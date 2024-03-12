@@ -11,5 +11,38 @@
     <a href="/send">Send a Message</a>
     <br>
     <a href="/receive">Receive a Message</a>
+    <!-- send -->
+    <div>
+        <h1>Send Message</h1>
+        <form action="/send" method="post">
+            <label for="message">Enter your message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+            <input type="submit" value="Send">
+        </form>
+            <div>
+                <h1>Here's your username and PIN</h1>
+                <p class="username">Username: {{ username }}</p>
+                <p class="pin">PIN: {{ pin }}</p>
+            </div>
+        </div>
+        <!-- receive -->
+        <div>
+            <h1>Receive Message</h1>
+            <form action="/receive" method="post">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <label for="pin">PIN:</label><br>
+                <input type="text" id="pin" name="pin"><br>
+                <input type="submit" value="Receive">
+            </form>
+            <div>
+                {% if error %}
+                <p class="error">{{ error }}</p>
+                {% endif %}
+                {% if message %}
+                <p class="message-out">Message: {{ message }}</p>
+                {% endif %}
+            </div>
+        </div>
 </body>
 </html>

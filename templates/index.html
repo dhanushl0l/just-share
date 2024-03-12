@@ -2,53 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message Sharing</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
-    <div class="a-continer">
-    <div>
-    <h1>Welcome to Message Sharing</h1>
-    <a href="/send">Send a Message</a>
-    <br>
-    <a href="/receive">Receive a Message</a>
+  <header>
+    <div class="title">
+      <h1><span>JUST SHARE</span></h1>
     </div>
-    <!-- send -->
-    <div>
-        <h1>Send Message</h1>
-        <form action="/send" method="post">
-            <label for="message">Enter your message:</label><br>
-            <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
-            <input type="submit" value="Send">
-        </form>
-            <div>
-                <h1>Here's your username and PIN</h1>
-                <p class="username">Username: {{ username }}</p>
-                <p class="pin">PIN: {{ pin }}</p>
-            </div>
+  </header>
+  <div class="content-s-r">
+  <div class="content-s">
+    <div class="send">
+      <form action="/send" method="post">
+          <label for="message">Enter your message:</label><br>
+          <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+          <input type="submit" value="Send" class="send-button">
         </div>
-        <!-- receive -->
-        <div>
-            <h1>Receive Message</h1>
-            <form action="/receive" method="post">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="pin">PIN:</label><br>
-                <input type="text" id="pin" name="pin"><br>
-                <input type="submit" value="Receive">
-            </form>
-            <div>
-                {% if error %}
-                <p class="error">{{ error }}</p>
-                {% endif %}
-                {% if message %}
-                <p class="message-out">Message: {{ message }}</p>
-                {% endif %}
-            </div>
-     </div>
-    </div>
+      </form>
+          <div>
+              <h1>Here's your username and PIN</h1>
+              <p class="username">Username: {{ username }}</p>
+              <p class="pin">PIN: {{ pin }}</p>
+          </div>
+      </div>
+    <div class="Receive-continer">
+      <div>
+        <div class="content-r">
+    <h1>Receive Message</h1>
+<form action="/receive" method="post">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="pin">PIN:</label><br>
+    <input type="text" id="pin" name="pin"><br>
+    <input type="submit" value="Receive">
+</form>
+<div>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    {% if message %}
+    <p class="message-out">Message: {{ message }}</p>
+    {% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+ <div class="video-container">
+    <video autoplay loop muted playsinline controlsList="nodownload" class="fullscreen-bg__video">
+      <source src="{{ url_for('static', filename='/assets/1080p.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+</div>
      <footer>
         <div id="copyright" class="footer-content bottom-left">
           <p>© MIT.</p>
@@ -68,10 +77,10 @@
         <div id="follow" class="footer-content bottom-right">
           <p>Follow</p>
           <div class="social-icons">
-            <a href="https://github.com/dhanushl0l"><img src="https://i.imgur.com/IWeLPG8.png" alt="github"></a>
-            <a href="https://twitter.com/dhanu_off"><img src="https://i.imgur.com/dechEE2.png" alt="Twitter"></a>
-            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="https://i.imgur.com/3ZaxRaZ.png" alt="LinkedIn"></a>
-            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="https://i.imgur.com/CyfeGIv.png" alt="Instagram"></a>
+            <a href="https://github.com/dhanushl0l"><img src="/static/assets/github.png" alt="github"></a>
+            <a href="https://twitter.com/dhanu_off"><img src="/static/assets/twitter.png" alt="Twitter"></a>
+            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="/static/assets/lin.png" alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png" alt="Instagram"></a>
         </div>    
         </div>
       </footer>

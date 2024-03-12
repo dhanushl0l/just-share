@@ -5,8 +5,8 @@ import string
 
 app = Flask(__name__)
 
-# Store the message to be shared
-shared_message = ""
+# Dictionary to store the message, username, and pin
+shared_data = {}
 
 @app.route('/')
 def index():
@@ -14,24 +14,22 @@ def index():
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
-    global shared_message
+    global shared_data
     if request.method == 'POST':
-        shared_message = request.form['message']
-        username = ''.join(random.choices(string.ascii_lowercase, k=4))
-        pin = ''.join(random.choices(string.digits, k=4))
-        return jsonify({"username": username, "pin": pin})
+        shared_data['message'] = request.form['message']
+        shared_data['username'] = ''.join(random.choices(string.ascii_lowercase, k=4))
+        shared_data['pin'] = ''.join(random.choices(string.digits, k=4))
+        return jsonify({"username": shared_data['username'], "pin": shared_data['pin']})
     return render_template('send.html')
 
 @app.route('/receive', methods=['GET', 'POST'])
 def receive():
-    global shared_message
+    global shared_data
     if request.method == 'POST':
         username = request.form['username']
         pin = request.form['pin']
-        if username == "" or pin == "":
-            return "Please enter both username and pin"
-        if username == request.form.get("username") and pin == request.form.get("pin"):  
-            return shared_message
+        if username == shared_data.get('username') and pin == shared_data.get('pin'):  
+            return shared_data.get('message', 'No message shared yet')
         else:
             return "Incorrect username or pin"
     return render_template('receive.html')

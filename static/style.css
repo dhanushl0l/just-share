@@ -7,7 +7,7 @@ html, body {
 }
 
 .video-container {
-  z-index: -99999;
+  z-index: -9;
   position: fixed;
   top: 0;
   left: 0;
@@ -137,7 +137,19 @@ html, body {
   display: block;
   background-color: rgb(255, 255, 255);
   padding: 5px;
-  font-size: 25px; /* Adjust the font size as needed */
+  border: 1px solid #000000;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+#message:focus {
+  border-color: black;
+}
+
+.error{
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .send-button {
@@ -185,12 +197,6 @@ html, body {
   transform: translate(2px, 2px);
 }
 
-@media (min-width: 768px) {
-  .send-button {
-    padding: 12px 50px;
-  }
-}
-
 label {
   display: block;
   margin-bottom: 5px;
@@ -199,26 +205,34 @@ label {
 
 input[type="text"] {
   width: 250px;
-  resize: none;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid #000000;
   margin: 10px auto;
   display: block;
   background-color: rgb(255, 255, 255);
-  padding: 5px;  
-  border: 1px solid #000000;
+  padding: 5px;
+  outline: none;
+  font-size: 15px;
 }
+
+input[type="text"]:focus {
+  border-color: black;
+  font-size: 15px; 
+}
+
+
 
 .user-name {
   display: block;
   margin-right: 155px;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 23px;
   top: 10px;
 }
 
 .user-pin {
   display: block;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 23px;
   margin-right: 220px;
 }
@@ -260,4 +274,9 @@ footer {
     height: auto;
   }
   @media only screen and (max-width:900px) {
+    .send-button {
+      padding: 12px 50px;
+    }
+
+
   }   

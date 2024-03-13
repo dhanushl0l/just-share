@@ -44,11 +44,11 @@
 </div>
 </div>
 </div>
- <div class="video-container">
-    <video autoplay loop muted playsinline controlsList="nodownload" class="fullscreen-bg__video">
-      <source src="{{ url_for('static', filename='/assets/1080p.mp4') }}" type="video/mp4">
+<div class="video-container">
+  <video autoplay loop muted playsinline controlsList="nodownload" class="fullscreen-bg__video">
+      <source src="{{ url_for('static', filename='/assets/1080p.webm') }}" type="video/mp4">
       Your browser does not support the video tag.
-    </video>
+  </video>
 </div>
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
     <div class="popup">
@@ -133,6 +133,10 @@ function closePopup(containerId) {
     container.style.display = 'none';
 }
 
+function closePopup(elementId) {
+    document.getElementById(elementId).style.display = 'none';
+    window.location.href = '/';
+}
 
     </script>
 </body>

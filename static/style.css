@@ -2,7 +2,8 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden; 
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .video-container {
@@ -64,7 +65,7 @@ html, body {
   position: absolute; 
   top: 0;           
   left: 0;           
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
   background-color: rgb(255, 255, 255);
 }
@@ -75,20 +76,158 @@ html, body {
   position: absolute; 
   top: 0;           
   right: 0;           
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
   background-color: rgb(255, 255, 255);
 }
 
 .content-s-r {
-  max-width: 1100px;
-  width: 80%;
-  min-width: 1050px;
+  width: 1050px;
   height: 378px;
   position: absolute;
   top: 50%;
   left : 50%;
   transform: translate(-50%, -50%);
+}
+
+.popup {
+  z-index: 99;
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
+  background-color: rgb(255, 255, 255);
+}
+
+.popup-2 {
+  z-index: 99;
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
+  background-color: rgb(255, 255, 255);
+}
+
+.console {
+  text-align: center;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+#message {
+  width: 350px;
+  height: 150px;
+  resize: none;
+  border-radius: 4px;
+  margin: 10px auto;
+  display: block;
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  font-size: 25px; /* Adjust the font size as needed */
+}
+
+.send-button {
+  appearance: button;
+  background-color: #000;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 40px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.send-button:focus {
+  text-decoration: none;
+}
+
+.send-button:hover {
+  text-decoration: none;
+}
+
+.send-button:active {
+  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.send-button:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .send-button {
+    padding: 12px 50px;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 250px;
+  resize: none;
+  border-radius: 4px;
+  margin: 10px auto;
+  display: block;
+  background-color: rgb(255, 255, 255);
+  padding: 5px;  
+  border: 1px solid #000000;
+}
+
+.user-name {
+  display: block;
+  margin-right: 155px;
+  font-weight: normal;
+  font-size: 23px;
+  top: 10px;
+}
+
+.user-pin {
+  display: block;
+  font-weight: normal;
+  font-size: 23px;
+  margin-right: 220px;
+}
+
+.receive-button {
+  top: 314px;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 footer {

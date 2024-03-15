@@ -8,6 +8,7 @@ import glob
 
 
 app = Flask(__name__)
+app.run(host='0.0.0.0', port=8000)
 
 # Dictionary to store the message, username, and pin
 shared_data = {}

@@ -95,3 +95,7 @@ def receive():
         else:
             return render_template('index.html', error="Username not found")
     return render_template('index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=False)

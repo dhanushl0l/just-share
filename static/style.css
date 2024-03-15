@@ -1,0 +1,310 @@
+body {
+  background-color: black;
+  padding: 0;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.a-continer {
+  margin-top: 350px;
+  background-color: rgb(255, 255, 255);
+  width: 700px;
+  position: absolute;
+  height: 400px;
+  border-radius: 10px; /* Add a slight curve */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  transition: box-shadow 0.3s, transform 0.3s; 
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header {
+  margin-top: 250px;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 0;
+  position: absolute; 
+  z-index: 9;       
+}
+
+.title h1 {
+  font-size: 2.5em;
+  font-weight: 500;
+  margin-left: 50px;
+  color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
+}
+
+.content-s {
+  width: 500px;
+  height: 378px;
+  position: absolute; 
+  top: 50%;
+  left: 73%;
+  transform: translate(-50%, -50%);            
+  border-radius: 5px;
+  border-radius: 5px;
+  background: rgb(0, 0, 0);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 5px;
+  border:1px solid rgb(255, 255, 255);
+  box-shadow: 0 1px 1px 0 rgb(255, 255, 255);
+}
+
+.content-r {
+  width: 500px;
+  height: 378px;
+  position: absolute;
+  top: 50%;
+  left: 27%;
+  transform: translate(-50%, -50%);         
+  border-radius: 5px;
+  background: rgb(0, 0, 0);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 5px;
+  border:1px solid rgb(255, 255, 255);
+  box-shadow: 0 1px 1px 0 rgb(255, 255, 255);
+}
+
+.content-s-r {
+  width: 1200px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.103), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgb(255, 255, 255);
+  box-shadow: 0 8px 32px 0 rgb(255, 255, 255);
+}
+
+.popup {
+  z-index: 99;
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
+  background-color: rgb(255, 255, 255);
+}
+
+.popup-2 {
+  z-index: 99;
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
+  background-color: rgb(255, 255, 255);
+}
+
+.console {
+  text-align: center;
+}
+
+.label {
+  color: #ffffff;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+#message {
+  color: #ffffff;
+  width: 350px;
+  height: 150px;
+  resize: none;
+  border-radius: 4px;
+  margin: 10px auto;
+  display: block;
+  background-color: rgb(0, 0, 0);
+  padding: 5px;
+  border: 1px solid #ffffff;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+#message:focus {
+  border-color: rgb(255, 255, 255);
+  
+}
+
+.error{
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.send-button {
+  appearance: button;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  box-shadow: #000000 4px 4px 0 0,#ffffff 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 40px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.send-button:focus {
+  text-decoration: none;
+}
+
+.send-button:hover {
+  text-decoration: none;
+}
+
+.send-button:active {
+  box-shadow: rgba(255, 255, 255, 0.125) 0 3px 5px inset;
+  outline: 0;
+}
+
+.send-button:not([disabled]):active {
+  box-shadow: #000000 2px 2px 0 0, #ffffff 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 250px;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  margin: 10px auto;
+  display: block;
+  background-color: rgb(0, 0, 0);
+  padding: 5px;
+  outline: none;
+  font-size: 20px;
+  color: white; 
+}
+
+input[type="text"]:focus {
+  border-color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+
+
+
+.user-name {
+  color: #ffffff;
+  display: block;
+  margin-right: 155px;
+  font-weight: bold;
+  font-size: 23px;
+  top: 10px;
+}
+
+.user-pin {
+  color: #ffffff;
+  display: block;
+  font-weight: bold;
+  font-size: 23px;
+  margin-right: 220px;
+}
+
+.receive-button {
+  top: 314px;
+  left : 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+footer {
+  position: absolute;
+  bottom: -111px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  transition: bottom 0.3s ease; /* Add smooth transition */
+  padding: 20px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.footer-content {
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+  
+  .social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    width: 20px; 
+    height: 20px; 
+  }
+  
+  .social-icons img {
+    width: 100%; 
+    height: auto;
+  }
+  @media only screen and (max-width:1200px) {
+    .send-button {
+      padding: 12px 50px;
+    }
+
+    .content-s {
+      width: 500px;
+      height: 378px; 
+      top: 50%;
+      left: 27%;
+    }
+    
+    .content-r {
+      width: 500px;
+      height: 378px;
+      top: 50%;
+      left: 73%;
+    }
+    
+    .content-s-r {
+      width: 90%;
+      height: 1200px;
+      top: 50%;
+      left : 50%;
+      z-index:-99;  
+    }
+    
+  }   

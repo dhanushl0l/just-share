@@ -2,47 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Message Sharing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
-    <h1>Welcome to Message Sharing</h1>
-    <a href="/send">Send a Message</a>
-    <br>
-    <a href="/receive">Receive a Message</a>
-    <!-- send -->
-    <div>
-        <h1>Send Message</h1>
-        <form action="/send" method="post">
-            <label for="message">Enter your message:</label><br>
-            <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
-            <input type="submit" value="Send">
-        </form>
-            <div>
-                <h1>Here's your username and PIN</h1>
-                <p class="username">Username: {{ username }}</p>
-                <p class="pin">PIN: {{ pin }}</p>
-            </div>
+  <header>
+    <div class="title">
+      <h1><span>JUST SHARE</span></h1>
+    </div>
+  </header>
+  <div class="content-s-r bluer">
+  <div class="content-s">
+    <div class="console">
+      <form action="/send" method="post">
+          <div class="label" label for="message">Enter your text</label><br> </div>
+          <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+          <input type="submit" value="Send" class="send-button">
         </div>
-        <!-- receive -->
-        <div>
-            <h1>Receive Message</h1>
-            <form action="/receive" method="post">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="pin">PIN:</label><br>
-                <input type="text" id="pin" name="pin"><br>
-                <input type="submit" value="Receive">
-            </form>
-            <div>
-                {% if error %}
-                <p class="error">{{ error }}</p>
-                {% endif %}
-                {% if message %}
-                <p class="message-out">Message: {{ message }}</p>
-                {% endif %}
-            </div>
+      </form>
+      </div>
+    <div class="Receive-continer">
+      <div>
+        <div class="content-r">
+          <div class="console">
+    <h1 class="label">Receive Message</h1>
+<form action="/receive" method="post">
+    <label class="user-name" for="username">Username</label>
+    <input type="text" id="username" name="username" autocomplete="off">
+    <label class="user-pin" for="pin">PIN</label>
+    <input type="text" id="pin" name="pin" autocomplete="off">
+<div class="receive-button">
+    <input type="submit" value="Receive" class="send-button">
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
+    <div class="popup">
+        <button class="close" onclick="closePopup('outputContainer')">Close</button>
+        <h1>Here's your username and PIN</h1>
+        <div id="userInfoContainer">
+            <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
+            <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>
         </div>
+    </div>
+</div>
+
+<div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
+    <div class="popup-2">
+        <button class="close" onclick="closePopup('outputContainer2')">Close</button>
+        <h1>Here's your username and PIN</h1>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if message %}
+        <p class="message-out">Message: {{ message }}</p>
+        {% endif %}
+    </div>
+</div>
+
+
+</div>
+</div>
+     <footer id="footer">
+      <div class="footer-content">
+        <div id="copyright" class="footer-content bottom-left">
+          <p>© MIT.</p>
+          <p>Powered by the Admin</p>
+        </div>
+      
+        <div id="call" class="footer-content center">
+          <p>Call</p>
+          <p>+91 8248417774</p>
+        </div>
+      
+        <div id="write" class="footer-content center">
+          <p>Write</p>
+          <p>dhanush@tutanota.de</p>
+        </div>
+      
+        <div id="follow" class="footer-content bottom-right">
+          <p>Follow</p>
+          <div class="social-icons">
+            <a href="https://github.com/dhanushl0l"><img src="/static/assets/github.png" alt="github"></a>
+            <a href="https://twitter.com/dhanu_off"><img src="/static/assets/twitter.png" alt="Twitter"></a>
+            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="/static/assets/lin.png" alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png" alt="Instagram"></a>
+        </div>    
+        </div>
+      </div>
+      </footer>
+      <script>
+const username = "{{ username }}";
+const pin = "{{ pin }}";
+const error = "{{ error }}";
+const message = "{{ message }}";
+
+const outputContainer = document.getElementById('outputContainer');
+const outputContainer2 = document.getElementById('outputContainer2');
+const usernameValue = document.getElementById('usernameValue');
+const pinValue = document.getElementById('pinValue');
+
+if (username && pin) {
+    outputContainer.style.display = 'block';
+    usernameValue.textContent = username;
+    pinValue.textContent = pin;
+} else {
+    outputContainer.style.display = 'none';
+}
+
+if (error || message) {
+    outputContainer2.style.display = 'block';
+} else {
+    outputContainer2.style.display = 'none';
+}
+
+function closePopup(containerId) {
+    const container = document.getElementById(containerId);
+    container.style.display = 'none';
+}
+
+function closePopup(elementId) {
+    document.getElementById(elementId).style.display = 'none';
+    window.location.href = '/';
+}
+
+    </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
       <h1><span>JUST SHARE</span></h1>
     </div>
   </header>
-  <div class="content-s-r">
+  <div class="content-s-r bluer">
   <div class="content-s">
     <div class="console">
       <form action="/send" method="post">
@@ -43,12 +43,6 @@
 </div>
 </div>
 </div>
-</div>
-<div class="video-container">
-  <video autoplay loop muted playsinline controlsList="nodownload" class="fullscreen-bg__video">
-      <source src="{{ url_for('static', filename='/assets/1080p.webm') }}" type="video/mp4">
-      Your browser does not support the video tag.
-  </video>
 </div>
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
     <div class="popup">

@@ -98,4 +98,5 @@ def receive():
 
 
 if __name__ == '__main__':
+    print("Starting app...")
     app.run(debug=False) 

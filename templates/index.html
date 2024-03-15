@@ -31,9 +31,9 @@
     <h1 class="label">Receive Message</h1>
 <form action="/receive" method="post">
     <label class="user-name" for="username">Username</label>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" name="username" autocomplete="off">
     <label class="user-pin" for="pin">PIN</label>
-    <input type="text" id="pin" name="pin">
+    <input type="text" id="pin" name="pin" autocomplete="off">
 <div class="receive-button">
     <input type="submit" value="Receive" class="send-button">
 </div>
@@ -71,7 +71,8 @@
 
 </div>
 </div>
-     <footer>
+     <footer id="footer">
+      <div class="footer-content">
         <div id="copyright" class="footer-content bottom-left">
           <p>© MIT.</p>
           <p>Powered by the Admin</p>
@@ -96,6 +97,7 @@
             <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png" alt="Instagram"></a>
         </div>    
         </div>
+      </div>
       </footer>
       <script>
 const username = "{{ username }}";

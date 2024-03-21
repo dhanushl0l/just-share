@@ -286,7 +286,6 @@ footer {
 
     body {
       min-height: 1290px;
-      min-width: 600px;
     }
 
     .send-button {
@@ -294,8 +293,8 @@ footer {
     }
 
     .content-s {
-      min-width: 300px;
-      width: 80%;
+      min-width: 400px;
+      width: 90%;
       max-width: 500px;
       height: 378px;
       top: 27%;
@@ -303,7 +302,8 @@ footer {
     }
     
     .content-r {
-      width: 80%;
+      min-width: 400px;
+      width: 90%;
       max-width: 500px;
       height: 378px; 
       top: 73%;
@@ -311,11 +311,12 @@ footer {
     }
     
     .content-s-r {
-      width: 80%;
-      min-width:500px;
+      width:80%;
+      min-width:300px;
       height: 1000px;
       top: 48%;
       left : 50%;  
+      transform: translate(-50%, -50%);
     }
     
     #message {
@@ -325,3 +326,40 @@ footer {
     }
 
   }   
+  @media only screen and (max-width:600px) {
+
+    body {
+      min-height: 1100px;
+    }
+    
+    .content-s-r {
+      top: 55%;
+      width: 100%;
+      background: rgb(0, 0, 0);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+      border:none;
+      box-shadow: none;
+    }
+
+    .content-r{
+      top: 67%;
+      background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 5px;
+      border:1px solid rgb(255, 255, 255);
+      box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
+    }
+
+    .content-s{
+      top: 20%;
+      background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 5px;
+      border:1px solid rgb(255, 255, 255);
+      box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
+    }
+}

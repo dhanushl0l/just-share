@@ -463,7 +463,7 @@ footer {
       margin-left: 5%;
       transform: translateX(-50%);
       min-width: 0; 
-      width: 90%;
+      width: 95%;
       top: 50%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
@@ -477,7 +477,7 @@ footer {
       position: fixed;
       margin-left: 5%;
       transform: translateX(-50%);
-      width: 90%;
+      width: 95%;
       min-width: 0; 
       top:5%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));

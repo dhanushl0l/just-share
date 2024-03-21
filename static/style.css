@@ -330,6 +330,7 @@ footer {
 
     body {
       min-height: 1100px;
+      min-width: 450px;
     }
     
     .content-s-r {

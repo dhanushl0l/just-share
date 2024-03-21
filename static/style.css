@@ -329,7 +329,8 @@ footer {
   @media only screen and (max-width:600px) {
 
     body {
-      min-height: 1200px;
+      min-height: 1100px;
+      min-width: 450px;
     }
 
     .title h1 {
@@ -340,12 +341,9 @@ footer {
     }
 
     .content-s-r {
-      left: 50%;
-      transform: translate(-50%, -50%);
-      top: 55%;
-      min-width: 360px;
+      top: 53%;
       width: 100%;
-      background: rgb(0, 0, 0);
+      background: black;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       border-radius: 0;
@@ -354,11 +352,10 @@ footer {
     }
 
     .content-r{
-      left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 330px;
+      left: 53%;
+      transform: translateX(-50%);
       width: 90%;
-      top: 67%;
+      top: 50%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -368,11 +365,10 @@ footer {
     }
 
     .content-s{
-      left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 330px;
+      left: 53%;
+      transform: translateX(-50%);
       width: 90%;
-      top: 20%;
+      top:5%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);

@@ -344,6 +344,8 @@ footer {
     }
 
     .content-r{
+      min-width: 330px;
+      width: 95%;
       top: 67%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
@@ -354,6 +356,8 @@ footer {
     }
 
     .content-s{
+      min-width: 330px;
+      width: 95%;
       top: 20%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);

@@ -286,6 +286,7 @@ footer {
 
     body {
       min-height: 1290px;
+      min-width: 600px;
     }
 
     .send-button {
@@ -302,7 +303,6 @@ footer {
     }
     
     .content-r {
-      min-width: 300px;
       width: 80%;
       max-width: 500px;
       height: 378px; 
@@ -312,6 +312,7 @@ footer {
     
     .content-s-r {
       width: 80%;
+      min-width:500px;
       height: 1000px;
       top: 48%;
       left : 50%;  

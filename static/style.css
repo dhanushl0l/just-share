@@ -329,12 +329,21 @@ footer {
   @media only screen and (max-width:600px) {
 
     body {
-      min-height: 1100px;
-      min-width: 450px;
+      min-height: 1200px;
     }
-    
+
+    .title h1 {
+      font-size: 2.5em;
+      font-weight: 500;
+      margin-left: 15px;
+      color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
+    }
+
     .content-s-r {
+      left: 50%;
+      transform: translate(-50%, -50%);
       top: 55%;
+      min-width: 360px;
       width: 100%;
       background: rgb(0, 0, 0);
       backdrop-filter: none;
@@ -345,8 +354,10 @@ footer {
     }
 
     .content-r{
+      left: 50%;
+      transform: translate(-50%, -50%);
       min-width: 330px;
-      width: 95%;
+      width: 90%;
       top: 67%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
@@ -357,8 +368,10 @@ footer {
     }
 
     .content-s{
+      left: 50%;
+      transform: translate(-50%, -50%);
       min-width: 330px;
-      width: 95%;
+      width: 90%;
       top: 20%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);

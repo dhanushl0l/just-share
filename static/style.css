@@ -90,18 +90,123 @@ body::-webkit-scrollbar {
   box-shadow: 0 8px 32px 0 rgb(255, 255, 255);
 }
 
+.popup-bg {
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.123), rgb(0, 0, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0px;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.popup-bg input {
+  pointer-events: none; 
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.copy-icon {
+  position: absolute;
+  display: inline-block;
+  margin-right: 10px;
+  left: 195px;
+  margin-top:100px;
+  width: 20px; 
+  height: 20px; 
+}
+
+.copy-icon img {
+  width: 100%; 
+  height: auto;
+}
+
+.copy-icon .copy-text {
+  display: none;
+}
+
+.copy-icon:nth-child(1) {
+  z-index: 9;
+  top: 208px; 
+}
+
+.copy-icon:nth-child(2) {
+  z-index: 9;
+  top: 65px; 
+}
+
+
 .popup {
   z-index: 99;
-  width: 500px;
+  min-width: 400px;
+  max-width: 500px;
   height: 400px;
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left : 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 5px;
-  box-shadow: 0 10px 18px rgba(119, 119, 119, 0.411);
-  background-color: rgb(255, 255, 255);
+  background: rgb(0, 0, 0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgb(255, 255, 255);
 }
+
+.username,
+.pin {
+  margin-left: 50%;
+  transform: translateX(-50%); 
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+.username {
+  margin-top:10%;
+}
+
+.pin {
+  margin-top:10%;
+}
+
+.username span,
+.pin span {
+  margin-left: 1px;
+  font-weight: normal;
+  align-items: center; 
+  color: white;
+}
+
+button.close {
+  border: 2px solid rgba(255, 255, 255, 0.295); 
+  border-radius: 50%; 
+  margin-left: 87%;
+  margin-top: 10px;
+  font-size: 25px;
+  font-style: normal;
+  background-color: transparent; 
+  color: white; 
+  width: 40px; 
+  height: 40px;
+  padding: 0; 
+  cursor: pointer; 
+  transition: background-color 0.1s, color 0.1s
+}
+
+button.close:hover {
+  background-color: white; 
+  color: black; 
+}
+
 
 .popup-2 {
   z-index: 99;
@@ -137,7 +242,7 @@ body::-webkit-scrollbar {
   border-radius: 4px;
   margin: 10px auto;
   display: block;
-  background-color: rgb(0, 0, 0);
+  background-color: transparent;
   padding: 5px;
   border: 1px solid #ffffff;
   font-size: 20px;
@@ -212,7 +317,7 @@ input[type="text"] {
   border-bottom: 1px solid #ffffff;
   margin: 10px auto;
   display: block;
-  background-color: rgb(0, 0, 0);
+  background-color: transparent;
   padding: 5px;
   outline: none;
   font-size: 20px;
@@ -254,7 +359,7 @@ footer {
   position: absolute;
   bottom: -111px;
   left: 0;
-  width: 100%;
+  width: 100;
   text-align: center;
   transition: bottom 0.3s ease; /* Add smooth transition */
   padding: 20px;
@@ -352,7 +457,7 @@ footer {
     }
 
     .content-r{
-      left: 53%;
+      left: 50%;
       transform: translateX(-50%);
       width: 90%;
       top: 50%;
@@ -365,7 +470,7 @@ footer {
     }
 
     .content-s{
-      left: 53%;
+      left: 50%;
       transform: translateX(-50%);
       width: 90%;
       top:5%;

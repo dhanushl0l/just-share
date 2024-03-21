@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Message Sharing</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
@@ -45,14 +45,17 @@
 </div>
 </div>
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
-    <div class="popup">
-        <button class="close" onclick="closePopup('outputContainer')">Close</button>
-        <h1>Here's your username and PIN</h1>
+    <div class="popup-bg">
+      <div class="popup">
+        <a class="copy-icon" onclick="copyPin(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text">Copy</span></a>
+        <a class="copy-icon" onclick="copyUsername(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text">Copy</span></a>
+        <button class="close" onclick="closePopup('outputContainer')">X</button>
         <div id="userInfoContainer">
-            <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
-            <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>
+          <p class="username">Username: <span id="usernameValue">{{ username }}</span> </p>
+          <p class="pin">PIN: <span id="pinValue">{{ pin }}</span> </p>
         </div>
     </div>
+</div>
 </div>
 
 <div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
@@ -132,6 +135,37 @@ function closePopup(containerId) {
 function closePopup(elementId) {
     document.getElementById(elementId).style.display = 'none';
     window.location.href = '/';
+}
+
+function copyUsername(link) {
+  const usernameValue = document.getElementById('usernameValue').innerText;
+  copyToClipboard(usernameValue);
+  changeIcon(link);
+}
+
+function copyPin(link) {
+  const pinValue = document.getElementById('pinValue').innerText;
+  copyToClipboard(pinValue);
+  changeIcon(link);
+}
+
+function copyToClipboard(value) {
+  const tempInput = document.createElement('input');
+  tempInput.value = value;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  tempInput.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+}
+
+function changeIcon(link) {
+  link.querySelector('img').src = '/static/assets/check.png'; // Change the src attribute to 'copy.png'
+  link.querySelector('.copy-text').style.display = 'block'; // Show the copy text
+  setTimeout(() => {
+    link.querySelector('img').src = '/static/assets/clipboard.png'; // Revert back to the original icon
+    link.querySelector('.copy-text').style.display = 'none'; // Hide the copy text
+  }, 1000); // Revert back to the original icon after 1 second
 }
 
     </script>

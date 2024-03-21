@@ -359,7 +359,7 @@ footer {
   position: absolute;
   bottom: -111px;
   left: 0;
-  width: 100;
+  width: 100%;
   text-align: center;
   transition: bottom 0.3s ease; /* Add smooth transition */
   padding: 20px;
@@ -435,7 +435,9 @@ footer {
 
     body {
       min-height: 1100px;
-      min-width: 450px;
+        min-width: 450px; 
+        max-width: 100vw; 
+        overflow-x: hidden;     
     }
 
     .title h1 {

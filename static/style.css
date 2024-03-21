@@ -444,7 +444,7 @@ footer {
       font-size: 2.5em;
       font-weight: 500;
       margin-left: 15px;
-      color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
+      color: rgb(255, 255, 255); 
     }
 
     .content-s-r {
@@ -459,6 +459,7 @@ footer {
     }
 
     .content-r{
+      position: fixed;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -472,6 +473,7 @@ footer {
     }
 
     .content-s{
+      position: fixed;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;

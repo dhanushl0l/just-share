@@ -59,18 +59,29 @@
 </div>
 
 <div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
-    <div class="popup-2">
-        <button class="close" onclick="closePopup('outputContainer2')">Close</button>
-        <h1>Here's your username and PIN</h1>
-        {% if error %}
-        <p class="error">{{ error }}</p>
-        {% endif %}
-        {% if message %}
-        <p class="message-out">Message: {{ message }}</p>
-        {% endif %}
+  <div class="popup-bg">
+    <div class="popup">
+      <button class="close" onclick="closePopup('outputContainer')">X</button>
+      {% if error %}
+      <p class="error">Error <span> {{ error }} </span></p>
+      {% endif %}      
     </div>
 </div>
+</div>
 
+<div class="output-3" id="outputContainer3" {% if error or message %}style="display: block;"{% endif %}>
+  <div class="popup-bg">
+    <div class="popup">
+      <button class="close" onclick="closePopup('outputContainer')">X</button>
+      {% if message %}
+      <h1 class="message-h1">message</h1>
+      <div class="scrollable">
+          <p class="message-out"><span> {{ message }}</span></p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
 
 </div>
 </div>
@@ -121,15 +132,21 @@ if (username && pin) {
     outputContainer.style.display = 'none';
 }
 
-if (error || message) {
+if (error) {
     outputContainer2.style.display = 'block';
 } else {
     outputContainer2.style.display = 'none';
 }
 
+if (message) {
+    outputContainer3.style.display = 'block';
+} else {
+    outputContainer3.style.display = 'none';
+}
+
 function closePopup(containerId) {
-    const container = document.getElementById(containerId);
-    container.style.display = 'none';
+  var container = document.getElementById(containerId);
+  container.style.display = "none";
 }
 
 function closePopup(elementId) {

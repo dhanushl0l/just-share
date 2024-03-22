@@ -520,7 +520,11 @@ footer {
     .content-r{
       position: fixed;
       min-width: 0; 
+<<<<<<< HEAD
       width: 100%;
+=======
+      width: 95%;
+>>>>>>> b0c2ef7b532da1e21757b88280d9885d03eb38df
       top: 50%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
@@ -532,7 +536,13 @@ footer {
 
     .content-s{
       position: fixed;
+<<<<<<< HEAD
       width: 100%;
+=======
+      margin-left: 5%;
+      transform: translateX(-50%);
+      width: 95%;
+>>>>>>> b0c2ef7b532da1e21757b88280d9885d03eb38df
       min-width: 0; 
       top:5%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));

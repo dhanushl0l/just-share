@@ -2,6 +2,7 @@ body {
   background-color: black;
   padding: 0;
   min-height: 100vh;
+  height: 750px;
   margin: 0;
   width: 100%;
   position: absolute;
@@ -116,7 +117,7 @@ body::-webkit-scrollbar {
   position: absolute;
   display: inline-block;
   margin-right: 10px;
-  left: 195px;
+  left: 205px;
   margin-top:100px;
   width: 20px; 
   height: 20px; 
@@ -133,13 +134,20 @@ body::-webkit-scrollbar {
 
 .copy-icon:nth-child(1) {
   z-index: 9;
-  top: 208px; 
+  top: 213px; 
 }
 
 .copy-icon:nth-child(2) {
   z-index: 9;
-  top: 65px; 
+  top: 71px; 
 }
+
+.output-3 .copy-icon {
+  z-index: 9;
+  top:65%; 
+  left: 90%;
+}
+
 
 
 .popup {
@@ -189,7 +197,7 @@ button.close {
   border: 2px solid rgba(255, 255, 255, 0.295); 
   border-radius: 50%; 
   margin-left: 87%;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 25px;
   font-style: normal;
   background-color: transparent; 
@@ -246,11 +254,26 @@ button.close:hover {
   border: 1px solid #ffffff;
   font-size: 20px;
   font-weight: normal;
+  outline: none;
+  overflow-y: auto;
 }
 
-#message:focus {
-  border-color: rgb(255, 255, 255);
-  
+#message::-webkit-scrollbar {
+  width: 10px; 
+  height: 100%; 
+}
+
+#message::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+#message::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0); 
+}
+
+#message {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255, 255, 255) transparent;
 }
 
 .error{
@@ -328,8 +351,6 @@ input[type="text"]:focus {
   font-size: 20px;
 }
 
-
-
 .user-name {
   color: #ffffff;
   display: block;
@@ -361,7 +382,8 @@ input[type="text"]:focus {
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
-  width: 80%; /* Fixed width */
+  width: 80%; 
+  word-wrap: break-word; 
 }
 
 .scrollable::-webkit-scrollbar {
@@ -371,22 +393,22 @@ input[type="text"]:focus {
 /* Custom scrollbar styles */
 .scrollable {
   scrollbar-width: thin;
-  scrollbar-color: #ffffff #030303; /* thumb and track colors */
+  scrollbar-color: #ffffff #030303; 
 }
 
 .scrollable::-webkit-scrollbar-track {
-  background: #ddd; /* track color */
+  background: #ddd; 
 }
 
 .scrollable::-webkit-scrollbar-thumb {
-  background-color: #aaa; /* thumb color */
-  border-radius: 5px; /* roundness of the thumb */
+  background-color: #aaa; 
+  border-radius: 5px; 
 }
 
 .message-h1 {
-  margin-top: -5%;
-  margin-left: 5%;
-  color: #ccc;
+  margin-top: -10%;
+  margin-left: 10%;
+  color: #ffffff;
 }
 .error {
   margin-left: 50%;
@@ -405,6 +427,9 @@ input[type="text"]:focus {
   font-weight: normal;
   align-items: center; 
   color: rgb(255, 255, 255);
+}
+
+.error span{
   font-size: 0.8em; 
 }
 

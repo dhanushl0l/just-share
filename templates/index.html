@@ -5,8 +5,7 @@
     <meta http-equiv="refresh" content="">
    <meta name="viewport" content="width=device-width">
     <title>Message Sharing</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <header>
@@ -47,8 +46,8 @@
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
     <div class="popup-bg">
       <div class="popup">
-        <a class="copy-icon" onclick="copyPin(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text">Copy</span></a>
-        <a class="copy-icon" onclick="copyUsername(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text">Copy</span></a>
+        <a class="copy-icon" onclick="copyPin(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
+        <a class="copy-icon" onclick="copyUsername(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
         <button class="close" onclick="closePopup('outputContainer')">X</button>
         <div id="userInfoContainer">
           <p class="username">Username: <span id="usernameValue">{{ username }}</span> </p>
@@ -74,10 +73,11 @@
     <div class="popup">
       <button class="close" onclick="closePopup('outputContainer')">X</button>
       {% if message %}
-      <h1 class="message-h1">message</h1>
+      <h1 class="message-h1">Data</h1>
       <div class="scrollable">
-          <p class="message-out"><span> {{ message }}</span></p>
+          <p class="message-out"><span id="datavalue" > {{ message }}</span></p>
       </div>
+      <a class="copy-icon" onclick="copydata(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
       {% endif %}
     </div>
   </div>
@@ -114,7 +114,7 @@
       </div>
       </footer>
       <script>
-const username = "{{ username }}";
+        const username = "{{ username }}";
 const pin = "{{ pin }}";
 const error = "{{ error }}";
 const message = "{{ message }}";
@@ -154,6 +154,12 @@ function closePopup(elementId) {
     window.location.href = '/';
 }
 
+function copydata(link) {
+  const datavalue = document.getElementById('datavalue').innerText;
+  copyToClipboard(datavalue);
+  changeIcon(link);
+}
+
 function copyUsername(link) {
   const usernameValue = document.getElementById('usernameValue').innerText;
   copyToClipboard(usernameValue);
@@ -177,14 +183,21 @@ function copyToClipboard(value) {
 }
 
 function changeIcon(link) {
-  link.querySelector('img').src = '/static/assets/check.png'; // Change the src attribute to 'copy.png'
-  link.querySelector('.copy-text').style.display = 'block'; // Show the copy text
+  link.querySelector('img').src = '/static/assets/check.png'; 
+  link.querySelector('.copy-text').style.display = 'block'; 
   setTimeout(() => {
-    link.querySelector('img').src = '/static/assets/clipboard.png'; // Revert back to the original icon
-    link.querySelector('.copy-text').style.display = 'none'; // Hide the copy text
-  }, 1000); // Revert back to the original icon after 1 second
+    link.querySelector('img').src = '/static/assets/clipboard.png'; 
+    link.querySelector('.copy-text').style.display = 'none'; 
+  }, 1000); 
 }
 
-    </script>
+const text = document.querySelector('.message-out span');
+if (text.textContent.length > 170) {
+  text.style.fontSize = '1.8em';
+} else {
+  text.style.fontSize = '3em';
+}
+
+      </script>
 </body>
 </html>

@@ -89,6 +89,7 @@ def receive():
                 data = json.load(file)
                 if data['pin'] == pin:
                     message = data.get('message', 'No message shared yet')
+                    message = message.replace('\r\n', '$')
                     return render_template('index.html', message=message)
                 else:
                     return render_template('index.html', error="Incorrect pin")

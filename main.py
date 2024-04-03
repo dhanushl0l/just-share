@@ -89,6 +89,7 @@ def receive():
                 data = json.load(file)
                 if data['pin'] == pin:
                     message = data.get('message', 'No message shared yet')
+                    message = message.replace('\r\n', '$')
                     return render_template('index.html', message=message)
                 else:
                     return render_template('index.html', error="Incorrect pin")
@@ -96,6 +97,5 @@ def receive():
             return render_template('index.html', error="Username not found")
     return render_template('index.html')
 
-
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True, host='0.0.0.0', port=3000) 

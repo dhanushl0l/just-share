@@ -421,11 +421,15 @@ input[type="text"]:focus {
   font-size: 2.0em; 
 }
 
+.message-out {
+  white-space: pre-line; /* Preserve newline characters */
+  line-height: 1; /* Set line height to 1 to remove extra space */
+}
+
 .error span,
 .message-out span {
   margin-left: 1px;
   font-weight: normal;
-  align-items: center; 
   color: rgb(255, 255, 255);
 }
 

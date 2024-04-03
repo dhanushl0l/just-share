@@ -155,10 +155,28 @@ function closePopup(elementId) {
 }
 
 function copydata(link) {
-  const datavalue = document.getElementById('datavalue').innerText;
-  copyToClipboard(datavalue);
+  const datavalue = document.getElementById('datavalue').textContent;
+
+  // Create a new textarea element
+  const textarea = document.createElement('textarea');
+  // Set the value of the textarea to the text content of the span element
+  textarea.value = datavalue;
+
+  // Append the textarea to the document body
+  document.body.appendChild(textarea);
+
+  // Select the text inside the textarea
+  textarea.select();
+  // Copy the selected text to the clipboard
+  document.execCommand('copy');
+
+  // Remove the textarea from the document body
+  document.body.removeChild(textarea);
+
+  // Change the icon
   changeIcon(link);
 }
+
 
 function copyUsername(link) {
   const usernameValue = document.getElementById('usernameValue').innerText;
@@ -197,6 +215,15 @@ if (text.textContent.length > 170) {
 } else {
   text.style.fontSize = '3em';
 }
+
+var messageSpan = document.querySelector('.message-out span');
+
+var messageText = messageSpan.textContent;
+
+var cleanedMessage = messageText.replace(/\$\s*/g, '\n');
+
+messageSpan.textContent = cleanedMessage;
+
 
       </script>
 </body>

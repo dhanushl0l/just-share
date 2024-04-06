@@ -38,9 +38,9 @@
           <div class="console">
     <h1 class="label">Receive</h1>
 <form action="/receive" method="post">
-    <label class="user-name" for="username">Username</label>
+    <label id="user-info" class="user-name" for="username">Username</label>
     <input type="text" id="username" name="username" autocomplete="off">
-    <label class="user-pin" for="pin">PIN</label>
+    <label id="user-info" class="user-pin" for="pin">PIN</label>
     <input type="text" id="pin" name="pin" autocomplete="off">
 <div class="receive-button">
     <input type="submit" value="Receive" class="send-button">
@@ -229,10 +229,9 @@ var messageSpan = document.querySelector('.message-out span');
 
 var messageText = messageSpan.textContent;
 
-var cleanedMessage = messageText.replace(/\$\s*/g, '\n');
+var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
 
 messageSpan.textContent = cleanedMessage;
-
 
       </script>
 </body>

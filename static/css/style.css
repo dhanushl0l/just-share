@@ -4,7 +4,8 @@ body {
   min-height: 100vh;
   height: 750px;
   margin: 0;
-  width: 100%;
+  width: 100vw;
+  overflow-x: hidden;
   position: absolute;
   font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -117,7 +118,7 @@ body::-webkit-scrollbar {
   position: absolute;
   display: inline-block;
   margin-right: 10px;
-  left: 205px;
+  left: 225px;
   margin-top:100px;
   width: 20px; 
   height: 20px; 
@@ -543,7 +544,7 @@ footer {
     .content-s, .content-r {
       left: 50%;
       transform: translateX(-50% );
-      margin-left: 20px;
+      margin-left: 0px;
     }
 
     .content-r{

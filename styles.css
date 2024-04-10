@@ -15,6 +15,7 @@ body {
   }
   
   .a-container {
+    margin-left:10px;
     width: 1200px;
     height: 500px;
     position: absolute;
@@ -202,7 +203,6 @@ body {
         }
     
         .a-container-file {
-          min-width: 400px;
           width: 90%;
           max-width: 500px;
           height: 378px;
@@ -211,7 +211,6 @@ body {
         }
         
         .a-container-text {
-          min-width: 400px;
           width: 90%;
           max-width: 500px;
           height: 378px; 
@@ -235,60 +234,70 @@ body {
         }
     
       }   
-      @media only screen and (max-width: 700px) {
+      @media only screen and (max-width:700px) {
+    
         body {
           min-height: 1100px;
-          width: 100%; 
+          min-width: 500px; 
           overflow-x: hidden;     
+            background-color: black;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            position: absolute;
         }
-      
+    
         .title h1 {
           font-size: 2.5em;
           font-weight: 500;
-          margin-left: 15px;
+          margin-left:40px;
           color: rgb(255, 255, 255); 
         }
-      
+    
         .a-container {
-          top: 53%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
           width: 100%;
-          background: rgb(255, 0, 0);
+          margin-left:20px;
+          background: none;
           backdrop-filter: none;
           -webkit-backdrop-filter: none;
-          border-radius: 0;
-          border: none;
+          border-radius: 20px;
+          border:none;
           box-shadow: none;
-        }
-      
-        .a-content-file, .a-container-text {
-          margin: 0 auto;
-        }
-      
-        .a-content-file {
-          position: fixed;
-          min-width: 0; 
-          width: 100%;
-          top: 50%;
-          transform: translateY(-50%);
-          background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border-radius: 5px;
-          border: 1px solid rgb(255, 255, 255);
-          box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
-        }
-      
-        .a-container-text {
-          position: fixed;
-          width: 100%;
-          min-width: 0; 
-          top: 5%;
-          background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border-radius: 5px;
-          border: 1px solid rgb(255, 255, 255);
-          box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
-        }
       }
       
+    
+        .a-container-file, .a-container-text {
+          left: 50%;
+          transform: translateX(-50% );
+          margin-left: 0px;
+        }
+    
+        .a-container-text{
+          position: fixed;
+          min-width: 0; 
+          width: 90%;
+          top: 55%;
+          background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 5px;
+          border:1px solid rgb(255, 255, 255);
+          box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
+        }
+    
+        .a-container-file{
+          position: fixed;
+          width: 90%;
+          min-width: 0; 
+          top:10%;
+          background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 5px;
+          border:1px solid rgb(255, 255, 255);
+          box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
+        }
+    }

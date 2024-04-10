@@ -515,21 +515,20 @@ footer {
 
   }   
   @media only screen and (max-width:700px) {
-
     body {
       min-height: 1100px;
       min-width: 420px; 
       max-width: 100vw; 
-        overflow-x: hidden;     
+      overflow-x: hidden;     
     }
-
+  
     .title h1 {
       font-size: 2.5em;
       font-weight: 500;
       margin-left: 15px;
       color: rgb(255, 255, 255); 
     }
-
+  
     .content-s-r {
       top: 53%;
       width: 400px;
@@ -540,18 +539,20 @@ footer {
       border:none;
       box-shadow: none;
     }
-
+  
     .content-s, .content-r {
       left: 50%;
-      transform: translateX(-50% );
+      transform: translateX(-50%);
       margin-left: 0px;
     }
-
-    .content-r{
+  
+    .content-r {
       position: fixed;
       min-width: 0; 
       width: 100%;
       top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -559,12 +560,14 @@ footer {
       border:1px solid rgb(255, 255, 255);
       box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
     }
-
-    .content-s{
+  
+    .content-s {
       position: fixed;
       width: 100%;
       min-width: 0; 
-      top:5%;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -572,4 +575,5 @@ footer {
       border:1px solid rgb(255, 255, 255);
       box-shadow: 0 2px 5px 0 rgb(255, 255, 255);
     }
-}
+  }
+  

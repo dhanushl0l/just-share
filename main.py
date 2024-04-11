@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import random
 import string
 import json
@@ -96,6 +96,64 @@ def receive():
         else:
             return render_template('index.html', error="Username not found")
     return render_template('index.html')
+
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Route to serve the HTML form for uploading files
+@app.route('/files')
+def files():
+    return render_template("index-files.html")
+
+# Route to handle file upload
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    uploaded_file = request.files['file']
+    
+    # Generate random 4-letter folder name
+    folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
+    
+    # Save the file inside the folder
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, uploaded_file.filename)
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    uploaded_file.save(file_path)
+    
+    # Generate random 4-digit PIN
+    pin = ''.join(random.choices(string.digits, k=4))
+    
+    # Store folder name and PIN in dictionary
+    folder_pin_mapping = { 'folder_name': folder_name, 'pin': pin }
+    
+    # Store folder name and PIN mapping in JSON file
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
+        json.dump(folder_pin_mapping, f)
+    
+    return """
+    <h1>File Uploaded Successfully!</h1>
+    <p>Folder Name: {folder_name}</p>
+    <p>PIN: {pin}</p>
+    """.format(folder_name=folder_name, pin=pin)
+
+@app.route('/download', methods=['GET'])
+def download_file():
+    pin = request.args.get('pin')
+    folder_name = request.args.get('folder_name')
+    
+    if folder_name is None:
+        return 'Invalid folder name!'
+    
+    # Load the JSON file
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'r') as f:
+        folder_pin_mapping = json.load(f)
+    
+    # Check if PIN and folder name match
+    if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
+        return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))[0], as_attachment=True)
+    else:
+        return 'Invalid PIN or folder name!'
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0') 

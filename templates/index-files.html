@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="">
+    <meta name="viewport" content="width=device-width">
+    <title>Just Share</title>
+    <link rel="icon" href="/static/assets/favicon.png" type="image/png">
+    <meta name="description" content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
+    <meta property="og:title" content="Just Share">
+    <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
+    <meta property="og:image" content="/static/assets/favicon.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://justshare.dhanush.online/">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <div class="title">
+      <h1><span>JUST SHARE</span></h1>
+    </div>
+  </header>
+  <div class="content-s-r bluer">
+  <div class="content-s">
+    <div class="console">
+        <h1 class="label">Upload</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload" class="send-button">
+        </div>
+      </form>
+      </div>
+    <div class="Receive-continer">
+      <div>
+        <div class="content-r">
+          <div class="console">
+    <h1 class="label">Receive</h1>
+    <form action="/download"  method="get">
+    <label id="user-info" class="user-name" for="username">Username</label>
+    <input type="text" name="folder_name" id="username" autocomplete="off">
+    <label id="user-info" class="user-pin" for="pin">PIN</label>
+    <input type="text" id="pin" name="pin" autocomplete="off">
+    <input type="submit" class="send-button" value="Download">
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+     <footer id="footer">
+      <div class="footer-content">
+        <div id="copyright" class="footer-content bottom-left">
+          <p>© MIT.</p>
+          <p>Powered by the Admin</p>
+        </div>
+      
+        <div id="call" class="footer-content center">
+          <p>Call</p>
+          <p>+91 8248417774</p>
+        </div>
+      
+        <div id="write" class="footer-content center">
+          <p>Write</p>
+          <p>dhanush@tutanota.de</p>
+        </div>
+      
+        <div id="follow" class="footer-content bottom-right">
+          <p>Follow</p>
+          <div class="social-icons">
+            <a href="https://github.com/dhanushl0l"><img src="/static/assets/github.png" alt="github"></a>
+            <a href="https://twitter.com/dhanu_off"><img src="/static/assets/twitter.png" alt="Twitter"></a>
+            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="/static/assets/lin.png" alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png" alt="Instagram"></a>
+        </div>    
+        </div>
+      </div>
+      </footer>
+      <script>
+        const username = "{{ username }}";
+const pin = "{{ pin }}";
+const error = "{{ error }}";
+const message = "{{ message }}";
+
+const outputContainer = document.getElementById('outputContainer');
+const outputContainer2 = document.getElementById('outputContainer2');
+const usernameValue = document.getElementById('usernameValue');
+const pinValue = document.getElementById('pinValue');
+
+if (username && pin) {
+    outputContainer.style.display = 'block';
+    usernameValue.textContent = username;
+    pinValue.textContent = pin;
+} else {
+    outputContainer.style.display = 'none';
+}
+
+if (error) {
+    outputContainer2.style.display = 'block';
+} else {
+    outputContainer2.style.display = 'none';
+}
+
+if (message) {
+    outputContainer3.style.display = 'block';
+} else {
+    outputContainer3.style.display = 'none';
+}
+
+function closePopup(containerId) {
+  var container = document.getElementById(containerId);
+  container.style.display = "none";
+}
+
+function closePopup(elementId) {
+    document.getElementById(elementId).style.display = 'none';
+    window.location.href = '/';
+}
+
+function copydata(link) {
+  const datavalue = document.getElementById('datavalue').textContent;
+
+  // Create a new textarea element
+  const textarea = document.createElement('textarea');
+  // Set the value of the textarea to the text content of the span element
+  textarea.value = datavalue;
+
+  // Append the textarea to the document body
+  document.body.appendChild(textarea);
+
+  // Select the text inside the textarea
+  textarea.select();
+  // Copy the selected text to the clipboard
+  document.execCommand('copy');
+
+  // Remove the textarea from the document body
+  document.body.removeChild(textarea);
+
+  // Change the icon
+  changeIcon(link);
+}
+
+
+function copyUsername(link) {
+  const usernameValue = document.getElementById('usernameValue').innerText;
+  copyToClipboard(usernameValue);
+  changeIcon(link);
+}
+
+function copyPin(link) {
+  const pinValue = document.getElementById('pinValue').innerText;
+  copyToClipboard(pinValue);
+  changeIcon(link);
+}
+
+function copyToClipboard(value) {
+  const tempInput = document.createElement('input');
+  tempInput.value = value;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  tempInput.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+}
+
+function changeIcon(link) {
+  link.querySelector('img').src = '/static/assets/check.png'; 
+  link.querySelector('.copy-text').style.display = 'block'; 
+  setTimeout(() => {
+    link.querySelector('img').src = '/static/assets/clipboard.png'; 
+    link.querySelector('.copy-text').style.display = 'none'; 
+  }, 1000); 
+}
+
+const text = document.querySelector('.message-out span');
+if (text.textContent.length > 170) {
+  text.style.fontSize = '1.8em';
+} else {
+  text.style.fontSize = '3em';
+}
+
+var messageSpan = document.querySelector('.message-out span');
+
+var messageText = messageSpan.textContent;
+
+var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
+
+messageSpan.textContent = cleanedMessage;
+
+      </script>
+</body>
+</html>

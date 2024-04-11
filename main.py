@@ -103,7 +103,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Route to serve the HTML form for uploading files
-@app.route('/files')
+@app.route('/files/')
 def files():
     return render_template("index-files.html")
 

@@ -26,9 +26,13 @@
   <div class="content-s">
     <div class="console">
         <h1 class="label">Upload</h1>
-      <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload" class="send-button">
+        <form id="uploadForm" action="/upload" method="post"  enctype="multipart/form-data">
+          <label for="fileInput" class="custom-file-input" id="fileInputArea">
+            <img src="/static/assets/update.png" alt="Upload File">
+        </label>
+        <input type="file" name="file" class="update-file" id="fileInput" style="display: none;">
+        <span id="selectedFileName"></span>        
+          <input type="submit" value="Upload" class="update-button" id="sendButton">
         </div>
       </form>
       </div>
@@ -42,7 +46,7 @@
     <input type="text" name="folder_name" id="username" autocomplete="off">
     <label id="user-info" class="user-pin" for="pin">PIN</label>
     <input type="text" id="pin" name="pin" autocomplete="off">
-    <input type="submit" class="send-button" value="Download">
+    <input type="submit" class="update-button" value="Download">
 
 </form>
 </div>
@@ -176,20 +180,6 @@ function changeIcon(link) {
   }, 1000); 
 }
 
-const text = document.querySelector('.message-out span');
-if (text.textContent.length > 170) {
-  text.style.fontSize = '1.8em';
-} else {
-  text.style.fontSize = '3em';
-}
-
-var messageSpan = document.querySelector('.message-out span');
-
-var messageText = messageSpan.textContent;
-
-var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
-
-messageSpan.textContent = cleanedMessage;
 
       </script>
 </body>

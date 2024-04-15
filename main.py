@@ -112,6 +112,14 @@ def files():
 def upload_file():
     uploaded_file = request.files['file']
     
+    # Check file size
+    file_size = len(uploaded_file.read())
+    if file_size > 11 * 1024 * 1024:  # 11MB in bytes
+        return "File size exceeds 11MB. Please upload a smaller file."
+    
+    # Reset file cursor to the beginning
+    uploaded_file.seek(0)
+    
     # Generate random 4-letter folder name
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
     
@@ -141,8 +149,8 @@ def download_file():
     pin = request.args.get('pin')
     folder_name = request.args.get('folder_name')
     
-    if folder_name is None:
-        return 'Invalid folder name!'
+    if folder_name is None or pin is None:
+        return 'Invalid request!'
     
     # Load the JSON file
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'r') as f:
@@ -150,9 +158,15 @@ def download_file():
     
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
-        return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))[0], as_attachment=True)
+        files_in_folder = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))
+        if len(files_in_folder) > 0:
+            file_to_download = files_in_folder[0]
+            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_to_download, as_attachment=True)
+        else:
+            return 'No files found in the folder!'
     else:
         return 'Invalid PIN or folder name!'
+
 
 
 if __name__ == '__main__':

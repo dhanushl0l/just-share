@@ -5,9 +5,27 @@ import json
 import os
 from datetime import datetime, timedelta
 import glob
-
+import shutil
+from apscheduler.schedulers.background import BackgroundScheduler
+import logging
 
 app = Flask(__name__)
+
+def delete_old_folders():
+    folder_path = '/path/to/your/folder'
+    threshold = datetime.now() - timedelta(hours=24)
+    
+    for root, dirs, files in os.walk(folder_path):
+        for dir_name in dirs:
+            dir_path = os.path.join(root, dir_name)
+            modification_time = datetime.fromtimestamp(os.path.getmtime(dir_path))
+            if modification_time < threshold:
+                shutil.rmtree(dir_path)
+                print(f"Deleted {dir_path}")
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(delete_old_folders, 'cron', hour=12)
+scheduler.start()
 
 # Dictionary to store the message, username, and pin
 shared_data = {}
@@ -145,13 +163,23 @@ def download_file():
         return 'Invalid folder name!'
     
     # Load the JSON file
-    with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'r') as f:
+    json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
+    with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
     
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
-        return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))[0], as_attachment=True)
+        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name)) if not file.endswith('.json')]
+        if len(files) > 0:
+            file_name = files[0]
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
+            logging.info(f"Downloading file: {file_path}")
+            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+        else:
+            logging.warning("No files found in folder!")
+            return 'No files found in folder!'
     else:
+        logging.warning("Invalid PIN or folder name!")
         return 'Invalid PIN or folder name!'
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ import logging
 app = Flask(__name__)
 
 def delete_old_folders():
-    folder_path = '/path/to/your/folder'
+    folder_path = '/uploads'
     threshold = datetime.now() - timedelta(hours=24)
     
     for root, dirs, files in os.walk(folder_path):

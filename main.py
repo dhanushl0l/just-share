@@ -15,6 +15,9 @@ shared_data = {}
 # Define the path to the database folder
 DATABASE_FOLDER = os.path.join(os.path.dirname(__file__), 'database')
 
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['MAX_CONTENT_LENGTH'] = 11 * 1024 * 1024
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -110,6 +113,12 @@ def files():
 # Route to handle file upload
 from flask import render_template
 
+MAX_FILE_SIZE = 11 * 1024 * 1024  # 11 MB in bytes
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+    return render_template('index-files.html', error="File size exceeds the limit of 11 MB. Please choose a smaller file to upload."), 413
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     uploaded_file = request.files['file']
@@ -119,26 +128,23 @@ def upload_file():
         error_message = "No file selected. Please choose a file to upload."
         return render_template('index-files.html', error=error_message)
 
-    # Generate random 4-letter folder name
+    # Save the file
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
-    
-    # Save the file inside the folder
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, uploaded_file.filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     uploaded_file.save(file_path)
-    
+
     # Generate random 4-digit PIN
     pin = ''.join(random.choices(string.digits, k=4))
-    
+
     # Store folder name and PIN in dictionary
-    folder_pin_mapping = { 'folder_name': folder_name, 'pin': pin }
-    
+    folder_pin_mapping = {'folder_name': folder_name, 'pin': pin}
+
     # Store folder name and PIN mapping in JSON file
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
         json.dump(folder_pin_mapping, f)
-    
-    return render_template('index-files.html', username=folder_name, pin=pin)
 
+    return render_template('index-files.html', username=folder_name, pin=pin)
 
 @app.route('/download', methods=['GET'])
 def download_file():

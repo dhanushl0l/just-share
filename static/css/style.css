@@ -234,7 +234,20 @@ body::-webkit-scrollbar {
 
 
 
+.user-info {
+  flex: 1;
+}
+
+.copy-icons {
+  display: flex;
+  flex-direction: row;
+}
+.copy-icon {
+  margin-left: 10px;
+}
+
 .popup {
+  flex-direction: row;
   z-index: 99;
   min-width: 400px;
   max-width: 500px;

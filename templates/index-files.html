@@ -59,15 +59,23 @@
 
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
   <div class="popup-bg">
-    <div class="popup">
-      <a class="copy-icon" onclick="copyPin(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
-      <a class="copy-icon" onclick="copyUsername(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
-      <button class="close" onclick="closePopup('outputContainer')">X</button>
-      <div id="userInfoContainer">
-        <p class="username">Username: <span id="usernameValue">{{ username }}</span> </p>
-        <p class="pin">PIN: <span id="pinValue">{{ pin }}</span> </p>
+      <div class="popup">
+        <button class="close" onclick="closePopup('outputContainer')">X</button>
+          <div class="user-info">
+              <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
+              <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>
+          </div>
+          <div class="copy-icons">
+              <a class="copy-icon" onclick="copyUsername(this)">
+                  <img src="/static/assets/clipboard.png" alt="Copy">
+                  <span class="copy-text">Copy Username</span>
+              </a>
+              <a class="copy-icon" onclick="copyPin(this)">
+                  <img src="/static/assets/clipboard.png" alt="Copy">
+                  <span class="copy-text">Copy PIN</span>
+              </a>
+          </div>
       </div>
-    </div>
   </div>
 </div>
 

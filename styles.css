@@ -278,7 +278,7 @@ body {
           position: fixed;
           min-width: 0; 
           width: 90%;
-          top: 55%;
+          top:10%;
           background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
@@ -291,7 +291,7 @@ body {
           position: fixed;
           width: 90%;
           min-width: 0; 
-          top:10%;
+          top: 55%;
           background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);

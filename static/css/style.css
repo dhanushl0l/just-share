@@ -43,57 +43,6 @@ body::-webkit-scrollbar {
   margin: 0 auto -10px; /* Center the image and add space below */
 }
 
-.popup-up {
-  z-index: 99;
-  min-width: 400px;
-  max-width: 500px;
-  height: 400px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgb(0, 0, 0);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgb(255, 255, 255);
-}
-
-.close-btn {
-  border: 2px solid rgba(255, 255, 255, 0.295); 
-  border-radius: 50%; 
-  margin-left: 87%;
-  margin-top: 15px;
-  font-size: 25px;
-  font-style: normal;
-  background-color: transparent; 
-  color: white; 
-  position: absolute;
-  width: 30px; /* Equal width and height */
-  height: 30px; /* Equal width and height */
-  padding: 0; 
-  cursor: pointer; 
-  transition: background-color 0.1s, color 0.1s;
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-}
-
-
-.close-btn:hover {
-  background-color: white; 
-  color: black; 
-}
-
-.popup-text{
-  margin-top: 30px;
-  position: absolute;
-  width: 80%;
-  display: block;
-  font-weight: bold;
-  font-size: 40px;
-  color: rgb(255, 255, 255);
-}
 
 .update-button{
     appearance: button;

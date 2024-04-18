@@ -108,10 +108,17 @@ def files():
     return render_template("index-files.html")
 
 # Route to handle file upload
+from flask import render_template
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     uploaded_file = request.files['file']
-    
+
+    # Check if the file is empty
+    if uploaded_file.filename == '':
+        error_message = "No file selected. Please choose a file to upload."
+        return render_template('index-files.html', error=error_message)
+
     # Generate random 4-letter folder name
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
     
@@ -130,19 +137,18 @@ def upload_file():
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
         json.dump(folder_pin_mapping, f)
     
-    return """
-    <h1>File Uploaded Successfully!</h1>
-    <p>Folder Name: {folder_name}</p>
-    <p>PIN: {pin}</p>
-    """.format(folder_name=folder_name, pin=pin)
+    return render_template('index-files.html', username=folder_name, pin=pin)
+
 
 @app.route('/download', methods=['GET'])
 def download_file():
     pin = request.args.get('pin')
     folder_name = request.args.get('folder_name')
     
-    if folder_name is None:
-        return 'Invalid folder name!'
+    if not folder_name or not pin:
+        logging.warning("Invalid PIN or Username!")
+        error_message = "Invalid PIN or Username!"
+        return render_template('index-files.html', error=error_message)
     
     # Load the JSON file
     json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
@@ -157,12 +163,6 @@ def download_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
-        else:
-            logging.warning("No files found in folder!")
-            return 'No files found in folder!'
-    else:
-        logging.warning("Invalid PIN or folder name!")
-        return 'Invalid PIN or folder name!'
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0') 

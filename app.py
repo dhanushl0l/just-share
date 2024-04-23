@@ -80,6 +80,25 @@ def username_exists(username):
     return False
 
 
+from flask import request
+
+@app.route('/receive/<username>/<pin>', methods=['GET', 'POST'])
+def receive_with_params(username, pin):
+    # Process the request
+    filename = os.path.join(DATABASE_FOLDER, username + '.json')
+
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            data = json.load(file)
+            if data['pin'] == pin:
+                message = data.get('message', 'No message shared yet')
+                message = message.replace('\r\n', '‎ ')
+                return render_template('index.html', message=message)
+            else:
+                return render_template('index.html', error="Incorrect pin")
+    else:
+        return render_template('index.html', error="Username not found")
+
 @app.route('/receive', methods=['GET', 'POST'])
 def receive():
     if request.method == 'POST':
@@ -98,6 +117,28 @@ def receive():
                     return render_template('index.html', error="Incorrect pin")
         else:
             return render_template('index.html', error="Username not found")
+
+    # If the request method is GET, check for query parameters
+    username = request.args.get('username')
+    pin = request.args.get('pin')
+
+    # If both username and pin are provided, process the request
+    if username and pin:
+        filename = os.path.join(DATABASE_FOLDER, username + '.json')
+
+        if os.path.exists(filename):
+            with open(filename, 'r') as file:
+                data = json.load(file)
+                if data['pin'] == pin:
+                    message = data.get('message', 'No message shared yet')
+                    message = message.replace('\r\n', '‎ ')
+                    return render_template('index.html', message=message)
+                else:
+                    return render_template('index.html', error="Incorrect pin")
+        else:
+            return render_template('index.html', error="Username not found")
+
+    # If username and pin are not provided, render the default template
     return render_template('index.html')
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
@@ -146,14 +187,34 @@ def upload_file():
 
     return render_template('index-files.html', username=folder_name, pin=pin)
 
+@app.route('/download/<folder_name>/<pin>', methods=['GET'])
+def download_file_with_params(folder_name, pin):
+    # Load the JSON file
+    json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
+    with open(json_path, 'r') as f:
+        folder_pin_mapping = json.load(f)
+    
+    # Check if PIN and folder name match
+    if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
+        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name)) if not file.endswith('.json')]
+        if len(files) > 0:
+            file_name = files[0]
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
+            logging.info(f"Downloading file: {file_path}")
+            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+    else:
+        logging.warning("Invalid PIN or folder name!")
+        error_message = "Invalid PIN or folder name!"
+        return render_template('index-files.html', error=error_message)
+
 @app.route('/download', methods=['GET'])
 def download_file():
     pin = request.args.get('pin')
     folder_name = request.args.get('folder_name')
     
     if not folder_name or not pin:
-        logging.warning("Invalid PIN or Username!")
-        error_message = "Invalid PIN or Username!"
+        logging.warning("Invalid PIN or folder name!")
+        error_message = "Invalid PIN or folder name!"
         return render_template('index-files.html', error=error_message)
     
     # Load the JSON file
@@ -169,6 +230,10 @@ def download_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
-
+    else:
+        logging.warning("Invalid PIN or folder name!")
+        error_message = "Invalid PIN or folder name!"
+        return render_template('index-files.html', error=error_message)
+    
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0') 

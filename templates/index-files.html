@@ -59,7 +59,7 @@
 
 <div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
   <div class="popup-bg">
-      <div class="popup">
+      <div class="popup-1">
         <button class="close" onclick="closePopup('outputContainer')">X</button>
           <div class="user-info">
               <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
@@ -74,6 +74,11 @@
                   <img src="/static/assets/clipboard.png" alt="Copy">
                   <span class="copy-text">Copy PIN</span>
               </a>
+          </div>
+          <div class="qr-code">
+            <div class="label-qr" >QR Code</label><br> </div>
+            <div class="label-qr-sub" >Scan using your mobile:</label><br> </div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{{ username }}/{{ pin }}" alt="QR Code">
           </div>
       </div>
   </div>

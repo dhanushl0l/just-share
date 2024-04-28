@@ -173,14 +173,7 @@ def upload_file():
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, uploaded_file.filename)
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-    # Create a file stream to save the file
-    with open(file_path, 'wb') as f:
-        while True:
-            chunk = uploaded_file.read(1024)
-            if not chunk:
-                break
-            f.write(chunk)
+    uploaded_file.save(file_path)
 
     # Generate random 4-digit PIN
     pin = ''.join(random.choices(string.digits, k=4))
@@ -191,7 +184,7 @@ def upload_file():
     # Store folder name and PIN mapping in JSON file
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
         json.dump(folder_pin_mapping, f)
-        
+
     return render_template('index-files.html', username=folder_name, pin=pin)
 
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])

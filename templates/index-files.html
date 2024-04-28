@@ -87,7 +87,7 @@
 <div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
   <div class="popup-bg">
     <div class="popup">
-      <button class="close" onclick="closePopup('outputContainer')">X</button>
+      <button class="close-1" onclick="closePopup('outputContainer')">X</button>
       {% if error %}
       <p class="error">Error <span> {{ error }} </span></p>
       <span class="popup-text" id="popupText"></span>
@@ -96,16 +96,10 @@
 </div>
 </div>
 
-<h1>File Upload</h1>
-<input type="file" id="fileInput">
-<button onclick="uploadFile()">Upload</button>
-<div id="progress"></div>
-<div id="result"></div>
-
 <div class="error-popup" id="popup" style="display: none;">
   <div class="popup-bg">
   <div class="popup">
-    <button class="close" onclick="closePopup('outputContainer')">X</button>
+    <button class="close-1" onclick="closePopup('outputContainer')">X</button>
   <span class="error" id="popupText"></span>
   </div>
 </div>
@@ -271,42 +265,6 @@ function updateFileName() {
   document.getElementById(containerId).style.display = 'none';
   window.location.href = '/files/';
 }
-
-function uploadFile() {
-            var fileInput = document.getElementById('fileInput');
-            var file = fileInput.files[0];
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/upload', true);
-
-            // Track upload progress
-            xhr.upload.onprogress = function(event) {
-                if (event.lengthComputable) {
-                    var percentComplete = (event.loaded / event.total) * 100;
-                    document.getElementById('progress').innerText = percentComplete.toFixed(2) + '%';
-                }
-            };
-
-            // Handle successful upload
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var username = response.username;
-                    var pin = response.pin;
-                    document.getElementById('result').innerText = 'File uploaded successfully. Username: ' + username + ', PIN: ' + pin;
-                } else {
-                    document.getElementById('result').innerText = 'Failed to upload file.';
-                }
-            };
-
-            // Handle errors
-            xhr.onerror = function() {
-                document.getElementById('result').innerText = 'Failed to upload file.';
-            };
-
-            var formData = new FormData();
-            formData.append('file', file);
-            xhr.send(formData);
-        }
 
       </script>
 </body>

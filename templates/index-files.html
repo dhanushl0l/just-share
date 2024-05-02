@@ -268,7 +268,7 @@ const fileInput = document.getElementById('fileInput');
 const uploadProgress = document.getElementById('uploadProgress');
 const sendButton = document.getElementById('sendButton');
 
-sendButton.disabled = true; // Disable the button initially
+sendButton.disabled = true; 
 
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
@@ -282,18 +282,17 @@ fileInput.addEventListener('change', () => {
             const percentComplete = (event.loaded / event.total) * 100;
             uploadProgress.value = percentComplete;
             if (percentComplete >= 100) {
-                sendButton.disabled = false; // Enable the button when upload is complete
-                sendButton.value = 'Upload'; // Set button text back to 'Upload'
+                sendButton.disabled = false; 
+                sendButton.value = 'Upload'; 
             } else {
-                sendButton.disabled = true; // Disable the button if upload is not complete
-                sendButton.value = 'Wait'; // Set button text to 'Wait' while disabled
+                sendButton.disabled = true; 
+                sendButton.value = 'Wait'; 
             }
         }
     });
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            // Handle the response from the server
             console.log(xhr.responseText);
         }
     };

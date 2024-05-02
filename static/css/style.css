@@ -14,6 +14,34 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.Progress {
+  width: auto;
+  height: 10px;
+  border: 1px solid white; 
+  background-color: #000000;
+  overflow: hidden;
+  position: fixed;
+  left: 50%;
+  top:250px;
+  transform: translateX(-50%);
+}
+
+.Progress::-webkit-progress-bar { 
+  border: 1px solid rgb(0, 0, 0);  
+  background-color: #ffffff;
+}
+
+.Progress::-moz-progress-bar {  /* Firefox */
+  border: 1px solid rgb(0, 0, 0); 
+  background-color: #ffffff;
+}
+
+.Progress::progress-bar {  
+  border: 1px solid rgb(0, 0, 0); 
+  background-color: #ffffff;  
+  transition: width 0.5s ease-in-out;
+}
+
 
 .update-file {
   position: absolute;
@@ -40,12 +68,13 @@ body::-webkit-scrollbar {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px; 
+  margin-top: -10%;
 }
 
 #fileLabel img {
   display: block; 
   width: 150px;
-  margin: 0 auto -10px; 
+  margin: 0 auto -20px; 
 }
 
 

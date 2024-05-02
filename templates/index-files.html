@@ -26,14 +26,17 @@
   <div class="content-s">
     <div class="console">
         <h1 class="label">Upload</h1>
-        <form id="uploadForm" action="/upload" method="post"  enctype="multipart/form-data">
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
           <div class="file-selector">
             <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()">
             <label for="fileInput" id="fileLabel"><img src="/static/assets/update.png" alt="Upload File">Select a file...</label>
+            <progress class="Progress" id="uploadProgress" max="100" value="0"></progress>
+            <input type="hidden" name="folder_name" id="folderName">
+            <input type="hidden" name="pin" id="pin">
           </div>                        
-        <input type="submit" value="Upload" class="update-button" id="sendButton">
-      </div>
-      </form>
+          <input type="submit" value="Upload" class="update-button" id="sendButton">
+        </form>
+    </div>
       </div>
       
     <div class="Receive-continer">
@@ -134,7 +137,7 @@
       </div>
       </footer>
       <script>
-        const username = "{{ username }}";
+const username = "{{ username }}";
 const pin = "{{ pin }}";
 const error = "{{ error }}";
 const message = "{{ message }}";
@@ -158,11 +161,6 @@ if (error) {
     outputContainer2.style.display = 'none';
 }
 
-if (message) {
-    outputContainer3.style.display = 'block';
-} else {
-    outputContainer3.style.display = 'none';
-}
 
 function closePopup(containerId) {
   var container = document.getElementById(containerId);
@@ -265,6 +263,35 @@ function updateFileName() {
   document.getElementById(containerId).style.display = 'none';
   window.location.href = '/files/';
 }
+
+const fileInput = document.getElementById('fileInput');
+const uploadProgress = document.getElementById('uploadProgress');
+const sendButton = document.getElementById('sendButton');
+
+sendButton.disabled = true; // Disable the button initially
+
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload');
+    xhr.upload.addEventListener('progress', (event) => {
+        if (event.lengthComputable) {
+            const percentComplete = (event.loaded / event.total) * 100;
+            uploadProgress.value = percentComplete;
+            if (percentComplete >= 100) {
+                sendButton.disabled = false; // Enable the button when upload is complete
+                sendButton.value = 'Upload'; // Set button text back to 'Upload'
+            } else {
+                sendButton.disabled = true; // Disable the button if upload is not complete
+                sendButton.value = 'Wait'; // Set button text to 'Wait' while disabled
+            }
+        }
+    });
+    xhr.send(formData);
+});
 
       </script>
 </body>

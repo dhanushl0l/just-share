@@ -29,19 +29,23 @@ body::-webkit-scrollbar {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  text-align: center; /* Center the text */
+  text-align: center; 
 }
 
 #fileLabel {
-  display: block; /* Change to block level to stack text and image */
+  display: inline-block;
   padding: 10px 20px;
   color: rgb(255, 255, 255);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; 
 }
 
 #fileLabel img {
-  display: block; /* Ensure image is block level */
+  display: block; 
   width: 150px;
-  margin: 0 auto -10px; /* Center the image and add space below */
+  margin: 0 auto -10px; 
 }
 
 
@@ -255,8 +259,8 @@ body::-webkit-scrollbar {
 
 .output-3 .copy-icon {
   z-index: 9;
-  top:65%; 
-  left: 90%;
+  top:90%; 
+  left:85%;
 }
 
 

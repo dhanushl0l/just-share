@@ -36,6 +36,10 @@
           </div>                        
           <input type="submit" value="Upload" class="update-button" id="sendButton">
         </form>
+        <div id="progressBarContainer" style="display: none;">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        
     </div>
       </div>
       
@@ -65,8 +69,8 @@
       <div class="popup-1">
         <button class="close" onclick="closePopup('outputContainer')">X</button>
           <div class="user-info">
-              <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
-              <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>
+            <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
+            <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>            
           </div>
           <div class="copy-icons">
               <a class="copy-icon" onclick="copyUsername(this)">
@@ -264,41 +268,77 @@ function updateFileName() {
   window.location.href = '/files/';
 }
 
-const fileInput = document.getElementById('fileInput');
-const uploadProgress = document.getElementById('uploadProgress');
-const sendButton = document.getElementById('sendButton');
-
-sendButton.disabled = true; 
-
-fileInput.addEventListener('change', () => {
-    const file = fileInput.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/upload');
-    xhr.upload.addEventListener('progress', (event) => {
-        if (event.lengthComputable) {
-            const percentComplete = (event.loaded / event.total) * 100;
-            uploadProgress.value = percentComplete;
-            if (percentComplete >= 100) {
-                sendButton.disabled = false; 
-                sendButton.value = 'Upload'; 
-            } else {
-                sendButton.disabled = true; 
-                sendButton.value = 'Wait'; 
-            }
-        }
-    });
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log(xhr.responseText);
-        }
-    };
-
-    xhr.send(formData);
+// Reset the progress bar when a new file is selected
+document.getElementById('fileInput').addEventListener('change', function() {
+  document.getElementById('uploadProgress').value = 0;
+  document.getElementById('progressBar').style.width = '0%';
 });
+
+// Submit the form and handle file upload
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  var formData = new FormData(this);
+
+  // Check if a file is selected
+  if (formData.get('file').name === '') {
+    return; // Exit the function
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/upload', true);
+
+  xhr.upload.onprogress = function(e) {
+    if (e.lengthComputable) {
+      var percentage = (e.loaded / e.total) * 100;
+      document.getElementById('uploadProgress').value = percentage;
+      document.getElementById('progressBar').style.width = percentage + '%';
+    }
+  };
+
+  xhr.onload = function() {
+    console.log(xhr.responseText); // Log the response for debugging
+    if (xhr.status == 200) {
+      // Upload successful
+      var response = JSON.parse(xhr.responseText);
+      document.getElementById('folderName').value = response.username;
+      document.getElementById('pin').value = response.pin;
+      document.getElementById('progressBarContainer').style.display = 'none';
+
+      // Update the username and pin values in the output container
+      document.getElementById('usernameValue').innerText = response.username;
+      document.getElementById('pinValue').innerText = response.pin;
+
+      // Show the output container
+      document.getElementById('outputContainer').style.display = 'block';
+    } else {
+      // Upload failed
+      alert('Upload failed. Please try again.');
+    }
+  };
+
+  xhr.onerror = function() {
+    // Upload failed
+    alert('Upload failed. Please try again.');
+  };
+
+  xhr.send(formData);
+
+  document.getElementById('progressBarContainer').style.display = 'block';
+});
+
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+  var fileInput = document.getElementById('fileInput');
+  var fileLabel = document.getElementById('fileLabel');
+  if (fileInput.files.length === 0) {
+    fileLabel.classList.add('shake'); // Add the shake class
+    setTimeout(function() {
+      fileLabel.classList.remove('shake'); // Remove the shake class after the animation ends
+    }, 400);
+    event.preventDefault(); // Prevent the form from being submitted
+    return;
+  }
+});
+
       </script>
 </body>
 </html>

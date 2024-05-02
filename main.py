@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, jsonify
 import random
 import string
 import json
@@ -158,7 +158,7 @@ MAX_FILE_SIZE = 11 * 1024 * 1024  # 11 MB in bytes
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
-    return render_template('index-files.html', error="File size exceeds the limit of 11 MB. Please choose a smaller file to upload."), 413
+    return jsonify( error="File size exceeds the limit of 11 MB. Please choose a smaller file to upload."), 413
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -167,7 +167,7 @@ def upload_file():
     # Check if the file is empty
     if uploaded_file.filename == '':
         error_message = "No file selected. Please choose a file to upload."
-        return render_template('index-files.html', error=error_message)
+        return jsonify( error=error_message)
 
     # Save the file
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
@@ -185,7 +185,7 @@ def upload_file():
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
         json.dump(folder_pin_mapping, f)
 
-    return render_template('index-files.html', username=folder_name, pin=pin)
+    return jsonify( username=folder_name, pin=pin)
 
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 def download_file_with_params(folder_name, pin):

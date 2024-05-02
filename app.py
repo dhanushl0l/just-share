@@ -162,19 +162,8 @@ def request_entity_too_large(error):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    uploaded_file = request.files['file']
-
-    # Check if the file is empty
-    if uploaded_file.filename == '':
-        error_message = "No file selected. Please choose a file to upload."
-        return render_template('index-files.html', error=error_message)
-
-    # Save the file
+    # Generate random folder name
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, uploaded_file.filename)
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    uploaded_file.save(file_path)
-
     # Generate random 4-digit PIN
     pin = ''.join(random.choices(string.digits, k=4))
 

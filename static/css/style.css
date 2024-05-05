@@ -14,32 +14,47 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.Progress {
-  width: auto;
-  height: 10px;
-  border: 1px solid white; 
-  background-color: #000000;
-  overflow: hidden;
+.progressBarContainer{
+  z-index: 98;
+  width: 30.5%;
+  height: 12px;
   position: fixed;
+  top: 249px;
   left: 50%;
-  top:250px;
   transform: translateX(-50%);
-}
-
-.Progress::-webkit-progress-bar { 
-  border: 1px solid rgb(0, 0, 0);  
   background-color: #ffffff;
 }
 
-.Progress::-moz-progress-bar {  /* Firefox */
-  border: 1px solid rgb(0, 0, 0); 
+@-moz-document url-prefix() {
+  .progressBarContainer {
+    opacity: 0;
+  }
+}
+
+.Progress {
+  z-index: 99;
+  width: 30%;
+  height: 10px;
+  position: fixed;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  overflow: hidden;
+}
+
+
+.Progress::-webkit-progress-bar {
+  background-color: #000000;
+}
+
+
+.Progress::-webkit-progress-value {
   background-color: #ffffff;
 }
 
-.Progress::progress-bar {  
-  border: 1px solid rgb(0, 0, 0); 
-  background-color: #ffffff;  
-  transition: width 0.5s ease-in-out;
+.Progress::-moz-progress-bar {
+  background-color: #fff;
 }
 
 
@@ -259,13 +274,13 @@ body::-webkit-scrollbar {
 
 .copy-icon:nth-child(1) {
   z-index: 9;
-  top: 295px; 
+  top: 115px; 
   left: 30%;
 }
 
 .copy-icon:nth-child(2) {
   z-index: 9;
-  top: 115px; 
+  top: 295px; 
   left: 30%;
 }
 

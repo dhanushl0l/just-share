@@ -167,7 +167,7 @@ def upload_file():
     # Check if the file is empty
     if uploaded_file.filename == '':
         error_message = "No file selected. Please choose a file to upload."
-        return jsonify( error=error_message)
+        return jsonify(error=error_message)
 
     # Save the file
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
@@ -185,7 +185,12 @@ def upload_file():
     with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
         json.dump(folder_pin_mapping, f)
 
-    return jsonify( username=folder_name, pin=pin)
+    # Generate download link for QR code
+    qr_code_link = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{}/{}'.format(folder_name, pin)
+
+    # Return folder name, PIN, and QR code link
+    return jsonify(username=folder_name, pin=pin, qr_code_link=qr_code_link)
+
 
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 def download_file_with_params(folder_name, pin):

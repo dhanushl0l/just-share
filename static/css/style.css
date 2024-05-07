@@ -14,6 +14,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+#justShare {
+  cursor: default;
+}
+
 .progressBarContainer{
   z-index: 98;
   width: 30.5%;
@@ -83,14 +87,28 @@ body::-webkit-scrollbar {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px; 
-  margin-top: -10%;
+  margin-top: 0%;
 }
 
 #fileLabel img {
   display: block; 
   width: 150px;
-  margin: 0 auto -20px; 
+  margin: 0 auto 10px; 
 }
+
+.fileLabel {
+  cursor: pointer;
+  position: absolute;
+  display: block; 
+  height: 45px;
+  top: 40px;
+  transition: transform 1000ms;
+}
+
+.fileLabel:hover {
+  transform: scale(1.1);
+}
+
 
 @keyframes shake {
   0% { transform: translateX(0); }

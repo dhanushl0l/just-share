@@ -19,7 +19,7 @@
 <body>
   <header>
     <div class="title">
-      <h1><span>JUST SHARE</span></h1>
+      <h1><span id="justShare">JUST SHARE</span></h1>
     </div>
   </header>
   <div class="content-s-r bluer">
@@ -28,8 +28,8 @@
         <h1 class="label">Upload</h1>
         <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
           <div class="file-selector">
-            <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()">
-            <label for="fileInput" id="fileLabel"><img src="/static/assets/update.png" alt="Upload File">Select a file...</label>
+            <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()"> 
+            <label for="fileInput" id="fileLabel"><img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg"  alt="Upload File">Select a file...</label>
             <progress class="Progress" id="uploadProgress" max="100" value="0"></progress>
             <input type="hidden" name="folder_name" id="folderName">
             <input type="hidden" name="pin" id="pin">
@@ -143,6 +143,10 @@
       </footer>
       <script>
 
+document.getElementById('justShare').addEventListener('click', function() {
+    window.location.href = 'https://justshare.dhanush.online/';
+});
+
 const error = "{{ error }}";
 
 const outputContainer2 = document.getElementById('outputContainer2');
@@ -236,12 +240,9 @@ function updateFileName() {
             fileInput.value = ''; // Clear the selected file
 
         } else {
-            fileLabel.innerHTML = `<img src="/static/assets/update.png" alt="Upload File">${fileInput.files[0].name}`;
+          fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update up.svg" alt="Upload File" class="fileLabel">${fileInput.files[0].name}`;
             popup.style.display = 'none'; // Hide the popup if no error
         }
-    } else {
-        fileLabel.innerHTML = `<img src="/static/assets/update.png" alt="Upload File">Select a file...`;
-        popup.style.display = 'none'; // Hide the popup if no error
     }
 }
 

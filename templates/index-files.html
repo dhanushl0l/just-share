@@ -38,28 +38,26 @@
         </form>
         <div class="progressBarContainer" id="progressBarContainer" >
           <div id="progressBar" class="progress-bar"></div>
-        </div>
-        
-    </div>
-      </div>
+        </div> 
+     </div>
+</div>
       
-    <div class="Receive-continer">
-      <div>
-        <div class="content-r">
-          <div class="console">
-    <h1 class="label">Receive</h1>
-    <form action="/download"  method="get">
-    <label id="user-info" class="user-name" for="username">Username</label>
-    <input type="text" name="folder_name" id="username" autocomplete="off">
-    <label id="user-info" class="user-pin" for="pin">PIN</label>
-    <input type="text" id="pin" name="pin" autocomplete="off">
-    <input type="submit" class="update-button" value="Download">
-
-</form>
-</div>
-</div>
-</div>
-</div>
+<div class="Receive-continer">
+  <div>
+    <div class="content-r">
+      <div class="console">
+        <h1 class="label">Receive</h1>
+        <form action="/download"  method="get">
+        <label id="user-info" class="user-name" for="username">Username</label>
+        <input type="text" name="folder_name" id="username" autocomplete="off">
+        <label id="user-info" class="user-pin" for="pin" >PIN</label>
+        <input type="text" id="pin" name="pin" autocomplete="off">
+        <input type="submit" class="update-button" value="Download">
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
 </div>
 </div>
 </div>
@@ -240,18 +238,38 @@ function updateFileName() {
             fileInput.value = ''; // Clear the selected file
 
         } else {
-          fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update up.svg" alt="Upload File" class="fileLabel">${fileInput.files[0].name}`;
+          fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update yes.svg" alt="Upload File" class="fileLabel">${fileInput.files[0].name}`;
             popup.style.display = 'none'; // Hide the popup if no error
         }
     }
 }
 
+function closePopup(containerId) {
+    // Get the container element
+    var container = document.getElementById(containerId);
+    // Hide the container
+    container.style.display = 'none';
+    
+    // Reset the file input value to remove the selected file
+    var fileInput = document.getElementById('fileInput');
+    fileInput.value = '';
 
+    // Reset the fileLabel content
+    var fileLabel = document.getElementById('fileLabel');
+    fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update up.svg" alt="Upload File" class="fileLabel">Select a file again...`;
+
+    // Reset the progress bar
+    document.getElementById('uploadProgress').value = 0;
+
+    // Reset the style of progressBarContainer
+    document.getElementById('progressBarContainer').style = '';
+
+}
 
 // Function to close the popup
 function closePopup(containerId) {
     document.getElementById(containerId).style.display = 'none';
-    window.location.href = '/files/'; // Redirect to files page
+    window.location.href = '/files/';
 }
 
 // Reset the progress bar when a new file is selected

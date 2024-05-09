@@ -709,7 +709,7 @@ footer {
     height: auto;
   }
   
-  @media only screen and (max-width:1200px) {
+  @media only screen and (max-width:1300px) {
 
     body {
       min-height: 1190px;

@@ -29,7 +29,7 @@
         <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
           <div class="file-selector">
             <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()"> 
-            <label for="fileInput" id="fileLabel"><img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg"  alt="Upload File">Select a file...</label>
+            <label for="fileInput" id="fileLabel"><img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">Select a file...</span></label>
             <progress class="Progress" id="uploadProgress" max="100" value="0"></progress>
             <input type="hidden" name="folder_name" id="folderName">
             <input type="hidden" name="pin" id="pin">
@@ -48,10 +48,10 @@
       <div class="console">
         <h1 class="label">Receive</h1>
         <form action="/download"  method="get">
-        <label id="user-info" class="user-name" for="username">Username</label>
-        <input type="text" name="folder_name" id="username" autocomplete="off">
-        <label id="user-info" class="user-pin" for="pin" >PIN</label>
-        <input type="text" id="pin" name="pin" autocomplete="off">
+          <label id="user-info" class="user-name" for="username">Username</label>
+          <input type="text" name="folder_name" id="username" autocomplete="off" maxlength="4" oninput="convertToLowercase(this)">
+         <label id="user-info" class="user-pin" for="pin">PIN</label>
+         <input type="text" id="pin" name="pin" autocomplete="off" maxlength="4">    
         <input type="submit" class="update-button" value="Download">
       </form>
     </div>
@@ -90,10 +90,10 @@
 </div>
 
 
-<div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
+<div class="output-2" id="outputContainer2" style="display: none;">
   <div class="popup-bg">
     <div class="popup">
-      <button class="close-1" onclick="closePopup('outputContainer')">X</button>
+      <button class="close-1">X</button>
       {% if error %}
       <p class="error">Error <span> {{ error }} </span></p>
       <span class="popup-text" id="popupText"></span>
@@ -104,11 +104,11 @@
 
 <div class="error-popup" id="popup" style="display: none;">
   <div class="popup-bg">
-  <div class="popup">
-    <button class="close-1" onclick="closePopup('outputContainer')">X</button>
-  <span class="error" id="popupText"></span>
+    <div class="popup">
+      <button class="close-1" onclick="closePopup('popup')">X</button>
+      <span class="error" id="popupText">File is above the size limit of 11MB</span>
+    </div>
   </div>
-</div>
 </div>
 
      <footer id="footer">
@@ -152,20 +152,9 @@ const outputContainer2 = document.getElementById('outputContainer2');
 
 if (error) {
     outputContainer2.style.display = 'block';
-} else {
-    outputContainer2.style.display = 'none';
 }
 
 
-function closePopup(containerId) {
-  var container = document.getElementById(containerId);
-  container.style.display = "none";
-}
-
-function closePopup(elementId) {
-    document.getElementById(elementId).style.display = 'none';
-    window.location.href = '/';
-}
 
 function copydata(link) {
   const datavalue = document.getElementById('datavalue').textContent;
@@ -222,6 +211,27 @@ function changeIcon(link) {
   }, 1000); 
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  var closeButton = document.querySelector('.close-1');
+  var outputContainer = document.querySelector('#outputContainer2');
+
+  closeButton.addEventListener('click', function() {
+    outputContainer.style.display = 'none';
+    document.getElementById("uploadProgress").value = 0;
+
+    var fileInput = document.getElementById("fileInput");
+    var fileLabel = document.getElementById("fileLabel");
+    fileLabel.innerHTML = `<img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1" alt="Upload File"><span class="fileLabelText">Select a file...</span>`;
+
+    fileInput.value = '';
+  });
+});
+
+
+function convertToLowercase(input) {
+    input.value = input.value.toLowerCase().replace(/[^a-z]/g, '');
+  }
+
 function updateFileName() {
     const fileInput = document.getElementById('fileInput');
     const fileLabel = document.getElementById('fileLabel');
@@ -233,44 +243,35 @@ function updateFileName() {
         const maxSize = 11 * 1024 * 1024; // 11MB in bytes
 
         if (fileSize > maxSize) {
-            popupText.textContent = 'File is above the size limit of 11MB';
             popup.style.display = 'block';
             fileInput.value = ''; // Clear the selected file
 
         } else {
-          fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update yes.svg" alt="Upload File" class="fileLabel">${fileInput.files[0].name}`;
+          fileLabel.innerHTML = `<img class="fileLabel" src="/static/assets/update yes.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">${fileInput.files[0].name}</span>`;
             popup.style.display = 'none'; // Hide the popup if no error
         }
     }
 }
 
-function closePopup(containerId) {
-    // Get the container element
-    var container = document.getElementById(containerId);
-    // Hide the container
-    container.style.display = 'none';
-    
-    // Reset the file input value to remove the selected file
-    var fileInput = document.getElementById('fileInput');
-    fileInput.value = '';
-
-    // Reset the fileLabel content
-    var fileLabel = document.getElementById('fileLabel');
-    fileLabel.innerHTML = `<img src="/static/assets/update out.svg" alt="Upload File"><img src="/static/assets/update up.svg" alt="Upload File" class="fileLabel">Select a file again...`;
-
-    // Reset the progress bar
-    document.getElementById('uploadProgress').value = 0;
-
-    // Reset the style of progressBarContainer
-    document.getElementById('progressBarContainer').style = '';
-
-}
 
 // Function to close the popup
 function closePopup(containerId) {
+    // Reset progress bar
+    document.getElementById('uploadProgress').value = 0;
+
+    // Remove selected file
+    document.getElementById('fileInput').value = '';
+
+    // Reset fileLabel HTML content
+    document.getElementById('fileLabel').innerHTML = `<img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">Select a file...</span>`;
+
+    // Reset progressBarContainer class
+    document.getElementById('progressBarContainer').className = 'progressBarContainer';
+
+    // Hide the popup
     document.getElementById(containerId).style.display = 'none';
-    window.location.href = '/files/';
 }
+
 
 // Reset the progress bar when a new file is selected
 document.getElementById('fileInput').addEventListener('change', function() {

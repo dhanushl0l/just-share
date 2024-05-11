@@ -80,35 +80,54 @@ body::-webkit-scrollbar {
 }
 
 #fileLabel {
-  display: inline-block;
+  display: block;
+  padding: 10px 20px;
+  width: 200px; 
+  top: 10px;
+}
+
+.fileLabelText {
+  position: relative;
   padding: 10px 20px;
   color: rgb(255, 255, 255);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 200px; 
-  margin-top: 0%;
-}
-
-#fileLabel img {
-  display: block; 
-  width: 150px;
-  margin: 0 auto 10px; 
+  top: -30px;
 }
 
 .fileLabel {
+  position: relative;
   cursor: pointer;
-  position: absolute;
-  display: block; 
+  display: block;
   height: 45px;
-  top: 40px;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
   transition: transform 1000ms;
 }
 
 .fileLabel:hover {
-  transform: scale(1.1);
+  transform: translateX(-50%) scale(11.1); /* Example: Enlarge the element by 10% */
 }
 
+
+.fileLabel-1{
+  position: relative;
+  cursor: pointer;
+  display: block; 
+  height: 100px;
+  top: -40px;
+  z-index: 99;
+  left: 50%; 
+  transform: translateX(-50%);
+  transition: transform 1000ms;
+}
+
+.fileLabel-1:hover {
+  transform: translateX(-50%) scale(1.1); /* Example: Enlarge the element by 10% */
+}
 
 @keyframes shake {
   0% { transform: translateX(0); }

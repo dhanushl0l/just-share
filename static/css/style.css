@@ -108,10 +108,6 @@ body::-webkit-scrollbar {
   transition: transform 1000ms;
 }
 
-.fileLabel:hover {
-  transform: translateX(-50%) scale(11.1); /* Example: Enlarge the element by 10% */
-}
-
 
 .fileLabel-1{
   position: relative;
@@ -126,8 +122,14 @@ body::-webkit-scrollbar {
 }
 
 .fileLabel-1:hover {
-  transform: translateX(-50%) scale(1.1); /* Example: Enlarge the element by 10% */
+  transform: translateX(-50%) scale(01.1); /* Example: Enlarge the element by 10% */
 }
+
+.Receive-continer.shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.9);
+  animation-fill-mode: both;
+}
+
 
 @keyframes shake {
   0% { transform: translateX(0); }
@@ -162,9 +164,9 @@ body::-webkit-scrollbar {
     padding: 12px 40px;
     text-align: center;
     text-transform: none;
-    position: absolute;
+    position:absolute;
     top: 75%;
-    right: 35%;
+    left: 37%; 
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;

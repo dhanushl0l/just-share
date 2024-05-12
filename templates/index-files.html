@@ -141,6 +141,14 @@
       </footer>
       <script>
 
+function loadPriorityImage() {
+        var img = new Image();
+        img.src = 'path_to_your_image.jpg', 'path_to_your_image2.jpg';
+        img.setAttribute('priority', 'high'); 
+        document.getElementById('imageContainer').appendChild(img);
+    }
+
+    
 document.getElementById('justShare').addEventListener('click', function() {
     window.location.href = 'https://justshare.dhanush.online/';
 });
@@ -266,7 +274,8 @@ function closePopup(containerId) {
     document.getElementById('fileLabel').innerHTML = `<img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">Select a file...</span>`;
 
     // Reset progressBarContainer class
-    document.getElementById('progressBarContainer').className = 'progressBarContainer';
+    document.getElementById('progressBarContainer').style.display = 'block';
+
 
     // Hide the popup
     document.getElementById(containerId).style.display = 'none';

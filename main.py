@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, jsonify
+from flask import Flask, render_template, request, send_from_directory, jsonify, redirect, url_for
 import random
 import string
 import json
@@ -191,7 +191,6 @@ def upload_file():
     # Return folder name, PIN, and QR code link
     return jsonify(username=folder_name, pin=pin, qr_code_link=qr_code_link)
 
-
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 def download_file_with_params(folder_name, pin):
     # Load the JSON file
@@ -216,17 +215,19 @@ def download_file_with_params(folder_name, pin):
 def download_file():
     pin = request.args.get('pin')
     folder_name = request.args.get('folder_name')
-    
+
     if not folder_name or not pin:
-        logging.warning("Invalid PIN or folder name!")
-        error_message = "Invalid PIN or folder name!"
-        return render_template('index-files.html', error=error_message)
-    
-    # Load the JSON file
+        return redirect(url_for('files'))
+
+    # Load the JSON file if it exists
     json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
+    if not os.path.exists(json_path):
+        error_message = "Folder not found or JSON file missing."
+        return render_template('index-files.html', error=error_message)
+
     with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
-    
+
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
         files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name)) if not file.endswith('.json')]
@@ -235,8 +236,10 @@ def download_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+        else:
+            error_message = "No files found in the folder."
+            return render_template('index-files.html', error=error_message)
     else:
-        logging.warning("Invalid PIN or folder name!")
         error_message = "Invalid PIN or folder name!"
         return render_template('index-files.html', error=error_message)
     

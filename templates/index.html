@@ -32,6 +32,7 @@
         </div>
       </form>
       </div>
+
     <div class="Receive-continer">
       <div>
         <div class="content-r">
@@ -52,7 +53,7 @@
 </div>
 </div>
 </div>
-<div class="output" id="outputContainer" {% if username and pin %}style="display: block;"{% endif %}>
+<div class="output" id="outputContainer" {% if username and pin %}style="display: none;"{% endif %}>
   <div class="popup-bg">
     <div class="popup-fileld">
       <div class="popup-1">
@@ -82,7 +83,7 @@
 </div>
 
 
-<div class="output-2" id="outputContainer2" {% if error or message %}style="display: block;"{% endif %}>
+<div class="output-2" id="outputContainer2" {% if error or message %}style="display: none;"{% endif %}>
   <div class="popup-bg">
     <div class="popup">
       <button class="close-1" onclick="closePopup('outputContainer')">X</button>
@@ -93,7 +94,7 @@
 </div>
 </div>
 
-<div class="output-3" id="outputContainer3" {% if error or message %}style="display: block;"{% endif %}>
+<div class="output-3" id="outputContainer3" {% if error or message %}style="display: none;"{% endif %}>
   <div class="popup-bg">
     <div class="popup">
       <button class="close-1" onclick="closePopup('outputContainer')">X</button>
@@ -138,117 +139,39 @@
         </div>
       </div>
       </footer>
-      <script>
-const username = "{{ username }}";
-const pin = "{{ pin }}";
-const error = "{{ error }}";
-const message = "{{ message }}";
+<script>
+  const username = "{{ username }}";
+  const pin = "{{ pin }}";
+  const error = "{{ error }}";
+  const message = "{{ message }}";
 
-const outputContainer = document.getElementById('outputContainer');
-const outputContainer2 = document.getElementById('outputContainer2');
-const usernameValue = document.getElementById('usernameValue');
-const pinValue = document.getElementById('pinValue');
+  const outputContainer = document.getElementById('outputContainer');
+  const outputContainer2 = document.getElementById('outputContainer2');
+  const outputContainer3 = document.getElementById('outputContainer3');
+  const usernameValue = document.getElementById('usernameValue');
+  const pinValue = document.getElementById('pinValue');
 
-if (username && pin) {
+  if (username && pin) {
     outputContainer.style.display = 'block';
     usernameValue.textContent = username;
     pinValue.textContent = pin;
-} else {
+  } else {
     outputContainer.style.display = 'none';
-}
+  }
 
-if (error) {
+  if (error) {
     outputContainer2.style.display = 'block';
-} else {
+  } else {
     outputContainer2.style.display = 'none';
-}
+  }
 
-if (message) {
+  if (message) {
     outputContainer3.style.display = 'block';
-} else {
+  } else {
     outputContainer3.style.display = 'none';
-}
+  }
+</script>
 
-function closePopup(containerId) {
-  var container = document.getElementById(containerId);
-  container.style.display = "none";
-}
-
-function closePopup(elementId) {
-    document.getElementById(elementId).style.display = 'none';
-    window.location.href = '/';
-}
-
-function copydata(link) {
-  const datavalue = document.getElementById('datavalue').textContent;
-
-  // Create a new textarea element
-  const textarea = document.createElement('textarea');
-  // Set the value of the textarea to the text content of the span element
-  textarea.value = datavalue;
-
-  // Append the textarea to the document body
-  document.body.appendChild(textarea);
-
-  // Select the text inside the textarea
-  textarea.select();
-  // Copy the selected text to the clipboard
-  document.execCommand('copy');
-
-  // Remove the textarea from the document body
-  document.body.removeChild(textarea);
-
-  // Change the icon
-  changeIcon(link);
-}
-
-
-function copyUsername(link) {
-  const usernameValue = document.getElementById('usernameValue').innerText;
-  copyToClipboard(usernameValue);
-  changeIcon(link);
-}
-
-function copyPin(link) {
-  const pinValue = document.getElementById('pinValue').innerText;
-  copyToClipboard(pinValue);
-  changeIcon(link);
-}
-
-function copyToClipboard(value) {
-  const tempInput = document.createElement('input');
-  tempInput.value = value;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  tempInput.setSelectionRange(0, 99999);
-  document.execCommand('copy');
-  document.body.removeChild(tempInput);
-}
-
-function changeIcon(link) {
-  link.querySelector('img').src = '/static/assets/check.png'; 
-  link.querySelector('.copy-text').style.display = 'block'; 
-  setTimeout(() => {
-    link.querySelector('img').src = '/static/assets/clipboard.png'; 
-    link.querySelector('.copy-text').style.display = 'none'; 
-  }, 1000); 
-}
-
-const text = document.querySelector('.message-out span');
-if (text.textContent.length > 170) {
-  text.style.fontSize = '1.8em';
-} else {
-  text.style.fontSize = '3em';
-}
-
-var messageSpan = document.querySelector('.message-out span');
-
-var messageText = messageSpan.textContent;
-
-var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
-
-messageSpan.textContent = cleanedMessage;
-
-      </script>
-</body>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
 </html>

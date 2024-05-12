@@ -79,9 +79,6 @@ def username_exists(username):
                 return True
     return False
 
-
-from flask import request
-
 @app.route('/receive/<username>/<pin>', methods=['GET', 'POST'])
 def receive_with_params(username, pin):
     # Process the request
@@ -147,18 +144,19 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Route to serve the HTML form for uploading files
-@app.route('/files/')
+@app.route('/files')
 def files():
-    return render_template("index-files.html")
+    error_message = request.args.get('error')
+    if error_message:
+        return render_template('index-files.html', error=error_message)
+    else:
+        return render_template("index-files.html")
 
-# Route to handle file upload
-from flask import render_template
-
-MAX_FILE_SIZE = 11 * 1024 * 1024  # 11 MB in bytes
+MAX_FILE_SIZE = 11 * 1024 * 1024  
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
-    return jsonify( error="File size exceeds the limit of 11 MB. Please choose a smaller file to upload."), 413
+    return jsonify( error="File size exceeds the limit of 10 MB. Please choose a smaller file to upload."), 413
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -215,15 +213,17 @@ def download_file_with_params(folder_name, pin):
 def download_file():
     pin = request.args.get('pin')
     folder_name = request.args.get('folder_name')
+    error_message = None
 
     if not folder_name or not pin:
-        return redirect(url_for('files'))
+        error_message = "Folder name or PIN missing."
+        return redirect(url_for('files', error=error_message))
 
     # Load the JSON file if it exists
     json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
     if not os.path.exists(json_path):
         error_message = "Folder not found or JSON file missing."
-        return render_template('index-files.html', error=error_message)
+        return redirect(url_for('files', error=error_message))
 
     with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
@@ -238,10 +238,10 @@ def download_file():
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
         else:
             error_message = "No files found in the folder."
-            return render_template('index-files.html', error=error_message)
+            return redirect(url_for('files', error=error_message))
     else:
         error_message = "Invalid PIN or folder name!"
-        return render_template('index-files.html', error=error_message)
+        return redirect(url_for('files', error=error_message))
     
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0') 

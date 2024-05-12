@@ -87,14 +87,16 @@ body::-webkit-scrollbar {
 }
 
 .fileLabelText {
+  display: block;
   position: relative;
   padding: 10px 20px;
   color: rgb(255, 255, 255);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px; 
-  top: -30px;
+  width: 200px; 
+  top: -40px;
+  left: -20px;
 }
 
 .fileLabel {

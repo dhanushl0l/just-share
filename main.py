@@ -270,6 +270,5 @@ def download_file():
         session['error_message'] = error_message
         return redirect(url_for('files'))
 
-    
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0') 

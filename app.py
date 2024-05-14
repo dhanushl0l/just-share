@@ -28,6 +28,10 @@ DATABASE_FOLDER = os.path.join(os.path.dirname(__file__), 'database')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 11 * 1024 * 1024
 
+@app.route('/')
+def index():
+    return render_template("home.html")
+
 @app.route('/text')
 def text():
     username = session.pop('username', None)
@@ -266,6 +270,5 @@ def download_file():
         session['error_message'] = error_message
         return redirect(url_for('files'))
 
-    
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0') 

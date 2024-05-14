@@ -2,15 +2,24 @@ document.getElementById('justShare').addEventListener('click', function() {
   window.location.href = 'https://justshare.dhanush.online/';
 });
 
-function closePopup(containerId) {
-var container = document.getElementById(containerId);
-container.style.display = "none";
+function hideContainer(containerId) {
+  var container = document.getElementById(containerId);
+  if (container) {
+    container.style.display = 'none';
+  }
 }
 
-function closePopup(elementId) {
-  document.getElementById(elementId).style.display = 'none';
-  window.location.href = '/';
-}
+document.getElementById('outputContainer2').querySelector('.close-1').addEventListener('click', function() {
+  hideContainer('outputContainer2');
+});
+
+document.getElementById('outputContainer3').querySelector('.close-1').addEventListener('click', function() {
+  hideContainer('outputContainer3');
+});
+
+document.getElementById('outputContainer').querySelector('.close').addEventListener('click', function() {
+  hideContainer('outputContainer');
+});
 
 function copydata(link) {
 const datavalue = document.getElementById('datavalue').textContent;
@@ -68,18 +77,17 @@ setTimeout(() => {
 }
 
 const text = document.querySelector('.message-out span');
-if (text.textContent.length > 170) {
-text.style.fontSize = '1.8em';
-} else {
-text.style.fontSize = '3em';
+if (text && text.textContent && text.textContent.length > 170) {
+    text.style.fontSize = '1.8em';
+} else if (text) {
+    text.style.fontSize = '3em';
 }
 
 var messageSpan = document.querySelector('.message-out span');
 
-var messageText = messageSpan.textContent;
+if (messageSpan) {
+    var messageText = messageSpan.textContent;
+    var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
+    messageSpan.textContent = cleanedMessage;
+}
 
-var cleanedMessage = messageText.replace(/\‎ \s*/g, '\n');
-
-messageSpan.textContent = cleanedMessage;
-
-   

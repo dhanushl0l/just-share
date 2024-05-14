@@ -14,7 +14,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://justshare.dhanush.online/">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-home.css') }}">
 </head>
 <body>
   <header>
@@ -26,7 +26,7 @@
     <div class="a-container-text">
       <h1>Share text & links</h1>
       <p>Datas only visible for 24 hours. If any server related maintenance happens, the data will be deleted.</p>
-      <button class="send-text" onclick="window.location.href = 'https://justshare.pythonanywhere.com/';">SHARE TEXT</button>
+      <button class="send-text" onclick="window.location.href = 'https://justshare.pythonanywhere.com/text';">SHARE TEXT</button>
   </div>
   <div class="a-container-file">
       <h1>Share files</h1>

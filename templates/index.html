@@ -57,7 +57,7 @@
   <div class="popup-bg">
     <div class="popup-fileld">
       <div class="popup-1">
-        <button class="close" onclick="closePopup('outputContainer')">X</button>
+        <button class="close" >X</button>
           <div class="user-info">
               <p class="username">Username: <span id="usernameValue">{{ username }}</span></p>
               <p class="pin">PIN: <span id="pinValue">{{ pin }}</span></p>
@@ -86,7 +86,7 @@
 <div class="output-2" id="outputContainer2" {% if error or message %}style="display: none;"{% endif %}>
   <div class="popup-bg">
     <div class="popup">
-      <button class="close-1" onclick="closePopup('outputContainer')">X</button>
+      <button class="close-1" >X</button>
       {% if error %}
       <p class="error">Error <span> {{ error }} </span></p>
       {% endif %}      
@@ -97,7 +97,7 @@
 <div class="output-3" id="outputContainer3" {% if error or message %}style="display: none;"{% endif %}>
   <div class="popup-bg">
     <div class="popup">
-      <button class="close-1" onclick="closePopup('outputContainer')">X</button>
+      <button class="close-1" >X</button>
       {% if message %}
       <h1 class="message-h1">Data</h1>
       <div class="scrollable">
@@ -170,8 +170,8 @@
   } else {
     outputContainer3.style.display = 'none';
   }
-</script>
 
+</script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

@@ -34,55 +34,33 @@ def index():
 
 @app.route('/text')
 def text():
-    username = session.pop('username', None)
-    pin = session.pop('pin', None)
-    
-    error_message = session.pop('error_message', None)
-    message = session.pop('message', None)
-    
-    if username:
-        return render_template('index.html', username=username, pin=pin)
-    elif error_message:
-        return render_template('index.html', error=error_message)
-    elif message:
-        return render_template('index.html', message=message)
-    else:
-        return render_template('index.html')
-
-
-@app.route('/send', methods=['GET', 'POST'])
-def send():
-    if request.method == 'POST':
-        message = request.form['message']
-        if not message:
-            session['error_message'] = "Message cannot be empty"
-            return redirect(url_for('text'))
-
-        shared_data['message'] = message
-        # Generate a unique username
-        while True:
-            username = ''.join(random.choices(string.ascii_lowercase, k=4))
-            if not username_exists(username):
-                break
-        shared_data['username'] = username
-        
-        shared_data['pin'] = ''.join(random.choices(string.digits, k=4))
-
-        # Create the database folder if it doesn't exist
-        if not os.path.exists(DATABASE_FOLDER):
-            os.makedirs(DATABASE_FOLDER)
-        
-        # Save data to a JSON file in the database folder
-        filename = os.path.join(DATABASE_FOLDER, shared_data['username'] + '.json')
-        with open(filename, 'w') as file:
-            json.dump(shared_data, file)
-
-        # Return a new HTML template for displaying the results
-        session['username'] = shared_data['username']
-        session['pin'] = shared_data['pin']
-        return redirect(url_for('text'))
-
     return render_template('index.html')
+
+
+@app.route('/send', methods=['POST'])
+def send():
+    message = request.form['message']
+    if not message:
+        return jsonify({'error_message': "Message cannot be empty"})
+
+    shared_data['message'] = message
+    while True:
+        username = ''.join(random.choices(string.ascii_lowercase, k=4))
+        if not username_exists(username):
+            break
+    shared_data['username'] = username
+    shared_data['pin'] = ''.join(random.choices(string.digits, k=4))
+
+    if not os.path.exists(DATABASE_FOLDER):
+        os.makedirs(DATABASE_FOLDER)
+    
+    filename = os.path.join(DATABASE_FOLDER, shared_data['username'] + '.json')
+    with open(filename, 'w') as file:
+        json.dump(shared_data, file)
+    
+    qr_code_link = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{}/{}'.format(shared_data['username'], shared_data['pin'])
+        
+    return jsonify({'username': shared_data['username'], 'pin': shared_data['pin'], 'qr_code_link': qr_code_link})
 
 def username_exists(username):
     # Check if the username exists in the database
@@ -112,53 +90,26 @@ def receive_with_params(username, pin):
     else:
         return render_template('index.html', error="Username not found")
 
-@app.route('/receive', methods=['GET', 'POST'])
+@app.route('/receive', methods=['POST'])
 def receive():
-    if request.method == 'POST':
-        username = request.form['username']
-        pin = request.form['pin']
-        filename = os.path.join(DATABASE_FOLDER, username + '.json')
+    username = request.form['username']
+    pin = request.form['pin']
+    filename = os.path.join(DATABASE_FOLDER, username + '.json')
 
-        if os.path.exists(filename):
-            with open(filename, 'r') as file:
-                data = json.load(file)
-                if data['pin'] == pin:
-                    message = data.get('message', 'No message shared yet')
-                    message = message.replace('\r\n', '‎ ')
-                    session['message'] = message
-                    return redirect(url_for('text'))
-                else:
-                    session['error_message'] = "Incorrect PIN"
-                    return redirect(url_for('text'))
-        else:
-            session['error_message'] = "Username not found"
-            return redirect(url_for('text'))
-
-    # If the request method is GET, check for query parameters
-    username = request.args.get('username')
-    pin = request.args.get('pin')
-
-    # If both username and pin are provided, process the request
-    if username and pin:
-        filename = os.path.join(DATABASE_FOLDER, username + '.json')
-
-        if os.path.exists(filename):
-            with open(filename, 'r') as file:
-                data = json.load(file)
-                if data['pin'] == pin:
-                    message = data.get('message', 'No message shared yet')
-                    message = message.replace('\r\n', '‎ ')
-                    session['message'] = message
-                    return redirect(url_for('text'))
-                else:
-                    session['error_message'] = "Incorrect PIN"
-                    return redirect(url_for('text'))
-        else:
-            session['error_message'] = "Username not found"
-            return redirect(url_for('text'))
-
-    # If username and pin are not provided, render the default template
-    return render_template('index.html')
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            data = json.load(file)
+            if data['pin'] == pin:
+                message = data.get('message', 'No message shared yet')
+                message = message.replace('\r\n', '‎ ')
+                session['message'] = message
+                return jsonify({'message': message})
+            else:
+                session['error_message'] = "Incorrect PIN"
+                return jsonify({'error_message': "Incorrect PIN"})
+    else:
+        session['error_message'] = "Username not found"
+        return jsonify({'error_message': "Username not found"})
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

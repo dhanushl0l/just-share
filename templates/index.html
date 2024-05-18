@@ -42,13 +42,13 @@
     <h1 class="label">Receive</h1>
     <form id="receiveForm">
       <label id="user-info" class="user-name" for="username">Username</label>
-      <input type="text" id="username" name="username" autocomplete="off">
+      <input type="text" id="username" name="username" autocomplete="off" maxlength="4">
       <label id="user-info" class="user-pin" for="pin">PIN</label>
-      <input type="text" id="pin" name="pin" autocomplete="off">
+      <input type="text" id="pin" name="pin" autocomplete="off" maxlength="4">
       <div class="receive-button">
           <input type="submit" value="Receive" class="send-button">
       </div>
-  </form>
+  </form>  
 </div>
 </div>
 </div>
@@ -96,7 +96,7 @@
 <div class="output-3" id="outputContainer3" style="display: none;">
   <div class="popup-bg">
       <div class="popup">
-          <button class="close-1" onclick="closePopup()">X</button>
+          <button class="close-1" >X</button>
           <h1 class="message-h1">Data</h1>
           <div class="scrollable">
               <p class="message-out"><span id="datavalue"></span></p>
@@ -167,81 +167,6 @@
     outputContainer3.style.display = 'none';
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('receiveForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting the traditional way
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/receive', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.error_message) {
-                            document.getElementById('errorvalue').textContent = response.error_message;
-                            document.getElementById('outputContainer2').style.display = 'block';
-                            document.getElementById('outputContainer3').style.display = 'none';
-                        } else if (response.message) {
-                            document.getElementById('datavalue').textContent = response.message;
-                            document.getElementById('outputContainer3').style.display = 'block';
-                            document.getElementById('outputContainer2').style.display = 'none';
-                        }
-                    }
-                };
-
-                var username = document.getElementById('username').value;
-                var pin = document.getElementById('pin').value;
-                var params = 'username=' + encodeURIComponent(username) + '&pin=' + encodeURIComponent(pin);
-                xhr.send(params);
-            });
-        });
-
-        function copydata(element) {
-            var text = document.getElementById('datavalue').textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                element.querySelector('.copy-text').textContent = 'Copied!';
-            }, function(err) {
-                console.error('Could not copy text: ', err);
-            });
-        }
-
-        
-
-
-
-
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('sendForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/send', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.error_message) {
-                    document.getElementById('errorvalue').textContent = response.error_message;
-                    document.getElementById('outputContainer2').style.display = 'block';
-                    document.getElementById('outputContainer3').style.display = 'none';
-                } else if (response.username && response.pin && response.qr_code_link) {
-                    document.getElementById('usernameValue').textContent = response.username;
-                    document.getElementById('pinValue').textContent = response.pin;
-                    document.getElementById('qrCodeImage').src = response.qr_code_link;
-                    document.getElementById('outputContainer').style.display = 'block';
-                }
-            }
-        };
-
-        var message = document.getElementById('message').value;
-        var params = 'message=' + encodeURIComponent(message);
-        xhr.send(params);
-    });
-});
 </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>

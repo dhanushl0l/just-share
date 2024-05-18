@@ -7,18 +7,23 @@ import os
 import glob
 import logging
 
-secret_key = os.urandom(24)
-
 app = Flask(__name__)
+secret_key = os.urandom(24)
 app.secret_key = secret_key
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = False 
 
-del secret_key
+# Environment specific configuration
+if os.getenv('FLASK_ENV') == 'production':
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+    app.config['SESSION_COOKIE_SECURE'] = True
+else:
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+    app.config['SESSION_COOKIE_SECURE'] = False
 
 Session(app)
 
+del secret_key
 # Dictionary to store the message, username, and pin
 shared_data = {}
 
@@ -143,8 +148,9 @@ def upload_file():
 
     # Save the file
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, uploaded_file.filename)
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
+    os.makedirs(folder_path, exist_ok=True)
+    file_path = os.path.join(folder_path, uploaded_file.filename)
     uploaded_file.save(file_path)
 
     # Generate random 4-digit PIN
@@ -153,8 +159,11 @@ def upload_file():
     # Store folder name and PIN in dictionary
     folder_pin_mapping = {'folder_name': folder_name, 'pin': pin}
 
-    # Store folder name and PIN mapping in JSON file
-    with open(os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json'), 'w') as f:
+    # Store folder name and PIN mapping in JSON file inside the 'json' folder
+    json_folder_path = os.path.join(folder_path, 'json')
+    os.makedirs(json_folder_path, exist_ok=True)
+    json_file_path = os.path.join(json_folder_path, folder_name + '.json')
+    with open(json_file_path, 'w') as f:
         json.dump(folder_pin_mapping, f)
 
     # Generate download link for QR code
@@ -163,25 +172,32 @@ def upload_file():
     # Return folder name, PIN, and QR code link
     return jsonify(username=folder_name, pin=pin, qr_code_link=qr_code_link)
 
+
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 def download_file_with_params(folder_name, pin):
     # Load the JSON file
-    json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
+    json_folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json')
+    json_path = os.path.join(json_folder_path, folder_name + '.json')
     with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
     
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
-        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name)) if not file.endswith('.json')]
+        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))]
         if len(files) > 0:
             file_name = files[0]
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+        else:
+            logging.warning("No files found in the folder.")
+            error_message = "No files found in the folder."
+            return render_template('index-files.html', error=error_message)
     else:
         logging.warning("Invalid PIN or folder name!")
         error_message = "Invalid PIN or folder name!"
         return render_template('index-files.html', error=error_message)
+
 
 @app.route('/download', methods=['GET'])
 def download_file():
@@ -191,22 +207,21 @@ def download_file():
 
     if not folder_name or not pin:
         error_message = "Folder name or PIN missing."
-        session['error_message'] = error_message
-        return redirect(url_for('files'))
+        return jsonify(error=error_message)
 
     # Load the JSON file if it exists
-    json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, folder_name + '.json')
+    json_folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json')
+    json_path = os.path.join(json_folder_path, folder_name + '.json')
     if not os.path.exists(json_path):
         error_message = "Folder not found or JSON file missing."
-        session['error_message'] = error_message
-        return redirect(url_for('files'))
+        return jsonify(error=error_message)
 
     with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
 
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
-        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name)) if not file.endswith('.json')]
+        files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))]
         if len(files) > 0:
             file_name = files[0]
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
@@ -214,12 +229,10 @@ def download_file():
             return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
         else:
             error_message = "No files found in the folder."
-            session['error_message'] = error_message
-            return redirect(url_for('files'))
+            return jsonify(error=error_message)
     else:
         error_message = "Invalid PIN or folder name!"
-        session['error_message'] = error_message
-        return redirect(url_for('files'))
+        return jsonify(error=error_message)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0') 

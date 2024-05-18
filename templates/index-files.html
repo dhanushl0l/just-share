@@ -47,12 +47,12 @@
     <div class="content-r">
       <div class="console">
         <h1 class="label">Receive</h1>
-        <form action="/download"  method="get">
+        <form id="receiveForm" action="/download" method="get">
           <label id="user-info" class="user-name" for="username">Username</label>
           <input type="text" name="folder_name" id="username" autocomplete="off" maxlength="4" oninput="convertToLowercase(this)">
-         <label id="user-info" class="user-pin" for="pin">PIN</label>
-         <input type="text" id="pin" name="pin" autocomplete="off" maxlength="4">    
-        <input type="submit" class="update-button" value="Download">
+          <label id="user-info" class="user-pin" for="pin">PIN</label>
+          <input type="text" id="pin-1" name="pin" autocomplete="off" maxlength="4">
+          <input type="submit" class="update-button" value="Download">
       </form>
     </div>
   </div>
@@ -92,14 +92,11 @@
 
 <div class="output-2" id="outputContainer2" style="display: none;">
   <div class="popup-bg">
-    <div class="popup">
-      <button class="close-1">X</button>
-      {% if error %}
-      <p class="error">Error <span> {{ error }} </span></p>
-      <span class="popup-text" id="popupText"></span>
-      {% endif %}      
-    </div>
-</div>
+      <div class="popup">
+          <button class="close-1">X</button>
+          <p class="error">Error <span id="errorvalue"></span></p>
+      </div>
+  </div>
 </div>
 
 <div class="error-popup" id="popup" style="display: none;">

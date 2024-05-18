@@ -2,6 +2,149 @@ document.getElementById('justShare').addEventListener('click', function() {
   window.location.href = 'https://justshare.dhanush.online/';
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  var usernameInput = document.getElementById('username');
+  var pinInput = document.getElementById('pin');
+
+  usernameInput.addEventListener('input', function() {
+      var value = usernameInput.value;
+
+      // Convert to lowercase and remove non-lowercase English letters
+      value = value.toLowerCase().replace(/[^a-z]/g, '');
+
+      // Limit to 4 characters
+      if (value.length > 4) {
+          value = value.substring(0, 4);
+      }
+
+      usernameInput.value = value;
+  });
+
+  pinInput.addEventListener('input', function() {
+      var value = pinInput.value;
+
+      // Remove non-digit characters
+      value = value.replace(/[^0-9]/g, '');
+
+      // Limit to 4 characters
+      if (value.length > 4) {
+          value = value.substring(0, 4);
+      }
+
+      pinInput.value = value;
+  });
+
+  document.getElementById('receiveForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+
+      var isValid = true;
+
+      if (!usernameInput.value.trim() || usernameInput.value.length < 4) {
+          usernameInput.classList.add('shake');
+          isValid = false;
+      }
+
+      if (!pinInput.value.trim() || pinInput.value.length < 4) {
+          pinInput.classList.add('shake');
+          isValid = false;
+      }
+
+      // Remove the shake class after the animation ends
+      setTimeout(function() {
+          usernameInput.classList.remove('shake');
+          pinInput.classList.remove('shake');
+      }, 500); // Duration of the animation in milliseconds
+
+      if (!isValid) {
+          return; // If validation fails, do not proceed with the AJAX request
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/receive', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload = function() {
+          if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              if (response.error_message) {
+                  document.getElementById('errorvalue').textContent = response.error_message;
+                  document.getElementById('outputContainer2').style.display = 'block';
+                  document.getElementById('outputContainer3').style.display = 'none';
+              } else if (response.message) {
+                  document.getElementById('datavalue').textContent = response.message;
+                  document.getElementById('outputContainer3').style.display = 'block';
+                  document.getElementById('outputContainer2').style.display = 'none';
+              }
+          }
+      };
+
+      var username = usernameInput.value;
+      var pin = pinInput.value;
+      var params = 'username=' + encodeURIComponent(username) + '&pin=' + encodeURIComponent(pin);
+      xhr.send(params);
+  });
+});
+
+function copydata(element) {
+  var text = document.getElementById('datavalue').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+      element.querySelector('.copy-text').textContent = 'Copied!';
+  }, function(err) {
+      console.error('Could not copy text: ', err);
+  });
+}
+
+      
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('sendForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+
+      var messageInput = document.getElementById('message');
+      var isValid = true;
+
+      if (!messageInput.value.trim()) {
+          messageInput.classList.add('shake');
+          isValid = false;
+      }
+
+      // Remove the shake class after the animation ends
+      setTimeout(function() {
+          messageInput.classList.remove('shake');
+      }, 500); // Duration of the animation in milliseconds
+
+      if (!isValid) {
+          return; // If validation fails, do not proceed with the AJAX request
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/send', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      xhr.onload = function() {
+          if (xhr.status === 200) {
+              var response = JSON.parse(xhr.responseText);
+              if (response.error_message) {
+                  document.getElementById('errorvalue').textContent = response.error_message;
+                  document.getElementById('outputContainer2').style.display = 'block';
+                  document.getElementById('outputContainer3').style.display = 'none';
+              } else if (response.username && response.pin && response.qr_code_link) {
+                  document.getElementById('usernameValue').textContent = response.username;
+                  document.getElementById('pinValue').textContent = response.pin;
+                  document.getElementById('qrCodeImage').src = response.qr_code_link;
+                  document.getElementById('outputContainer').style.display = 'block';
+              }
+          }
+      };
+
+      var message = messageInput.value;
+      var params = 'message=' + encodeURIComponent(message);
+      xhr.send(params);
+  });
+});
+
+
 function hideContainer(containerId) {
   var container = document.getElementById(containerId);
   if (container) {

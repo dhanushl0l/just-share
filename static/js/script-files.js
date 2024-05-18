@@ -1,3 +1,86 @@
+document.addEventListener('DOMContentLoaded', function() {
+    var usernameInput = document.getElementById('username');
+    var pinInput = document.getElementById('pin-1');
+    var outputContainer = document.getElementById('outputContainer2');
+
+    if (usernameInput && pinInput && outputContainer) {
+        usernameInput.addEventListener('input', function() {
+            // Your username input handling code here
+        });
+
+        pinInput.addEventListener('input', function() {
+            // Your PIN input handling code here
+        });
+
+        document.getElementById('receiveForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            var isValid = true;
+
+            if (!usernameInput.value.trim() || usernameInput.value.length < 4) {
+                usernameInput.classList.add('shake');
+                isValid = false;
+            }
+
+            if (!pinInput.value.trim() || pinInput.value.length < 4) {
+                pinInput.classList.add('shake');
+                isValid = false;
+            }
+
+            // Remove the shake class after the animation ends
+            setTimeout(function() {
+                usernameInput.classList.remove('shake');
+                pinInput.classList.remove('shake');
+            }, 500); // Duration of the animation in milliseconds
+
+            if (!isValid) {
+                return; // If validation fails, do not proceed with the AJAX request
+            }
+
+            // Perform AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var contentType = xhr.getResponseHeader('Content-Type');
+                    if (contentType && contentType.toLowerCase().includes('json')) {
+                        // Handle JSON response
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                outputContainer.style.display = 'block';
+                                document.getElementById('errorvalue').textContent = response.error;
+                            } else {
+                                // Handle successful JSON response
+                                var downloadLink = document.createElement('a');
+                                downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
+                                downloadLink.target = '_blank';
+                                downloadLink.click();
+                            }
+                        } catch (e) {
+                            // Silently handle JSON parsing error for this response
+                            var downloadLink = document.createElement('a');
+                            downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
+                            downloadLink.target = '_blank';
+                            downloadLink.click();
+                        }
+                    } else {
+                        // Handle file download for non-JSON responses
+                        var downloadLink = document.createElement('a');
+                        downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
+                        downloadLink.target = '_blank';
+                        downloadLink.click();
+                    }
+                } else {
+                    console.error('Request failed. Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+        });
+    }
+});
+
+
 var images = ['/static/assets/update up.svg', '/static/assets/update out.svg', '/static/assets/update yes.svg'];
 var index = 0;
 

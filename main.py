@@ -124,12 +124,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Route to serve the HTML form for uploading files
 @app.route('/files')
 def files():
-    error_message = session.pop('error_message', None)
-    # Display the error message in the template if it exists
-    if error_message:
-        return render_template('index-files.html', error=error_message)
-    else:
-        return render_template('index-files.html')
+    return render_template('index-files.html')
 
 MAX_FILE_SIZE = 11 * 1024 * 1024  
 

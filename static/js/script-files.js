@@ -54,22 +54,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 // Handle successful JSON response
                                 var downloadLink = document.createElement('a');
                                 downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
-                                downloadLink.target = '_blank';
                                 downloadLink.click();
                             }
                         } catch (e) {
                             // Silently handle JSON parsing error for this response
                             var downloadLink = document.createElement('a');
                             downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
-                            downloadLink.target = '_blank';
-                            downloadLink.click();
+                            downloadLink.click();  
                         }
                     } else {
                         // Handle file download for non-JSON responses
                         var downloadLink = document.createElement('a');
                         downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
-                        downloadLink.target = '_blank';
-                        downloadLink.click();
+                        downloadLink.click();                        
                     }
                 } else {
                     console.error('Request failed. Returned status of ' + xhr.status);

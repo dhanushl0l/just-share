@@ -1,3 +1,7 @@
+html{
+  touch-action: manipulation; 
+} 
+
 body {
   background-color: black;
   padding: 0;
@@ -735,6 +739,7 @@ footer {
   @media only screen and (max-width:1300px) {
 
     body {
+      height: 100vh;
       min-height: 1190px;
     }
 
@@ -881,14 +886,15 @@ footer {
   @media only screen and (max-width:700px) {
 
     body {
+      height: 100vh;
       min-height: 1100px;
       min-width: 500px; 
       overflow-x: hidden;     
-        background-color: black;
-        padding: 0;
-        margin: 0;
-        overflow-x: hidden;
-        position: absolute;
+      background-color: black;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      position: absolute;
     }
 
     .title h1 {

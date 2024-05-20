@@ -141,18 +141,22 @@ def upload_file():
         error_message = "No file selected. Please choose a file to upload."
         return jsonify(error=error_message)
 
-    # Save the file
+    # Save the file with the name 'file'
     folder_name = ''.join(random.choices(string.ascii_lowercase, k=4))
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
     os.makedirs(folder_path, exist_ok=True)
-    file_path = os.path.join(folder_path, uploaded_file.filename)
+    file_path = os.path.join(folder_path, 'file')
     uploaded_file.save(file_path)
 
     # Generate random 4-digit PIN
     pin = ''.join(random.choices(string.digits, k=4))
 
-    # Store folder name and PIN in dictionary
-    folder_pin_mapping = {'folder_name': folder_name, 'pin': pin}
+    # Store folder name, PIN, and original file name in dictionary
+    folder_pin_mapping = {
+        'folder_name': folder_name,
+        'pin': pin,
+        'original_file_name': uploaded_file.filename
+    }
 
     # Store folder name and PIN mapping in JSON file inside the 'json' folder
     json_folder_path = os.path.join(folder_path, 'json')
@@ -162,36 +166,41 @@ def upload_file():
         json.dump(folder_pin_mapping, f)
 
     # Generate download link for QR code
-    qr_code_link = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{}/{}'.format(folder_name, pin)
+    qr_code_link = f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{folder_name}/{pin}'.format(pin, folder_name)
+
 
     # Return folder name, PIN, and QR code link
     return jsonify(username=folder_name, pin=pin, qr_code_link=qr_code_link)
 
-
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
-def download_file_with_params(folder_name, pin):
-    # Load the JSON file
+def download_file_by_folder_and_pin(folder_name, pin):
+    error_message = None
+
+    # Load the JSON file if it exists
     json_folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json')
     json_path = os.path.join(json_folder_path, folder_name + '.json')
+    if not os.path.exists(json_path):
+        error_message = "Folder not found or JSON file missing."
+        return jsonify(error=error_message)
+
     with open(json_path, 'r') as f:
         folder_pin_mapping = json.load(f)
-    
+
     # Check if PIN and folder name match
     if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
         files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))]
         if len(files) > 0:
             file_name = files[0]
+            original_file_name = folder_pin_mapping['original_file_name']
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
-            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True, download_name=original_file_name)
         else:
-            logging.warning("No files found in the folder.")
-            error_message = "No files found in the folder."
-            return render_template('index-files.html', error=error_message)
+            error_message = "No files found."
+            return jsonify(error=error_message)
     else:
-        logging.warning("Invalid PIN or folder name!")
-        error_message = "Invalid PIN or folder name!"
-        return render_template('index-files.html', error=error_message)
+        error_message = "Invalid PIN or username!"
+        return jsonify(error=error_message)
 
 
 @app.route('/download', methods=['GET'])
@@ -219,14 +228,15 @@ def download_file():
         files = [file for file in os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], folder_name))]
         if len(files) > 0:
             file_name = files[0]
+            original_file_name = folder_pin_mapping['original_file_name']
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, file_name)
             logging.info(f"Downloading file: {file_path}")
-            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True)
+            return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder_name), file_name, as_attachment=True, download_name=original_file_name)
         else:
-            error_message = "No files found in the folder."
+            error_message = "No files found."
             return jsonify(error=error_message)
     else:
-        error_message = "Invalid PIN or folder name!"
+        error_message = "Invalid PIN or username!"
         return jsonify(error=error_message)
 
 if __name__ == '__main__':

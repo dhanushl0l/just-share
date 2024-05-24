@@ -99,7 +99,7 @@
           <button class="close-1" >X</button>
           <h1 class="message-h1">Data</h1>
           <div class="scrollable">
-              <p class="message-out"><span id="datavalue"></span></p>
+              <p class="message-out"><span id="datavalue">{{ message }}</span></p>
           </div>
           <a class="copy-icon" onclick="copydata(this)"><img src="/static/assets/clipboard.png" alt="Copy"><span class="copy-text"></span></a>
       </div>
@@ -139,7 +139,7 @@
   const username = "{{ username }}";
   const pin = "{{ pin }}";
   const error = "{{ error }}";
-  const message = "{{ message }}";
+  const message = `{{ message }}`;
 
   const outputContainer = document.getElementById('outputContainer');
   const outputContainer2 = document.getElementById('outputContainer2');

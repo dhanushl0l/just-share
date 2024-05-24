@@ -262,7 +262,7 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 
             // Load the QR code image
             var qrCodeImg = document.getElementById('qrCodeImg');
-            qrCodeImg.src = response.qr_code_link;
+            qrCodeImg.src = response.qr_code_link_files;
             qrCodeImg.onload = function() {
                 // Once the image is loaded, display it
                 qrCodeImg.style.display = 'block';
@@ -306,7 +306,7 @@ function showOutputContainer() {
 
         // Set the QR code link as the src of the image
         var qrCodeImg = document.getElementById('qrCodeImg');
-        qrCodeImg.src = data.qr_code_link;
+        qrCodeImg.src = data.qr_code_link_files;
         qrCodeImg.onload = function() {
             // Once the image is loaded, display it
             qrCodeImg.style.display = 'block';

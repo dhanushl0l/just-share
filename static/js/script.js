@@ -94,8 +94,6 @@ function copydata(element) {
   });
 }
 
-      
-
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('sendForm').addEventListener('submit', function(event) {
@@ -129,10 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
                   document.getElementById('errorvalue').textContent = response.error_message;
                   document.getElementById('outputContainer2').style.display = 'block';
                   document.getElementById('outputContainer3').style.display = 'none';
-              } else if (response.username && response.pin && response.qr_code_link) {
+              } else if (response.username && response.pin && response.qr_code_link_text) {
                   document.getElementById('usernameValue').textContent = response.username;
                   document.getElementById('pinValue').textContent = response.pin;
-                  document.getElementById('qrCodeImage').src = response.qr_code_link;
+                  document.getElementById('qrCodeImage').src = response.qr_code_link_text;
                   document.getElementById('outputContainer').style.display = 'block';
               }
           }

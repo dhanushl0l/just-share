@@ -62,16 +62,15 @@ document.addEventListener('DOMContentLoaded', function() {
                                 downloadLink.click();
                             }
                         } catch (e) {
-                            // Silently handle JSON parsing error for this response
-                            var downloadLink = document.createElement('a');
-                            downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
-                            downloadLink.click();  
+                            // Handle JSON parsing error by showing an error message
+                            outputContainer.style.display = 'block';
+                            document.getElementById('errorvalue').textContent = 'An error occurred while processing the response.';
                         }
                     } else {
                         // Handle file download for non-JSON responses
                         var downloadLink = document.createElement('a');
                         downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
-                        downloadLink.click();                        
+                        downloadLink.click();
                     }
                 } else {
                     console.error('Request failed. Returned status of ' + xhr.status);

@@ -1,5 +1,5 @@
 document.getElementById('justShare').addEventListener('click', function() {
-  window.location.href = 'https://justshare.dhanush.online/';
+  window.location.href = '/';
 });
 
 document.addEventListener('DOMContentLoaded', function() {

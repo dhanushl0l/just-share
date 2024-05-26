@@ -1,3 +1,7 @@
+document.getElementById('justShare').addEventListener('click', function() {
+    window.location.href = '/';
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var usernameInput = document.getElementById('username');
     var pinInput = document.getElementById('pin-1');
@@ -9,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         pinInput.addEventListener('input', function() {
-            // Your PIN input handling code here
+            var numericValue = pinInput.value.replace(/\D/g, ''); // Remove non-numeric characters
+            pinInput.value = numericValue;
         });
 
         document.getElementById('receiveForm').addEventListener('submit', function(event) {
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            if (!pinInput.value.trim() || pinInput.value.length < 4) {
+            if (!pinInput.value.trim() || pinInput.value.length < 4 || !/^\d+$/.test(pinInput.value)) {
                 pinInput.classList.add('shake');
                 isValid = false;
             }
@@ -93,11 +98,6 @@ function loadNextImage() {
 }
 
 loadNextImage();
-  
-document.getElementById('justShare').addEventListener('click', function() {
-    window.location.href = 'https://justshare.dhanush.online/';
-});
-
 
 function copydata(link) {
   const datavalue = document.getElementById('datavalue').textContent;

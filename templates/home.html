@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="">
-    <meta name="viewport" content="width=device-width">
-    <title>Just Share</title>
-    <link rel="icon" href="/static/assets/favicon.svg" type="image/svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Share - Instant File and Text Sharing</title>
+    <link rel="icon" href="/static/assets/favicon.svg" type="image/svg+xml">
     <meta name="description" content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
-    <meta property="og:title" content="Just Share">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Just Share - Instant File and Text Sharing">
     <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
-    <meta property="og:image" content="/static/assets/og-image.svg">
-    <meta property="og:image:width" content="630">
-    <meta property="og:image:height" content="315">
-    <meta property="og:url" content="https://justshare.dhanush.online/">
+    <meta property="og:image" content="https://i.imgur.com/XPNgEmh.png">
+    <meta property="og:image:width" content="250">
+    <meta property="og:image:height" content="50">
+    <meta property="og:url" content="https://justshare.cloud/">
     <meta property="og:type" content="website">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Just Share",
+        "url": "https://justshare.cloud/",
+        "description": "Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website.",
+        "image": "https://i.imgur.com/XPNgEmh.png"
+    }
+    </script>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-home.css') }}">
 </head>
 <body>
@@ -24,15 +40,15 @@
   </header>
   <div class="a-container">
     <div class="a-container-text">
-      <h1>Share text & links</h1>
-      <p>Datas only visible for 24 hours. If any server related maintenance happens, the data will be deleted.</p>
-      <button class="send-text" onclick="window.location.href = 'https://justshare.pythonanywhere.com/text';">SHARE TEXT</button>
-  </div>
-  <div class="a-container-file">
-      <h1>Share files</h1>
-      <p>You can send files up to 10MB. This limit is temporary; Files only visible for 3 hours.</p>
-      <button class="send-text" onclick="window.location.href = 'https://justshare.pythonanywhere.com/files';">SHARE FILES</button>
-  </div>  
+        <h1>Share text & links</h1>
+        <p>Data is only visible for 24 hours. If any server-related maintenance happens, the data will be deleted.</p>
+        <button class="send-text" onclick="window.location.href='/text'">SHARE TEXT</button>
+    </div>
+    <div class="a-container-file">
+        <h1>Share files</h1>
+        <p>You can send files up to 10MB. This limit is temporary; files are only visible for 3 hours.</p>
+        <button class="send-text" onclick="window.location.href='/files'">SHARE FILES</button>
+    </div>  
 </div>
      <footer id="footer">
       <div class="footer-content">

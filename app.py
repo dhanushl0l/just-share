@@ -84,7 +84,7 @@ def username_exists(username):
     return False
 
 def generate_qr_code_link_text(username, pin):
-    return f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/receive/{username}/{pin}'
+    return f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.cloud/receive/{username}/{pin}'
 
 @app.route('/receive/<username>/<pin>', methods=['GET', 'POST'])
 def receive_with_params(username, pin):
@@ -170,7 +170,7 @@ def save_folder_pin_mapping(folder_name, pin, original_file_name):
         json.dump(folder_pin_mapping, f)
 
 def generate_qr_code_link_files(folder_name, pin):
-    return f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.pythonanywhere.com/download/{folder_name}/{pin}'
+    return f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.cloud/download/{folder_name}/{pin}'
 
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 @app.route('/download', methods=['GET'])
@@ -197,7 +197,7 @@ def validate_folder_and_pin(folder_name, pin):
                 return True
         session['error_message'] = "Invalid PIN or username!"
     else:
-        session['error_message'] = "Folder not found or JSON file missing."
+        session['error_message'] = "Username not found."
     return False
 
 def get_file_path_and_original_name(folder_name):

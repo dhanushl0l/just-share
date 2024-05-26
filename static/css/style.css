@@ -19,7 +19,7 @@ body::-webkit-scrollbar {
 }
 
 #justShare {
-  cursor: default;
+  cursor: pointer;
 }
 
 .progressBarContainer{

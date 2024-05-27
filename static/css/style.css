@@ -182,7 +182,6 @@ body::-webkit-scrollbar {
   
   .update-button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
     text-decoration: none;
   }
   
@@ -334,9 +333,8 @@ body::-webkit-scrollbar {
   width: 200px; 
   height: 200px; 
   position: absolute; 
-  top: 60%; 
-  left: 70%; 
-  transform: translate(-50%, -50%); 
+  top: 37%;
+  left: 57%;
 }
 
 .label-qr-sub{
@@ -370,7 +368,6 @@ body::-webkit-scrollbar {
 .user-info {
   flex: 1;
 }
-
 
 .popup {
   flex-direction: row;
@@ -570,7 +567,6 @@ button.close-1:hover {
 }
 
 .send-button:focus {
-  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
   outline: none;
   text-decoration: none;
 }
@@ -609,7 +605,6 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
   outline: none;
   border-color: rgb(255, 255, 255);
   font-size: 20px;
@@ -800,8 +795,8 @@ footer {
       width: 210px; 
       height: 200px; 
       position: absolute; 
-      left: 50%; 
-      transform: translate(-50%, -50%); 
+      left: 24%;
+      top: 62%;
     }
     
     .label-qr-sub{

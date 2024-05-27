@@ -181,6 +181,8 @@ body::-webkit-scrollbar {
   }
   
   .update-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
     text-decoration: none;
   }
   
@@ -301,13 +303,14 @@ body::-webkit-scrollbar {
 .disable-scroll {
   overflow: hidden;
 }
-
+.copy-icon-1,
 .copy-icon {
   position: absolute;
   display: inline-block;
   width: 20px; 
 }
 
+.copy-icon-1 img,
 .copy-icon img {
   width: 100%; 
   height: auto;
@@ -317,16 +320,14 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.copy-icon:nth-child(1) {
+.copy-icon-1,
+.copy-icon {
   z-index: 9;
-  top: 115px; 
-  left: 30%;
+  left: 28%;
 }
 
-.copy-icon:nth-child(2) {
-  z-index: 9;
-  top: 295px; 
-  left: 30%;
+.copy-icon {
+  top: 50px;
 }
 
 .qr-code img {
@@ -370,29 +371,22 @@ body::-webkit-scrollbar {
   flex: 1;
 }
 
-.copy-icons {
-  display: flex;
-  flex-direction: row;
-}
-.copy-icon {
-  margin-left: 10px;
-}
 
-    .popup {
-      flex-direction: row;
-      z-index: 99;
-      width: 400px;
-      height: 400px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgb(0, 0, 0);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1px solid rgb(255, 255, 255);
-    }
+.popup {
+  flex-direction: row;
+  z-index: 99;
+  width: 400px;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(0, 0, 0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgb(255, 255, 255);
+}
 
 .popup-1 {
   flex-direction: row;
@@ -576,6 +570,8 @@ button.close-1:hover {
 }
 
 .send-button:focus {
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+  outline: none;
   text-decoration: none;
 }
 
@@ -613,6 +609,8 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+  outline: none;
   border-color: rgb(255, 255, 255);
   font-size: 20px;
 }
@@ -792,23 +790,16 @@ footer {
       border-radius: 20px;
       border: 1px solid rgb(255, 255, 255);
     }
-  
-    .copy-icon:nth-child(1) {
-      top: 120px; 
-      left: 45%;
-    }
-    
-    .copy-icon:nth-child(2) {
-      z-index: 9;
-      top: 265px; 
-      left: 45%;
+    .copy-icon-1,
+    .copy-icon {
+      top:45%;
+      left: 55%;
     }
     
     .qr-code img {
       width: 210px; 
       height: 200px; 
       position: absolute; 
-      top: 77%; 
       left: 50%; 
       transform: translate(-50%, -50%); 
     }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory, jsonify, session
+from flask import Flask, render_template, request, send_from_directory, jsonify, session, redirect, url_for
 from flask_session import Session
 import random
 import string
@@ -127,7 +127,8 @@ def load_message_from_file(username):
     return data.get('message', 'No message shared yet').replace('\r\n', '‎ ')
 
 @app.route('/files')
-def upload_form():
+def files():
+    session.pop('error_message', None)
     return render_template('index-files.html')
 
 @app.errorhandler(413)
@@ -179,14 +180,14 @@ def download_file(folder_name=None, pin=None):
         folder_name = request.args.get('folder_name')
         pin = request.args.get('pin')
         if not folder_name or not pin:
-            return jsonify(error="Folder name or PIN missing.")
+            return handle_error("Folder name or PIN missing.")
 
     if validate_folder_and_pin(folder_name, pin):
         file_path, original_file_name = get_file_path_and_original_name(folder_name)
         if file_path:
             logging.info(f"Downloading file: {file_path}")
             return send_from_directory(os.path.dirname(file_path), os.path.basename(file_path), as_attachment=True, download_name=original_file_name)
-    return jsonify(error=session.get('error_message', "Invalid PIN or username!"))
+    return handle_error(session.get('error_message', "Invalid PIN or username!"))
 
 def validate_folder_and_pin(folder_name, pin):
     json_path = get_json_path(folder_name)
@@ -215,6 +216,13 @@ def get_file_path_and_original_name(folder_name):
 
 def get_json_path(folder_name):
     return os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json', f'{folder_name}.json')
+
+def handle_error(message):
+    session['error_message'] = message
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify(error=message)
+    else:
+        return redirect(url_for('files'))
     
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0') 

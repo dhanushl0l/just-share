@@ -176,44 +176,63 @@ def download_file(folder_name=None, pin=None):
         pin = request.args.get('pin')
         if not folder_name or not pin:
             return jsonify(error="Folder name or PIN missing.")
+    
+    logging.info(f"Received download request for folder: {folder_name}, PIN: {pin}")
+    
     if validate_folder_and_pin(folder_name, pin):
         try:
             file_path, original_file_name = get_file_path_and_original_name(folder_name)
             if file_path:
-                logging.info(f"Downloading file: {file_path}")
+                logging.info(f"Found file to download: {file_path}")
                 return send_from_directory(os.path.dirname(file_path), os.path.basename(file_path), as_attachment=True, download_name=original_file_name)
+            else:
+                logging.error("File path not found.")
+                return jsonify(error="No files found in the specified folder.")
         except Exception as e:
             logging.error(f"Error downloading file: {e}")
             return jsonify(error="An error occurred while downloading the file.")
-    return jsonify(error=session.get('error_message', "Invalid PIN or username!"))
+    else:
+        return jsonify(error=session.get('error_message', "Invalid PIN or username!"))
 
 def validate_folder_and_pin(folder_name, pin):
     json_path = get_json_path(folder_name)
+    logging.info(f"Validating folder: {folder_name}, PIN: {pin}, JSON path: {json_path}")
+    
     if os.path.exists(json_path):
         with open(json_path, 'r') as f:
             folder_pin_mapping = json.load(f)
-            if folder_pin_mapping['pin'] == pin and folder_pin_mapping['folder_name'] == folder_name:
+            if folder_pin_mapping.get('pin') == pin and folder_pin_mapping.get('folder_name') == folder_name:
                 return True
-        session['error_message'] = "Invalid PIN or username!"
+            else:
+                session['error_message'] = "Invalid PIN or folder name!"
     else:
-        session['error_message'] = "Username not found."
+        session['error_message'] = "Folder not found."
     return False
 
 def get_file_path_and_original_name(folder_name):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
-    files = os.listdir(folder_path)
-    if files:
-        file_path = os.path.join(folder_path, files[0])
-        json_path = get_json_path(folder_name)
-        with open(json_path, 'r') as f:
-            folder_pin_mapping = json.load(f)
-        original_file_name = folder_pin_mapping['original_file_name']
-        return file_path, original_file_name
-    session['error_message'] = "No files found."
+    logging.info(f"Getting file path and original name for folder: {folder_path}")
+    
+    if os.path.isdir(folder_path):
+        files = os.listdir(folder_path)
+        if files:
+            file_path = os.path.join(folder_path, files[0])
+            json_path = get_json_path(folder_name)
+            with open(json_path, 'r') as f:
+                folder_pin_mapping = json.load(f)
+            original_file_name = folder_pin_mapping.get('original_file_name', files[0])
+            logging.info(f"File path: {file_path}, Original file name: {original_file_name}")
+            return file_path, original_file_name
+        else:
+            session['error_message'] = "No files found."
+    else:
+        session['error_message'] = "Folder path does not exist."
     return None, None
 
 def get_json_path(folder_name):
-    return os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json', f'{folder_name}.json')
+    json_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name, 'json', f'{folder_name}.json')
+    logging.info(f"JSON path for folder '{folder_name}': {json_path}")
+    return json_path
 
 def handle_error(message):
     session['error_message'] = message
@@ -221,6 +240,8 @@ def handle_error(message):
         return jsonify(error=message)
     else:
         return redirect(url_for('files'))
+
+logging.basicConfig(level=logging.DEBUG)
     
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0') 
+    app.run(debug=True, host='0.0.0.0') 

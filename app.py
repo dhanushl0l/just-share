@@ -168,6 +168,7 @@ def save_folder_pin_mapping(folder_name, pin, original_file_name):
 def generate_qr_code_link_files(folder_name, pin):
     return f'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://justshare.cloud/download/{folder_name}/{pin}'
 
+
 @app.route('/download/<folder_name>/<pin>', methods=['GET'])
 @app.route('/download', methods=['GET'])
 def download_file(folder_name=None, pin=None):
@@ -212,21 +213,19 @@ def validate_folder_and_pin(folder_name, pin):
 def get_file_path_and_original_name(folder_name):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
     logging.info(f"Getting file path and original name for folder: {folder_path}")
-    
-    if os.path.isdir(folder_path):
-        files = os.listdir(folder_path)
-        if files:
-            file_path = os.path.join(folder_path, files[0])
-            json_path = get_json_path(folder_name)
-            with open(json_path, 'r') as f:
-                folder_pin_mapping = json.load(f)
-            original_file_name = folder_pin_mapping.get('original_file_name', files[0])
-            logging.info(f"File path: {file_path}, Original file name: {original_file_name}")
+
+    json_path = get_json_path(folder_name)
+    if os.path.isfile(json_path):
+        with open(json_path, 'r') as f:
+            folder_pin_mapping = json.load(f)
+            original_file_name = folder_pin_mapping.get('original_file_name', None)
+            logging.info(f"Original file name: {original_file_name}")
+            file_name = 'file'
+            file_path = os.path.join(folder_path, file_name)
+            logging.info(f"File path: {file_path}")
             return file_path, original_file_name
-        else:
-            session['error_message'] = "No files found."
-    else:
-        session['error_message'] = "Folder path does not exist."
+
+    session['error_message'] = "JSON file not found."
     return None, None
 
 def get_json_path(folder_name):
@@ -240,8 +239,6 @@ def handle_error(message):
         return jsonify(error=message)
     else:
         return redirect(url_for('files'))
-
-logging.basicConfig(level=logging.DEBUG)
     
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0') 
+    app.run(debug=False, host='0.0.0.0') 

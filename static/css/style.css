@@ -2,6 +2,10 @@ html{
   touch-action: manipulation; 
 } 
 
+.nav{
+  display: none;
+}
+
 body {
   background-color: black;
   padding: 0;

@@ -1,8 +1,8 @@
 # Just Share
 
-This web app allows you to share messages & files without creating account or any unwanted steps. You can access the application at https://justshare.dhanush.online/.
+This web app allows you to share messages & files without creating account or any unwanted steps. You can access the application at https://justshare.cloud.
 
-<img alt="Just-Share" src="https://raw.githubusercontent.com/dhanushl0l/just-share/17cba9ca819a25c7bdde55130d74a5db55751f71/static/assets/og-image-git.svg" width="600px">
+<img alt="Just-Share" src="https://raw.githubusercontent.com/dhanushl0l/just-share/bf7197978b707159098aa587820e81c75ccf2252/static/assets/og-image-git.svg" width="600px">
 
 ## Features
 

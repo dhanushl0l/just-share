@@ -367,7 +367,17 @@ body::-webkit-scrollbar {
   left:85%;
 }
 
-
+.sub-label{
+  color: #ffffff;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .user-info {
   flex: 1;
@@ -542,7 +552,7 @@ button.close-1:hover {
   margin-bottom: 5px;
   font-weight: bold;
 }
-
+.home-button,
 .send-button {
   appearance: button;
   background-color: #ffffff;
@@ -570,20 +580,26 @@ button.close-1:hover {
   white-space: nowrap;
 }
 
+.home-button {
+  margin-top: 60px;
+}
+
+.home-button:focus,
 .send-button:focus {
   outline: none;
   text-decoration: none;
 }
 
+.home-button:hover,
 .send-button:hover {
   text-decoration: none;
 }
-
+.home-button:active,
 .send-button:active {
   box-shadow: rgba(255, 255, 255, 0.125) 0 3px 5px inset;
   outline: 0;
 }
-
+.home-button:not([disabled]):active,
 .send-button:not([disabled]):active {
   box-shadow: #000000 2px 2px 0 0, #ffffff 2px 2px 0 1px;
   transform: translate(2px, 2px);
@@ -943,6 +959,10 @@ footer {
 
     footer {
       bottom: -131px;
+    }
+
+    .title{
+      margin-top: 40px;
     }
 
 }

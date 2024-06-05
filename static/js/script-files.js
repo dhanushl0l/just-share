@@ -2,6 +2,10 @@ document.getElementById('justShare').addEventListener('click', function() {
     window.location.href = '/';
 });
 
+document.getElementById('about-button').addEventListener('click', function() {
+    window.location.href = '/about';
+  });
+
 document.addEventListener('DOMContentLoaded', function() {
     var usernameInput = document.getElementById('username');
     var pinInput = document.getElementById('pin-1');

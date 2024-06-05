@@ -1,0 +1,301 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: rgb(0, 0, 0);
+}
+
+div[class^="about-page"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: transform 1s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.container-Founder, .container-Founder-t {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-Founder-doc {
+    width: 70%;
+    height: 90%;
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: calc(1.2vw + 8px); /* Responsive font size with a base minimum */
+    display: flex;
+    flex-direction: column;
+}
+
+.container-Founder-doc h1,
+.container-Founder-doc h2,
+.container-Founder-doc p,
+.container-Founder-doc ul {
+    margin: 0 0 10px 0;
+    flex-shrink: 0;
+}
+
+.container-Founder-doc ul {
+    padding-left: 20px;
+}
+
+.container-Founder-doc li {
+    margin-bottom: 5px;
+}
+
+/* Enforcing minimum readable font size */
+@media (max-width: 600px) {
+    .container-Founder-doc {
+        font-size: 14px;
+    }
+}
+
+.container-1 {
+    position: absolute;
+    left: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center; 
+  }
+
+.label-1{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 0;
+    top: -60px;
+}
+
+
+.container-1, .container-2, .container-3, .container-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #7a7a7a;
+    border-radius: 8px;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 10px 0;
+    height: 180px;
+    width: 155px;
+    margin-left: 20px;
+}
+
+.container-1 img, .container-2 img, .container-3 img, .container-4 img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%; 
+    top: 5px;
+
+}
+
+.label-name {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    top: 25px;
+    position: relative;
+}
+
+.nav{
+    display: none;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 250px;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 0;
+    position: absolute; 
+    z-index: 9;       
+  }
+
+.title h1 {
+  z-index: 999;
+  position: fixed;
+  font-size: 2.5em;
+  font-weight: 500;
+  margin-left: 50px;
+  color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
+  font-family: Segoe UI;
+}
+
+  .strap {
+    position: absolute;
+    z-index: 99;
+    background-color: white;
+    left: 80%;
+    width: 100px;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.strap-object {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    top:25%;
+}
+
+.strap img {
+    width: 80px;
+    height: 80px;
+    margin-right: 8px;
+    transform: rotate(90deg) scale(1); /* Initial scale */
+    position: relative;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.strap a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 70px;
+    display: block;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+/* Apply zoom effect to the individual elements on hover */
+.strap:hover img {
+    transform: rotate(360deg) scale(1.1); /* Zoom in by 10% */
+}
+
+.strap:hover a {
+    transform: translateY(10px) scale(1.1); /* Move up by 10px and zoom in by 10% */
+}
+
+
+.label-page-1 {
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    width: 70%; /* Text container width */
+    height: 80%; /* Text container height */
+    font-size: 5vw; /* Base font size */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    left: 60px;
+    top: 150px;
+}
+
+/* Increase size and spacing to fit the container */
+
+
+.container-Founder, .container-Founder-t {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 70%;
+    max-width: 1200px;
+    min-width: 400px;
+    padding: 10px;
+    top: 50px;
+    box-sizing: border-box;
+    position: absolute;
+    left:50px;
+}
+
+.container-Founder {
+    top: 160px;
+}
+
+.container-Founder-t {
+    top: 440px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+button.about {
+  z-index: 9;
+  border: 2px solid rgba(255, 255, 255, 0.295); 
+  border-radius: 50%; 
+  position: absolute;
+  left: 275px;
+  top: 40px;
+  font-size: 20px;
+  font-style: normal;
+  background-color: transparent; 
+  color: white; 
+  height: 30px;
+  width: 30px;
+  padding: 0; 
+  cursor: pointer; 
+  transition: background-color 0.1s, color 0.1s
+}
+
+button.about:hover{
+  background-color: white; 
+  color: black; 
+}
+
+
+@media only screen and (max-width: 800px) {
+    .title h1 {
+        font-size: 2.5em;
+        font-weight: 500;
+        margin-left:40px;
+        color: rgb(255, 255, 255); 
+        margin-top: 40px;
+      }
+      
+    .strap {
+        display: none;
+    }    
+
+    .label-page-1 {
+        min-width: 400px; /* Full width */
+        font-size: 50px; 
+    }
+
+    .container-Founder-doc {
+        min-width: 400px;
+        width: 85%;
+    }
+
+    button.about{
+        top: 55px;
+        left: 275px;
+      }
+
+      .container-Founder {
+        top: 170px;
+    }
+    
+    .container-Founder-t {
+        top: 450px;
+    }
+
+}

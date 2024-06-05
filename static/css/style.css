@@ -443,6 +443,12 @@ body::-webkit-scrollbar {
   color: white;
 }
 
+.container {
+  display: flex;
+  align-items: center; 
+}
+
+button.about,
 button.close {
   border: 2px solid rgba(255, 255, 255, 0.295); 
   border-radius: 50%; 
@@ -459,9 +465,18 @@ button.close {
   transition: background-color 0.1s, color 0.1s
 }
 
+button.about:hover,
 button.close:hover {
   background-color: white; 
   color: black; 
+}
+
+button.about{
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 button.close-1 {
@@ -764,7 +779,7 @@ footer {
       width: 90%;
       max-width: 500px;
       height: 378px;
-      top: 27%;
+      top: 73%;
       left: 50%;
     }
     
@@ -772,7 +787,7 @@ footer {
       width: 90%;
       max-width: 500px;
       height: 378px; 
-      top: 73%;
+      top: 27%;
       left: 50%;
     }
     
@@ -908,6 +923,7 @@ footer {
       font-weight: 500;
       margin-left:40px;
       color: rgb(255, 255, 255); 
+      margin-top: 40px;
     }
 
     .content-s-r {
@@ -935,7 +951,7 @@ footer {
       position: fixed;
       min-width: 0; 
       width: 90%;
-      top: 55%;
+      top:10%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -948,7 +964,7 @@ footer {
       position: fixed;
       width: 90%;
       min-width: 0; 
-      top:10%;
+      top: 55%;
       background: linear-gradient(135deg, rgba(182, 182, 182, 0.103), rgba(255, 255, 255, 0));
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -961,8 +977,10 @@ footer {
       bottom: -131px;
     }
 
-    .title{
-      margin-top: 40px;
+    button.about{
+      z-index: 9;
+      margin-top: 25px;
+      margin-left: 19px;
     }
 
 }

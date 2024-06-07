@@ -297,21 +297,32 @@ div[class^="about-page"] {
     
 
     .label-page-1 {
-        min-width: 400px; /* Full width */
-        font-size: 50px; 
+        font-size: 40px; 
+        left: 40px;
+        width: 90%;
     }
 
     .container-Founder-doc {
-        min-width: 400px;
+        left: 20px;
         width: 85%;
     }
 
       .container-Founder {
-        top: 170px;
+        top: 140px;
     }
     
     .container-Founder-t {
-        top: 450px;
+        top: 382px;
     }
 
+    .container-Founder, .container-Founder-t{
+        left: 20px;
+    }
+    .label-1{
+        left:20px;
+    }
+
+    .container-1, .container-2, .container-3, .container-4{
+        height: 170px;
+    }
 }

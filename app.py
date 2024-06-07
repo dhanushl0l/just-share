@@ -34,8 +34,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 11 * 1024 * 1024
 
 @app.route('/')
-def index():
+def home():
     return render_template("home.html")
+
+@app.route('/about')
+def about():
+    return render_template("index-about.html")
 
 @app.route('/text')
 def text():

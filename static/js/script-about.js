@@ -19,18 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const delta = Math.sign(event.deltaY);
 
-        // Check if the scroll event is within the scrollable container
         if (scrollableContainer.contains(event.target)) {
             const scrollTop = scrollableContainer.scrollTop;
             const scrollHeight = scrollableContainer.scrollHeight;
             const containerHeight = scrollableContainer.clientHeight;
 
-            // Allow page transition only if at the top or bottom of the container
             if ((delta < 0 && scrollTop === 0) || (delta > 0 && scrollTop + containerHeight >= scrollHeight)) {
                 isScrolling = true;
                 setTimeout(() => {
                     isScrolling = false;
-                }, 1000); // Adjust timeout to match the CSS transition duration
+                }, 1000);
 
                 if (delta > 0) {
                     showSection(currentIndex + 1);
@@ -39,11 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } else {
-            // If the scroll event is outside the container, handle page transition
             isScrolling = true;
             setTimeout(() => {
                 isScrolling = false;
-            }, 1000); // Adjust timeout to match the CSS transition duration
+            }, 1000);
 
             if (delta > 0) {
                 showSection(currentIndex + 1);
@@ -59,9 +56,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleTouchMove = (event) => {
         endY = event.touches[0].clientY;
+        const deltaY = startY - endY;
+
+        if (currentIndex === 1 && deltaY < 0 && window.scrollY === 0) {
+            event.preventDefault();
+        }
+
+        if (scrollableContainer.contains(event.target)) {
+            const scrollTop = scrollableContainer.scrollTop;
+            const scrollHeight = scrollableContainer.scrollHeight;
+            const containerHeight = scrollableContainer.clientHeight;
+
+            if ((deltaY < 0 && scrollTop === 0) || (deltaY > 0 && scrollTop + containerHeight >= scrollHeight)) {
+                event.preventDefault();
+            }
+        }
     };
 
-    const handleTouchEnd = () => {
+    const handleTouchEnd = (event) => {
         const deltaY = startY - endY;
 
         if (scrollableContainer.contains(event.target)) {
@@ -69,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollHeight = scrollableContainer.scrollHeight;
             const containerHeight = scrollableContainer.clientHeight;
 
-            // Allow page transition only if at the top or bottom of the container
             if ((deltaY < 0 && scrollTop === 0) || (deltaY > 0 && scrollTop + containerHeight >= scrollHeight)) {
                 if (Math.abs(deltaY) > 50) {
                     if (deltaY > 0) {
@@ -80,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } else {
-            // If the touch event is outside the container, handle page transition
             if (Math.abs(deltaY) > 50) {
                 if (deltaY > 0) {
                     showSection(currentIndex + 1);
@@ -91,12 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    document.addEventListener('wheel', handleScroll);
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchmove', handleTouchMove);
-    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('wheel', handleScroll, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd, { passive: false });
 
-    showSection(currentIndex); // Initialize the first section
+    showSection(currentIndex);
 });
 
 

@@ -11,7 +11,7 @@ html{
     width: 100vw;
     overflow-x: hidden;
     position: absolute;
-    font-family: "Basier circle", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Segoe UI;
   }
   
   body::-webkit-scrollbar {

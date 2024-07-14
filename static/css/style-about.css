@@ -1,3 +1,7 @@
+html, body {
+    overscroll-behavior: none;
+}
+
 html{
     touch-action: manipulation; 
   } 

@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollableContainer = document.querySelector('.container-Founder-doc');
     let currentIndex = 0;
     let isScrolling = false;
-    let startY = 0;
-    let endY = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
 
     const showSection = (index) => {
         if (index < 0 || index >= sections.length) return;
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const delta = Math.sign(event.deltaY);
 
-        if (scrollableContainer.contains(event.target)) {
+        if (currentIndex === 2 && scrollableContainer.contains(event.target)) {
             const scrollTop = scrollableContainer.scrollTop;
             const scrollHeight = scrollableContainer.scrollHeight;
             const containerHeight = scrollableContainer.clientHeight;
@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     isScrolling = false;
                 }, 1000);
 
-                if (delta > 0) {
+                if (delta > 0 && scrollTop + containerHeight >= scrollHeight) {
                     showSection(currentIndex + 1);
-                } else if (delta < 0) {
+                } else if (delta < 0 && scrollTop === 0) {
                     showSection(currentIndex - 1);
                 }
             }
@@ -51,60 +51,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleTouchStart = (event) => {
-        startY = event.touches[0].clientY;
-    };
-
-    const handleTouchMove = (event) => {
-        endY = event.touches[0].clientY;
-        const deltaY = startY - endY;
-
-        if (currentIndex === 1 && deltaY < 0 && window.scrollY === 0) {
-            event.preventDefault();
-        }
-
-        if (scrollableContainer.contains(event.target)) {
-            const scrollTop = scrollableContainer.scrollTop;
-            const scrollHeight = scrollableContainer.scrollHeight;
-            const containerHeight = scrollableContainer.clientHeight;
-
-            if ((deltaY < 0 && scrollTop === 0) || (deltaY > 0 && scrollTop + containerHeight >= scrollHeight)) {
-                event.preventDefault();
-            }
-        }
+        touchStartY = event.touches[0].clientY;
     };
 
     const handleTouchEnd = (event) => {
-        const deltaY = startY - endY;
+        touchEndY = event.changedTouches[0].clientY;
+        handleSwipe();
+    };
 
-        if (scrollableContainer.contains(event.target)) {
-            const scrollTop = scrollableContainer.scrollTop;
-            const scrollHeight = scrollableContainer.scrollHeight;
-            const containerHeight = scrollableContainer.clientHeight;
+    const handleSwipe = () => {
+        const deltaY = touchEndY - touchStartY;
+        if (Math.abs(deltaY) > 10) {
+            if (currentIndex === 2) {
+                const scrollTop = scrollableContainer.scrollTop;
+                const scrollHeight = scrollableContainer.scrollHeight;
+                const containerHeight = scrollableContainer.clientHeight;
 
-            if ((deltaY < 0 && scrollTop === 0) || (deltaY > 0 && scrollTop + containerHeight >= scrollHeight)) {
-                if (Math.abs(deltaY) > 50) {
+                if ((deltaY > 0 && scrollTop === 0) || (deltaY < 0 && scrollTop + containerHeight >= scrollHeight)) {
                     if (deltaY > 0) {
-                        showSection(currentIndex + 1);
+                        showSection(currentIndex - 1); // Swipe down
                     } else {
-                        showSection(currentIndex - 1);
+                        showSection(currentIndex + 1); // Swipe up
                     }
                 }
-            }
-        } else {
-            if (Math.abs(deltaY) > 50) {
+            } else {
                 if (deltaY > 0) {
-                    showSection(currentIndex + 1);
+                    showSection(currentIndex - 1); // Swipe down
                 } else {
-                    showSection(currentIndex - 1);
+                    showSection(currentIndex + 1); // Swipe up
                 }
             }
         }
     };
 
     document.addEventListener('wheel', handleScroll, { passive: false });
-    document.addEventListener('touchstart', handleTouchStart, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     showSection(currentIndex);
 });
@@ -113,5 +95,3 @@ document.addEventListener('DOMContentLoaded', () => {
 function openLink() {
     window.location.href = "https://github.com/dhanushl0l/just-share";
 }
-
-

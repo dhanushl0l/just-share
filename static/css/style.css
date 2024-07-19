@@ -341,6 +341,27 @@ body::-webkit-scrollbar {
   left: 57%;
 }
 
+.share-link {
+  border-radius: 12px;
+  margin-left: 13%;
+  margin-top: -30px;
+  font-size: 25px;
+  font-style: normal;
+  background-color: transparent;
+  color: white;
+  width: 210px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1.5px solid rgb(255, 255, 255);
+  transition: background-color 0.1s, color 0.1s;
+}
+
+button.share-link:hover {
+  background-color: white; 
+  color: black; 
+}
+
 .label-qr-sub{
   color: #ffffff;
   display: block;
@@ -396,7 +417,7 @@ body::-webkit-scrollbar {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
-  border: 1px solid rgb(255, 255, 255);
+  border: 1.5px solid rgb(255, 255, 255);
 }
 
 .popup-1 {
@@ -412,7 +433,7 @@ body::-webkit-scrollbar {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
-  border: 1px solid rgb(255, 255, 255);
+  border: 1.5px solid rgb(255, 255, 255);
 }
 
 .username,
@@ -432,7 +453,7 @@ body::-webkit-scrollbar {
 }
 
 .pin {
-  margin-top:10%;
+  margin-top: -19px;
 }
 
 .username span,
@@ -450,7 +471,7 @@ body::-webkit-scrollbar {
 
 button.about,
 button.close {
-  border: 2px solid rgba(255, 255, 255, 0.295); 
+  border: 1.5px solid rgb(255, 255, 255);
   border-radius: 50%; 
   margin-left: 93%;
   margin-top: 15px;
@@ -818,7 +839,7 @@ footer {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 20px;
-      border: 1px solid rgb(255, 255, 255);
+      border: 1.5px solid rgb(255, 255, 255);
     }
     .copy-icon-1,
     .copy-icon {
@@ -831,7 +852,7 @@ footer {
       height: 200px; 
       position: absolute; 
       left: 24%;
-      top: 62%;
+      top: 65%;
     }
     
     .label-qr-sub{
@@ -840,7 +861,7 @@ footer {
       margin-bottom: 10px;
       font-weight: normal;
       position: absolute;
-      top: 55%;
+      top: 60%;
       left: 15%;
     }
     
@@ -850,7 +871,7 @@ footer {
       font-weight: bold;
       font-size: 40px;
       position: absolute;
-      top:47%;
+      top:53%;
       left: 15%;
     }
     
@@ -858,7 +879,7 @@ footer {
       flex-direction: row;
       z-index: 99;
       width: 400px;
-      height: 650px;
+      height: 720px;
       position: fixed;
       top: 50%;
       left: 50%;
@@ -867,7 +888,7 @@ footer {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 20px;
-      border: 1px solid rgb(255, 255, 255);
+      border: 1.5px solid rgb(255, 255, 255);
     }
     
     .username,
@@ -887,7 +908,7 @@ footer {
     }
     
     .pin {
-      margin-top:10%;
+      margin-top: -6%;
     }
     
     .username span,

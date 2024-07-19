@@ -236,3 +236,18 @@ if (messageSpan) {
     messageSpan.textContent = cleanedMessage;
 }
 
+function share() {
+    const pinValue = document.getElementById('pinValue').innerText;
+    const usernameValue = document.getElementById('usernameValue').innerText;
+    const UserName = usernameValue;
+    const pin = pinValue;
+    const shareUrl = `https://justshare.cloud/receive/${UserName}/${pin}`;
+    copyToClipboard(shareUrl);
+
+    const shareButton = document.querySelector('.share-link');
+    const originalText = shareButton.innerText;
+    shareButton.innerText = 'Copied!';
+    setTimeout(() => {
+        shareButton.innerText = originalText;
+    }, 1000);
+}

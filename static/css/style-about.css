@@ -15,7 +15,7 @@ html{
     width: 100vw;
     overflow-x: hidden;
     position: absolute;
-    font-family: Segoe UI;
+    font-family: Roboto, Arial, sans-serif;
   }
   
   body::-webkit-scrollbar {

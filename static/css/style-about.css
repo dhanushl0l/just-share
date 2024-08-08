@@ -156,7 +156,7 @@ div[class^="about-page"] {
   font-weight: 500;
   margin-left: 50px;
   color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
-  font-family: Segoe UI;
+  font-family: Roboto, Arial, sans-serif;
 }
 
   .strap {
@@ -196,7 +196,7 @@ div[class^="about-page"] {
     font-size: 70px;
     display: block;
     position: relative;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     font-weight: bold;
     transition: transform 0.3s ease; /* Smooth transition for zoom effect */
 }

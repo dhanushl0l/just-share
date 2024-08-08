@@ -251,3 +251,58 @@ function share() {
         shareButton.innerText = originalText;
     }, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const usernameInput = document.getElementById("username");
+    const pinInput = document.getElementById("pin");
+    const submitButton = document.querySelector(".click");
+
+    function handleInput(e) {
+        const target = e.target;
+
+        if (target.value.length >= target.maxLength && target === usernameInput) {
+            pinInput.focus();  
+        }
+    }
+
+    function handleKeyPress(e) {
+        if (e.target === usernameInput && e.key !== "Backspace" && usernameInput.value.length >= usernameInput.maxLength) {
+            pinInput.focus(); 
+        }
+        if (e.target === pinInput && e.key === "Enter") {
+            submitButton.click();  
+        }
+    }
+
+    usernameInput.addEventListener("input", handleInput);
+    pinInput.addEventListener("input", handleInput);
+    usernameInput.addEventListener("keypress", handleKeyPress);
+    pinInput.addEventListener("keypress", handleKeyPress);
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const messageTextarea = document.getElementById("message");
+
+    function handleGlobalKeyDown(e) {
+        const activeElement = document.activeElement;
+        const isPrintableKey = e.key.length === 1;
+        const isPaste = (e.ctrlKey || e.metaKey) && e.key === 'v';
+
+        if (activeElement.tagName !== "INPUT" && activeElement.tagName !== "TEXTAREA") {
+            messageTextarea.focus();
+
+            if (isPrintableKey) {
+                e.preventDefault(); 
+                messageTextarea.value += e.key; 
+            } else if (isPaste) {
+                e.preventDefault(); 
+                navigator.clipboard.readText().then((clipText) => {
+                    messageTextarea.value += clipText; 
+                });
+            }
+        }
+    }
+
+    document.addEventListener("keydown", handleGlobalKeyDown);
+});

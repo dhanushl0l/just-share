@@ -332,3 +332,99 @@ function share() {
         shareButton.innerText = originalText;
     }, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const usernameInput = document.getElementById("username");
+    const pinInput = document.getElementById("pin-1");
+    const submitButton = document.querySelector(".update-button");
+
+    function handleInput(e) {
+        const target = e.target;
+
+        if (target.value.length >= target.maxLength && target === usernameInput) {
+            pinInput.focus();  
+        }
+    }
+
+    function handleKeyPress(e) {
+        if (e.target === usernameInput && e.key !== "Backspace" && usernameInput.value.length >= usernameInput.maxLength) {
+            pinInput.focus(); 
+        }
+        if (e.target === pinInput && e.key === "Enter") {
+            submitButton.click();  
+        }
+    }
+
+    usernameInput.addEventListener("input", handleInput);
+    pinInput.addEventListener("input", handleInput);
+    usernameInput.addEventListener("keypress", handleKeyPress);
+    pinInput.addEventListener("keypress", handleKeyPress);
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const usernameInput = document.getElementById("username");
+
+    function handleGlobalKeyDown(e) {
+        const activeElement = document.activeElement;
+        const isPrintableKey = e.key.length === 1 && e.key.match(/[a-zA-Z!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/); // Letters and symbols only
+        const isPaste = (e.ctrlKey || e.metaKey) && e.key === 'v';
+
+        if (activeElement.tagName !== "INPUT" && activeElement.tagName !== "TEXTAREA") {
+            if (usernameInput.value.length < 4) {
+                usernameInput.focus();
+
+                if (isPrintableKey) {
+                    e.preventDefault();
+                    usernameInput.value += e.key.toLowerCase(); 
+                } else if (isPaste) {
+                    e.preventDefault();
+                    navigator.clipboard.readText().then((clipText) => {
+                        const filteredText = clipText.toLowerCase().replace(/[0-9]/g, ''); 
+                        const newText = filteredText.slice(0, 4 - usernameInput.value.length); 
+                        usernameInput.value += newText;
+                    });
+                }
+            } else {
+                usernameInput.focus(); 
+            }
+        }
+    }
+
+    document.addEventListener("keydown", handleGlobalKeyDown);
+});
+
+
+function handleFileInput(e) {
+    e.preventDefault(); 
+
+    if (e.type === 'drop') {
+        const fileInput = document.getElementById('fileInput');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files; 
+            updateFileName(); 
+        }
+    }
+
+    if (e.clipboardData && e.clipboardData.items) {
+        const fileInput = document.getElementById('fileInput');
+        for (let i = 0; i < e.clipboardData.items.length; i++) {
+            const item = e.clipboardData.items[i];
+            if (item.kind === 'file') {
+                const file = item.getAsFile();
+                fileInput.files = new DataTransfer().files; // Clear any existing files
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files; // Set the file input to the pasted file
+                updateFileName(); // Call the updateFileName function
+            }
+        }
+    }
+}
+
+// Add event listeners for drag-and-drop and paste
+document.querySelector('.content-s').addEventListener('dragover', function(e) {
+    e.preventDefault(); // Allow drop
+});
+document.querySelector('.content-s').addEventListener('drop', handleFileInput);
+document.addEventListener('paste', handleFileInput);

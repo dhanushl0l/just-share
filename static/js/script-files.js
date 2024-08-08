@@ -336,7 +336,7 @@ function share() {
 document.addEventListener("DOMContentLoaded", function() {
     const usernameInput = document.getElementById("username");
     const pinInput = document.getElementById("pin-1");
-    const submitButton = document.querySelector(".update-button");
+    const submitButton = document.querySelector(".click");
 
     function handleInput(e) {
         const target = e.target;

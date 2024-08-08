@@ -211,7 +211,7 @@ def validate_folder_and_pin(folder_name, pin):
             else:
                 session['error_message'] = "Invalid PIN or folder name!"
     else:
-        session['error_message'] = "Folder not found."
+        session['error_message'] = "Invalid PIN or folder name!"
     return False
 
 def get_file_path_and_original_name(folder_name):

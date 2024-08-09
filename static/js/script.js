@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
   usernameInput.addEventListener('input', function() {
       var value = usernameInput.value;
 
-      // Convert to lowercase and remove non-lowercase English letters
+      
       value = value.toLowerCase().replace(/[^a-z]/g, '');
 
-      // Limit to 4 characters
+      
       if (value.length > 4) {
           value = value.substring(0, 4);
       }
@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
   pinInput.addEventListener('input', function() {
       var value = pinInput.value;
 
-      // Remove non-digit characters
+      
       value = value.replace(/[^0-9]/g, '');
 
-      // Limit to 4 characters
+      
       if (value.length > 4) {
           value = value.substring(0, 4);
       }
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('receiveForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the form from submitting the traditional way
+      event.preventDefault(); 
 
       var isValid = true;
 
@@ -53,14 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
           isValid = false;
       }
 
-      // Remove the shake class after the animation ends
+      
       setTimeout(function() {
           usernameInput.classList.remove('shake');
           pinInput.classList.remove('shake');
-      }, 500); // Duration of the animation in milliseconds
+      }, 500); 
 
       if (!isValid) {
-          return; // If validation fails, do not proceed with the AJAX request
+          return; 
       }
 
       var xhr = new XMLHttpRequest();
@@ -101,7 +101,7 @@ function copydata(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('sendForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the form from submitting the traditional way
+      event.preventDefault(); 
 
       var messageInput = document.getElementById('message');
       var isValid = true;
@@ -111,13 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
           isValid = false;
       }
 
-      // Remove the shake class after the animation ends
+      
       setTimeout(function() {
           messageInput.classList.remove('shake');
-      }, 500); // Duration of the animation in milliseconds
+      }, 500); 
 
       if (!isValid) {
-          return; // If validation fails, do not proceed with the AJAX request
+          return; 
       }
 
       var xhr = new XMLHttpRequest();
@@ -169,23 +169,23 @@ document.getElementById('outputContainer').querySelector('.close').addEventListe
 function copydata(link) {
 const datavalue = document.getElementById('datavalue').textContent;
 
-// Create a new textarea element
+
 const textarea = document.createElement('textarea');
-// Set the value of the textarea to the text content of the span element
+
 textarea.value = datavalue;
 
-// Append the textarea to the document body
+
 document.body.appendChild(textarea);
 
-// Select the text inside the textarea
+
 textarea.select();
-// Copy the selected text to the clipboard
+
 document.execCommand('copy');
 
-// Remove the textarea from the document body
+
 document.body.removeChild(textarea);
 
-// Change the icon
+
 changeIcon(link);
 }
 

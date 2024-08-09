@@ -31,7 +31,7 @@ div[class^="about-page"] {
     transition: transform 1s ease;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Ensure content doesn't overflow */
+    overflow: hidden;
 }
 
 .container-Founder, .container-Founder-t {
@@ -51,7 +51,7 @@ div[class^="about-page"] {
     overflow: auto;
     padding: 20px;
     box-sizing: border-box;
-    font-size: calc(1.2vw + 8px); /* Responsive font size with a base minimum */
+    font-size: calc(1.2vw + 8px);
     display: flex;
     flex-direction: column;
 }
@@ -72,7 +72,7 @@ div[class^="about-page"] {
     margin-bottom: 5px;
 }
 
-/* Enforcing minimum readable font size */
+
 @media (max-width: 600px) {
     .container-Founder-doc {
         font-size: 14px;
@@ -155,7 +155,7 @@ div[class^="about-page"] {
   font-size: 2.5em;
   font-weight: 500;
   margin-left: 50px;
-  color: rgb(255, 255, 255); /* Replace 'red' with your desired color */
+  color: rgb(255, 255, 255);
   font-family: Roboto, Arial, sans-serif;
 }
 
@@ -185,9 +185,9 @@ div[class^="about-page"] {
     width: 80px;
     height: 80px;
     margin-right: 8px;
-    transform: rotate(90deg) scale(1); /* Initial scale */
+    transform: rotate(90deg) scale(1);
     position: relative;
-    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+    transition: transform 0.3s ease;
 }
 
 .strap a {
@@ -198,16 +198,16 @@ div[class^="about-page"] {
     position: relative;
     font-family: Roboto, Arial, sans-serif;
     font-weight: bold;
-    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+    transition: transform 0.3s ease;
 }
 
-/* Apply zoom effect to the individual elements on hover */
+
 .strap:hover img {
-    transform: rotate(360deg) scale(1.1); /* Zoom in by 10% */
+    transform: rotate(360deg) scale(1.1);
 }
 
 .strap:hover a {
-    transform: translateY(10px) scale(1.1); /* Move up by 10px and zoom in by 10% */
+    transform: translateY(10px) scale(1.1);
 }
 
 
@@ -215,9 +215,9 @@ div[class^="about-page"] {
     position: relative;
     color: rgb(255, 255, 255);
     text-align: left;
-    width: 70%; /* Text container width */
-    height: 80%; /* Text container height */
-    font-size: 5vw; /* Base font size */
+    width: 70%;
+    height: 80%;
+    font-size: 5vw;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -226,7 +226,7 @@ div[class^="about-page"] {
     top: 150px;
 }
 
-/* Increase size and spacing to fit the container */
+
 
 
 .container-Founder, .container-Founder-t {

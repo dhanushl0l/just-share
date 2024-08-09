@@ -13,16 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (usernameInput && pinInput && outputContainer) {
         usernameInput.addEventListener('input', function() {
-            // Your username input handling code here
+            
         });
 
         pinInput.addEventListener('input', function() {
-            var numericValue = pinInput.value.replace(/\D/g, ''); // Remove non-numeric characters
+            var numericValue = pinInput.value.replace(/\D/g, ''); 
             pinInput.value = numericValue;
         });
 
         document.getElementById('receiveForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
+            event.preventDefault(); 
 
             var isValid = true;
 
@@ -36,42 +36,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            // Remove the shake class after the animation ends
+            
             setTimeout(function() {
                 usernameInput.classList.remove('shake');
                 pinInput.classList.remove('shake');
-            }, 500); // Duration of the animation in milliseconds
+            }, 500); 
 
             if (!isValid) {
-                return; // If validation fails, do not proceed with the AJAX request
+                return; 
             }
 
-            // Perform AJAX request
+            
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var contentType = xhr.getResponseHeader('Content-Type');
                     if (contentType && contentType.toLowerCase().includes('json')) {
-                        // Handle JSON response
+                        
                         try {
                             var response = JSON.parse(xhr.responseText);
                             if (response.error) {
                                 outputContainer.style.display = 'block';
                                 document.getElementById('errorvalue').textContent = response.error;
                             } else {
-                                // Handle successful JSON response
+                                
                                 var downloadLink = document.createElement('a');
                                 downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
                                 downloadLink.click();
                             }
                         } catch (e) {
-                            // Handle JSON parsing error by showing an error message
+                            
                             outputContainer.style.display = 'block';
                             document.getElementById('errorvalue').textContent = 'An error occurred while processing the response.';
                         }
                     } else {
-                        // Handle file download for non-JSON responses
+                        
                         var downloadLink = document.createElement('a');
                         downloadLink.href = '/download?pin=' + pinInput.value + '&folder_name=' + usernameInput.value;
                         downloadLink.click();
@@ -105,23 +105,23 @@ loadNextImage();
 function copydata(link) {
   const datavalue = document.getElementById('datavalue').textContent;
 
-  // Create a new textarea element
+  
   const textarea = document.createElement('textarea');
-  // Set the value of the textarea to the text content of the span element
+  
   textarea.value = datavalue;
 
-  // Append the textarea to the document body
+  
   document.body.appendChild(textarea);
 
-  // Select the text inside the textarea
+  
   textarea.select();
-  // Copy the selected text to the clipboard
+  
   document.execCommand('copy');
 
-  // Remove the textarea from the document body
+  
   document.body.removeChild(textarea);
 
-  // Change the icon
+  
   changeIcon(link);
 }
 
@@ -185,55 +185,55 @@ function updateFileName() {
     const popupText = document.getElementById('popupText');
 
     if (fileInput.files.length > 0) {
-        const fileSize = fileInput.files[0].size; // Size in bytes
-        const maxSize = 11 * 1024 * 1024; // 10 MB in bytes
+        const fileSize = fileInput.files[0].size; 
+        const maxSize = 11 * 1024 * 1024; 
 
         if (fileSize > maxSize) {
             popup.style.display = 'block';
-            fileInput.value = ''; // Clear the selected file
+            fileInput.value = ''; 
 
         } else {
           fileLabel.innerHTML = `<img class="fileLabel" src="/static/assets/update yes.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">${fileInput.files[0].name}</span>`;
-            popup.style.display = 'none'; // Hide the popup if no error
+            popup.style.display = 'none'; 
         }
     }
 }
 
 
-// Function to close the popup
+
 function closePopup(containerId) {
-    // Reset progress bar
+    
     document.getElementById('uploadProgress').value = 0;
 
-    // Remove selected file
+    
     document.getElementById('fileInput').value = '';
 
-    // Reset fileLabel HTML content
+    
     document.getElementById('fileLabel').innerHTML = `<img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">Select a file...</span>`;
 
-    // Reset progressBarContainer class
+    
     document.getElementById('progressBarContainer').style.display = 'block';
 
 
-    // Hide the popup
+    
     document.getElementById(containerId).style.display = 'none';
 }
 
 
-// Reset the progress bar when a new file is selected
+
 document.getElementById('fileInput').addEventListener('change', function() {
     document.getElementById('uploadProgress').value = 0;
     document.getElementById('progressBar').style.width = '0%';
 });
 
-// Submit the form and handle file upload
+
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     var formData = new FormData(this);
 
-    // Check if a file is selected
+    
     if (formData.get('file').name === '') {
-        return; // Exit the function
+        return; 
     }
 
     var xhr = new XMLHttpRequest();
@@ -248,30 +248,30 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
     };
 
     xhr.onload = function() {
-        console.log(xhr.responseText); // Log the response for debugging
+        console.log(xhr.responseText); 
         if (xhr.status == 200) {
-            // Upload successful
+            
             var response = JSON.parse(xhr.responseText);
             document.getElementById('folderName').value = response.username;
             document.getElementById('pin').value = response.pin;
             document.getElementById('progressBarContainer').style.display = 'none';
 
-            // Update the username and pin values in the output container
+            
             document.getElementById('usernameValue').innerText = response.username;
             document.getElementById('pinValue').innerText = response.pin;
 
-            // Show the output container
+            
             document.getElementById('outputContainer').style.display = 'block';
 
-            // Load the QR code image
+            
             var qrCodeImg = document.getElementById('qrCodeImg');
             qrCodeImg.src = response.qr_code_link_files;
             qrCodeImg.onload = function() {
-                // Once the image is loaded, display it
+                
                 qrCodeImg.style.display = 'block';
             };
         } else {
-            // Upload failed
+            
             alert('Upload failed. Please try again.');
         }
     };
@@ -285,11 +285,11 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
   var fileInput = document.getElementById('fileInput');
   var fileLabel = document.getElementById('fileLabel');
   if (fileInput.files.length === 0) {
-    fileLabel.classList.add('shake'); // Add the shake class
+    fileLabel.classList.add('shake'); 
     setTimeout(function() {
-      fileLabel.classList.remove('shake'); // Remove the shake class after the animation ends
+      fileLabel.classList.remove('shake'); 
     }, 400);
-    event.preventDefault(); // Prevent the form from being submitted
+    event.preventDefault(); 
     return;
   }
 });
@@ -307,11 +307,11 @@ function showOutputContainer() {
         document.getElementById('usernameValue').textContent = data.username;
         document.getElementById('pinValue').textContent = data.pin;
 
-        // Set the QR code link as the src of the image
+        
         var qrCodeImg = document.getElementById('qrCodeImg');
         qrCodeImg.src = data.qr_code_link_files;
         qrCodeImg.onload = function() {
-            // Once the image is loaded, display it
+            
             qrCodeImg.style.display = 'block';
         };
     });
@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function handleGlobalKeyDown(e) {
         const activeElement = document.activeElement;
-        const isPrintableKey = e.key.length === 1 && e.key.match(/[a-zA-Z!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/); // Letters and symbols only
+        const isPrintableKey = e.key.length === 1 && e.key.match(/[a-zA-Z!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/); 
         const isPaste = (e.ctrlKey || e.metaKey) && e.key === 'v';
 
         if (activeElement.tagName !== "INPUT" && activeElement.tagName !== "TEXTAREA") {
@@ -412,19 +412,18 @@ function handleFileInput(e) {
             const item = e.clipboardData.items[i];
             if (item.kind === 'file') {
                 const file = item.getAsFile();
-                fileInput.files = new DataTransfer().files; // Clear any existing files
+                fileInput.files = new DataTransfer().files; 
                 const dataTransfer = new DataTransfer();
                 dataTransfer.items.add(file);
-                fileInput.files = dataTransfer.files; // Set the file input to the pasted file
-                updateFileName(); // Call the updateFileName function
+                fileInput.files = dataTransfer.files; 
+                updateFileName(); 
             }
         }
     }
 }
 
-// Add event listeners for drag-and-drop and paste
 document.querySelector('.content-s').addEventListener('dragover', function(e) {
-    e.preventDefault(); // Allow drop
+    e.preventDefault(); 
 });
 document.querySelector('.content-s').addEventListener('drop', handleFileInput);
 document.addEventListener('paste', handleFileInput);

@@ -132,7 +132,7 @@ body::-webkit-scrollbar {
 }
 
 .fileLabel-1:hover {
-  transform: translateX(-50%) scale(01.1); /* Example: Enlarge the element by 10% */
+  transform: translateX(-50%) scale(01.1);
 }
 
 .Receive-continer.shake {
@@ -213,8 +213,8 @@ body::-webkit-scrollbar {
   width: 700px;
   position: absolute;
   height: 400px;
-  border-radius: 10px; /* Add a slight curve */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s, transform 0.3s; 
   left: 50%;
   transform: translateX(-50%);
@@ -705,7 +705,7 @@ input[type="text"]:focus {
   display: none;
 }
 
-/* Custom scrollbar styles */
+
 .scrollable {
   scrollbar-width: thin;
   scrollbar-color: #ffffff #030303; 
@@ -737,8 +737,8 @@ input[type="text"]:focus {
 }
 
 .message-out {
-  white-space: pre-line; /* Preserve newline characters */
-  line-height: 1; /* Set line height to 1 to remove extra space */
+  white-space: pre-line;
+  line-height: 1;
 }
 
 .error span,
@@ -758,7 +758,7 @@ footer {
   left: 0;
   width: 100%;
   text-align: center;
-  transition: bottom 0.3s ease; /* Add smooth transition */
+  transition: bottom 0.3s ease;
   padding: 20px;
   background-color: #ffffff;
   color: rgb(0, 0, 0);

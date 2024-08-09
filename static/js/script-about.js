@@ -69,16 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if ((deltaY > 0 && scrollTop === 0) || (deltaY < 0 && scrollTop + containerHeight >= scrollHeight)) {
                     if (deltaY > 0) {
-                        showSection(currentIndex - 1); // Swipe down
+                        showSection(currentIndex - 1); 
                     } else {
-                        showSection(currentIndex + 1); // Swipe up
+                        showSection(currentIndex + 1); 
                     }
                 }
             } else {
                 if (deltaY > 0) {
-                    showSection(currentIndex - 1); // Swipe down
+                    showSection(currentIndex - 1); 
                 } else {
-                    showSection(currentIndex + 1); // Swipe up
+                    showSection(currentIndex + 1); 
                 }
             }
         }

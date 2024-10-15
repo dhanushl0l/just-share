@@ -33,6 +33,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 11 * 1024 * 1024
 
+@app.route('/sitemap.xml')
+def serve_sitemap():
+    return send_from_directory(os.getcwd(), 'sitemap.xml')
+    
 @app.route('/')
 def home():
     return render_template("home.html")

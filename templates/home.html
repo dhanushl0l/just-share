@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Just Share</title>
-    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
-    <meta name="description" content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
-    <meta name="keywords" content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Just Share</title>
+  <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon"
+    sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
+  <meta name="description"
+    content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
+  <meta name="keywords"
+    content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Just Share">
-    <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
-    <meta property="og:image" content="https://i.imgur.com/3OwtmNK.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">      
-    <meta property="og:url" content="https://justshare.cloud/">
-    <meta property="og:type" content="website">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Just Share">
+  <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
+  <meta property="og:image" content="https://i.imgur.com/3OwtmNK.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://justshare.cloud/">
+  <meta property="og:type" content="website">
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -28,10 +32,11 @@
         "image": "https://i.imgur.com/3OwtmNK.png"
     }
     </script>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
   <header>
     <div class="container">
@@ -39,65 +44,72 @@
         <h1><span id="justShare">JUST SHARE</span></h1>
       </div>
       <button class="about" id="about-button" onclick="window.location.href = '/about';">!</button>
-    </div>    
+    </div>
     <div class="nav">
       <nav>
         <ul>
-            <li><a href="/files">files</a></li>
-            <li><a href="/info">info</a></li>
+          <li><a href="/files">files</a></li>
+          <li><a href="/info">info</a></li>
         </ul>
-    </nav>
-  </div>
+      </nav>
+    </div>
   </header>
   <div class="content-s-r bluer">
     <div class="content-r">
       <div class="console">
-      <div class="label">Share text & links<br>
-        <div class="sub-label">Data is only visible for 24 hours. If any server-related maintenance happens, the data will be deleted.<br>
+        <div class="label">Share text & links<br>
+          <div class="sub-label">Data is stored temporarily and will be deleted. For privacy, do not share passwords or
+            sensitive information.<br>
+          </div>
         </div>
-      </div>
         <button class="home-button" onclick="window.location.href='/text'">SHARE TEXT</button>
       </div>
-  </div>
-  <div class="content-s">
-    <div class="console">
-    <div class="label">Share files<br>
-      <div class="sub-label">You can send files up to 10MB. This limit is temporary; files are only visible for 3 hours.<br>
+    </div>
+    <div class="content-s">
+      <div class="console">
+        <div class="label">Share files<br>
+          <div class="sub-label">You can send files up to 10MB. This limit is temporary, and files are stored only for a
+            short period.<br>
+          </div>
+        </div>
+        <button class="home-button" onclick="window.location.href='/files'">SHARE FILES</button>
       </div>
     </div>
-        <button class="home-button" onclick="window.location.href='/files'">SHARE FILES</button>
-    </div>  
-  </div>  
-</div>
-     <footer id="footer">
-      <div class="footer-content">
-        <div id="copyright" class="footer-content bottom-left">
-          <p>© MIT.</p>
-          <p>Powered by the Admin</p>
-        </div>
-      
-        <div id="call" class="footer-content center">
-          <p>Call</p>
-          <p>+91 8248417774</p>
-        </div>
-      
-        <div id="write" class="footer-content center">
-          <p>Write</p>
-          <p>dhanush@tutanota.de</p>
-        </div>
-      
-        <div id="follow" class="footer-content bottom-right">
-          <p>Follow</p>
-          <div class="social-icons">
-            <a href="https://github.com/dhanushl0l"><img src="https://i.imgur.com/IWeLPG8.png" class="icon" alt="github"></a>
-            <a href="https://twitter.com/dhanu_off"><img src="https://i.imgur.com/dechEE2.png" class="icon" alt="Twitter"></a>
-            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="https://i.imgur.com/3ZaxRaZ.png" class="icon" alt="LinkedIn"></a>
-            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="https://i.imgur.com/CyfeGIv.png" class="icon" alt="Instagram"></a>
-        </div>    
+  </div>
+  <footer id="footer">
+    <div class="footer-content">
+      <div id="copyright" class="footer-content bottom-left">
+        <p>© MIT.</p>
+        <p>Powered by the Admin</p>
+      </div>
+
+      <div id="call" class="footer-content center">
+        <p>Call</p>
+        <p>+91 8248417774</p>
+      </div>
+
+      <div id="write" class="footer-content center">
+        <p>Write</p>
+        <p>dhanush@tutanota.de</p>
+      </div>
+
+      <div id="follow" class="footer-content bottom-right">
+        <p>Follow</p>
+        <div class="social-icons">
+          <a href="https://github.com/dhanushl0l"><img src="https://i.imgur.com/IWeLPG8.png" class="icon"
+              alt="github"></a>
+          <a href="https://twitter.com/dhanu_off"><img src="https://i.imgur.com/dechEE2.png" class="icon"
+              alt="Twitter"></a>
+          <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="https://i.imgur.com/3ZaxRaZ.png"
+              class="icon" alt="LinkedIn"></a>
+          <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="https://i.imgur.com/CyfeGIv.png" class="icon"
+              alt="Instagram"></a>
         </div>
       </div>
-      </footer>
-      <script>
-</script>
+    </div>
+  </footer>
+  <script>
+  </script>
 </body>
+
 </html>

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Just Share files</title>
-    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
-    <meta name="description" content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
-    <meta name="keywords" content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Just Share files</title>
+  <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon"
+    sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
+  <meta name="description"
+    content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
+  <meta name="keywords"
+    content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Just Share files">
-    <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
-    <meta property="og:image" content="https://i.imgur.com/3OwtmNK.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">      
-    <meta property="og:url" content="https://justshare.cloud/files">
-    <meta property="og:type" content="website">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Just Share files">
+  <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
+  <meta property="og:image" content="https://i.imgur.com/3OwtmNK.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://justshare.cloud/files">
+  <meta property="og:type" content="website">
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -28,10 +32,11 @@
         "image": "https://i.imgur.com/3OwtmNK.png"
     }
     </script>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
   <header>
     <div class="container">
@@ -39,143 +44,146 @@
         <h1><span id="justShare">JUST SHARE</span></h1>
       </div>
       <button class="about" id="about-button">!</button>
-    </div>    
+    </div>
     <div class="nav">
       <nav>
         <ul>
-            <li><a href="/files">files</a></li>
-            <li><a href="/info">info</a></li>
+          <li><a href="/files">files</a></li>
+          <li><a href="/info">info</a></li>
         </ul>
-    </nav>
-  </div>
+      </nav>
+    </div>
   </header>
   <div class="content-s-r bluer">
-  <div class="content-s">
-    <div class="console">
+    <div class="content-s">
+      <div class="console">
         <h1 class="label">Upload</h1>
         <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
           <div class="file-selector">
-            <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()"> 
-            <label for="fileInput" id="fileLabel"><img class="fileLabel" src="/static/assets/update up.svg"><img src="/static/assets/update out.svg" class="fileLabel-1"  alt="Upload File"><span class="fileLabelText">Select a file...</span></label>
+            <input type="file" name="file" id="fileInput" class="update-file" onchange="updateFileName()">
+            <label for="fileInput" id="fileLabel"><img class="fileLabel" src="/static/assets/update up.svg"><img
+                src="/static/assets/update out.svg" class="fileLabel-1" alt="Upload File"><span
+                class="fileLabelText">Select a file...</span></label>
             <progress class="Progress" id="uploadProgress" max="100" value="0"></progress>
             <input type="hidden" name="folder_name" id="folderName">
             <input type="hidden" name="pin" id="pin">
-          </div>                        
+          </div>
           <input type="submit" value="Upload" class="update-button update-click" id="sendButton">
         </form>
-        <div class="progressBarContainer" id="progressBarContainer" >
+        <div class="progressBarContainer" id="progressBarContainer">
           <div id="progressBar" class="progress-bar"></div>
-        </div> 
-     </div>
-</div>
-      
-<div class="Receive-continer">
-  <div>
-    <div class="content-r">
-      <div class="console">
-        <h1 class="label">Receive</h1>
-        <form id="receiveForm" action="/download" method="get">
-          <label id="user-info" class="user-name" for="username">Username</label>
-          <input type="text" name="folder_name" id="username" autocomplete="off" maxlength="4" oninput="convertToLowercase(this)">
-          <label id="user-info" class="user-pin" for="pin">PIN</label>
-          <input type="text" id="pin-1" name="pin" autocomplete="off" maxlength="4">
-          <input type="submit" class="update-button click" value="Download">
-      </form>
-    </div>
-  </div>
-  </div>
-  </div>
-</div>
-</div>
-</div>
-
-<div class="output" id="outputContainer" style="display: none;">
-  <div class="popup-bg">
-    <div class="popup-1">
-      <button class="close" onclick="closePopup('outputContainer')">X</button>
-      <div class="user-info">
-        <p class="username">
-          Username: <span id="usernameValue"></span>
-          <a class="copy-icon" onclick="copyUsername(this)">
-            <img src="/static/assets/clipboard.png" alt="Copy">
-            <span class="copy-text"></span>
-          </a>
-        </p>
-        <p class="pin">
-          PIN: <span id="pinValue"></span>
-          <a class="copy-icon" onclick="copyPin(this)">
-            <img src="/static/assets/clipboard.png" alt="Copy">
-            <span class="copy-text"></span>
-          </a>
-        </p>            
+        </div>
       </div>
-      <div class="qr-code">
-        <div class="label-qr">QR Code</div>
-        <div class="label-qr-sub">Scan using your mobile:</div>
-        <img id="qrCodeImg" src="" alt="QR Code">
-        <button class="share-link" onclick="share()">Copy link</button>
+    </div>
+
+    <div class="Receive-continer">
+      <div>
+        <div class="content-r">
+          <div class="console">
+            <h1 class="label">Receive</h1>
+            <form id="receiveForm" action="/download" method="get">
+              <label id="user-info" class="user-name" for="username">Username</label>
+              <input type="text" name="folder_name" id="username" autocomplete="off" maxlength="4"
+                oninput="convertToLowercase(this)">
+              <label id="user-info" class="user-pin" for="pin">PIN</label>
+              <input type="text" id="pin-1" name="pin" autocomplete="off" maxlength="4">
+              <input type="submit" class="update-button click" value="Download">
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="output" id="outputContainer" style="display: none;">
+    <div class="popup-bg">
+      <div class="popup-1">
+        <button class="close" onclick="closePopup('outputContainer')">X</button>
+        <div class="user-info">
+          <p class="username">
+            Username: <span id="usernameValue"></span>
+            <a class="copy-icon" onclick="copyUsername(this)">
+              <img src="/static/assets/clipboard.png" alt="Copy">
+              <span class="copy-text"></span>
+            </a>
+          </p>
+          <p class="pin">
+            PIN: <span id="pinValue"></span>
+            <a class="copy-icon" onclick="copyPin(this)">
+              <img src="/static/assets/clipboard.png" alt="Copy">
+              <span class="copy-text"></span>
+            </a>
+          </p>
+        </div>
+        <div class="qr-code">
+          <div class="label-qr">QR Code</div>
+          <div class="label-qr-sub">Scan using your mobile:</div>
+          <img id="qrCodeImg" src="" alt="QR Code">
+          <button class="share-link" onclick="share()">Copy link</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-<div class="output-2" id="outputContainer2" style="display: none;">
-  <div class="popup-bg">
+  <div class="output-2" id="outputContainer2" style="display: none;">
+    <div class="popup-bg">
       <div class="popup">
-          <button class="close-1">X</button>
-          <p class="error">Error <span id="errorvalue"></span></p>
+        <button class="close-1">X</button>
+        <p class="error">Error <span id="errorvalue"></span></p>
       </div>
-  </div>
-</div>
-
-<div class="error-popup" id="popup" style="display: none;">
-  <div class="popup-bg">
-    <div class="popup">
-      <button class="close-1" onclick="closePopup('popup')">X</button>
-      <span class="error" id="popupText">File is above the size limit of 10 MB</span>
     </div>
   </div>
-</div>
 
-     <footer id="footer">
-      <div class="footer-content">
-        <div id="copyright" class="footer-content bottom-left">
-          <p>© MIT.</p>
-          <p>Powered by the Admin</p>
-        </div>
-      
-        <div id="call" class="footer-content center">
-          <p>Call</p>
-          <p>+91 8248417774</p>
-        </div>
-      
-        <div id="write" class="footer-content center">
-          <p>Write</p>
-          <p>dhanush@tutanota.de</p>
-        </div>
-      
-        <div id="follow" class="footer-content bottom-right">
-          <p>Follow</p>
-          <div class="social-icons">
-            <a href="https://github.com/dhanushl0l"><img src="/static/assets/github.png" alt="github"></a>
-            <a href="https://twitter.com/dhanu_off"><img src="/static/assets/twitter.png" alt="Twitter"></a>
-            <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="/static/assets/lin.png" alt="LinkedIn"></a>
-            <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png" alt="Instagram"></a>
-        </div>    
+  <div class="error-popup" id="popup" style="display: none;">
+    <div class="popup-bg">
+      <div class="popup">
+        <button class="close-1" onclick="closePopup('popup')">X</button>
+        <span class="error" id="popupText">File is above the size limit of 10 MB</span>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-content">
+      <div id="copyright" class="footer-content bottom-left">
+        <p>© MIT.</p>
+        <p>Powered by the Admin</p>
+      </div>
+
+      <div id="call" class="footer-content center">
+        <p>Call</p>
+        <p>+91 8248417774</p>
+      </div>
+
+      <div id="write" class="footer-content center">
+        <p>Write</p>
+        <p>dhanush@tutanota.de</p>
+      </div>
+
+      <div id="follow" class="footer-content bottom-right">
+        <p>Follow</p>
+        <div class="social-icons">
+          <a href="https://github.com/dhanushl0l"><img src="/static/assets/github.png" alt="github"></a>
+          <a href="https://twitter.com/dhanu_off"><img src="/static/assets/twitter.png" alt="Twitter"></a>
+          <a href="https://www.linkedin.com/in/dhanush-a506b6297/"><img src="/static/assets/lin.png" alt="LinkedIn"></a>
+          <a href="https://www.instagram.com/i_am_the_bad.one/"><img src="/static/assets/instagram.png"
+              alt="Instagram"></a>
         </div>
       </div>
-      </footer>
-      <script>
-        const error = "{{ error }}";
-        const outputContainer2 = document.getElementById('outputContainer2');
+    </div>
+  </footer>
+  <script>
+    const error = "{{ error }}";
+    const outputContainer2 = document.getElementById('outputContainer2');
 
-        if (error) {
-         outputContainer2.style.display = 'block';
-        }
-        
-      </script>
-      <script src="{{ url_for('static', filename='js/script-files.js') }}"></script>
+    if (error) {
+      outputContainer2.style.display = 'block';
+    }
+
+  </script>
+  <script src="{{ url_for('static', filename='js/script-files.js') }}"></script>
 </body>
+
 </html>

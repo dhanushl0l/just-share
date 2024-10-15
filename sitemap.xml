@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
+  <url>
+    <loc>https://justshare.cloud/</loc>
+    <lastmod>2024-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Text Sharing Page -->
+  <url>
+    <loc>https://justshare.cloud/text</loc>
+    <lastmod>2024-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <description>Share text instantly without logins or pop-ups.</description>
+  </url>
+
+  <!-- File Sharing Page -->
+  <url>
+    <loc>https://justshare.cloud/files</loc>
+    <lastmod>2024-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <description>Share files securely and instantly without logins.</description>
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>https://justshare.cloud/about</loc>
+    <lastmod>2024-10-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <description>Learn more about Just Share and its features.</description>
+  </url>
+
+</urlset>

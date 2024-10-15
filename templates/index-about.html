@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Just Share about</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon" sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
-    <meta name="description" content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
-    <meta name="keywords" content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon"
+        sizes="16x16 24x24 32x32 48x48 64x64 72x72 80x80 96x96 128x128 256x256">
+    <meta name="description"
+        content="Share files and text instantly and securely without logins or pop-ups. Experience the easiest way to collaborate online with our hassle-free sharing website. Try it now!">
+    <meta name="keywords"
+        content="file sharing, text sharing, instant file sharing, justshare, just share, no login file sharing, no login text sharing, no login link sharing, hassle-free collaboration, online collaboration, share files online, share text online">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Just Share about">
     <meta property="og:description" content="Share text and files instantly without logins or pop-ups.">
     <meta property="og:image" content="https://i.imgur.com/3OwtmNK.png">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">    
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://justshare.cloud/about">
     <meta property="og:type" content="website">
 
@@ -29,156 +33,168 @@
         "image": "https://i.imgur.com/3OwtmNK.png"
     }
     </script>
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-about.css') }}">
 </head>
+
 <body>
-  <header>
-    <div class="container">
-        <div class="title">
-          <h1  onclick="window.location.href='/'"><span id="justShare">JUST SHARE</span></h1>
+    <header>
+        <div class="container">
+            <div class="title">
+                <h1 onclick="window.location.href='/'"><span id="justShare">JUST SHARE</span></h1>
+            </div>
         </div>
-      </div>    
-      <div class="nav">
-        <nav>
-          <ul>
-              <li><a href="/files">files</a></li>
-              <li><a href="/info">info</a></li>
-          </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="about-page-1">
-    <h1 class="label-page-1">This open-source project allows you to share text and files effortlessly, without requiring a login or any other cumbersome steps.</h1>
-    <div class="strap" onclick="openLink()">
-      <div class="strap-object">
-        <img src="/static/assets/github-mark.svg" alt="GitHub Mark">
-        <a href="#">Source</a>
-      </div>
-    </div>
-</div>
-<div class="about-page-2">
-    <div class="container-Founder">
-        <h1 class="label-1">Founder</h1>
-        <div class="container-1"  onclick="window.location.href='https://dhanush.online/'">
-            <img src="/static/assets/dhanush.svg" alt="profile">
-            <h1 class="label-name">Dhanush</h1>
+        <div class="nav">
+            <nav>
+                <ul>
+                    <li><a href="/files">files</a></li>
+                    <li><a href="/info">info</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="about-page-1">
+        <h1 class="label-page-1">This open-source project allows you to share text and files effortlessly, without
+            requiring a login or any other cumbersome steps.</h1>
+        <div class="strap" onclick="openLink()">
+            <div class="strap-object">
+                <img src="/static/assets/github-mark.svg" alt="GitHub Mark">
+                <a href="#">Source</a>
+            </div>
         </div>
     </div>
-    <div class="container-Founder-t">
-        <h1 class="label-1">Tester</h1>
-        <div class="container-2">
-            <img src="/static/assets/Rajash.svg" alt="profile">
-            <h1 class="label-name">Rajash</h1>
+    <div class="about-page-2">
+        <div class="container-Founder">
+            <h1 class="label-1">Founder</h1>
+            <div class="container-1" onclick="window.location.href='https://dhanush.online/'">
+                <img src="/static/assets/dhanush.svg" alt="profile">
+                <h1 class="label-name">Dhanush</h1>
+            </div>
         </div>
-        <div class="container-3">
-            <img src="/static/assets/saju.svg" alt="profile">
-            <h1 class="label-name">Saju</h1>
+        <div class="container-Founder-t">
+            <h1 class="label-1">Tester</h1>
+            <div class="container-2">
+                <img src="/static/assets/Rajash.svg" alt="profile">
+                <h1 class="label-name">Rajash</h1>
+            </div>
+            <div class="container-3">
+                <img src="/static/assets/saju.svg" alt="profile">
+                <h1 class="label-name">Saju</h1>
+            </div>
+            <div class="container-4">
+                <img src="/static/assets/abiram.svg" alt="profile">
+                <h1 class="label-name">Abiram</h1>
+            </div>
         </div>
-        <div class="container-4">
-            <img src="/static/assets/abiram.svg" alt="profile">
-            <h1 class="label-name">Abiram</h1>
+        <div class="strap" onclick="window.location.href='https://dhanush.online/donate'">
+            <div class="strap-object">
+                <img src="/static/assets/donate.svg" alt="GitHub Mark">
+                <a href="#">Donate</a>
+            </div>
         </div>
     </div>
-    <div class="strap"  onclick="window.location.href='https://dhanush.online/donate'">
-      <div class="strap-object">
-        <img src="/static/assets/donate.svg" alt="GitHub Mark">
-        <a href="#">Donate</a>
-      </div>
+    <div class="about-page-3">
+        <div class="container-Founder-doc">
+            <h1>JustShare: Secure and Simple File and Message Sharing</h2>
+                <p>JustShare is a web application designed to facilitate secure and simple sharing of messages and
+                    files. Whether you need to send a confidential message or share large files, JustShare ensures that
+                    your data remains safe and accessible only to intended recipients.</p>
+
+                <h3>Features</h3>
+                <ul>
+                    <li>
+                        <h4>Secure Message Sharing:</h4>
+                        <ul>
+                            <li>Easy to Use: Share messages effortlessly by generating a unique username and PIN.</li>
+                            <li>Confidential: Only users with the correct username and PIN can access the message.</li>
+                            <li>QR Code Generation: Quickly generate QR codes for easy sharing of access links.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>File Upload and Download:</h4>
+                        <ul>
+                            <li>Large File Support: Upload files up to 11 MB in size.</li>
+                            <li>Unique Access: Each file upload is protected with a unique folder name and PIN.</li>
+                            <li>QR Code Access: Generate QR codes for easy download links.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>User Privacy:</h4>
+                        <ul>
+                            <li>Secure Sessions: User sessions are managed securely to protect data.</li>
+                            <li>No Registration Required: Use the service without creating an account.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ul>
+                    <li>
+                        <h4>Sharing a Message:</h4>
+                        <ol>
+                            <li>Navigate to the <a href="/text" style="color: white;">shart text</a> section.</li>
+                            <li>Enter your message and click "Send".</li>
+                            <li>Receive a unique username and PIN.</li>
+                            <li>Share the username and PIN or the generated QR code with your recipient.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>Receiving a Message:</h4>
+                        <ol>
+                            <li>Go to the <a href="/text" style="color: white;">shart text</a> section.</li>
+                            <li>Enter the provided username and PIN.</li>
+                            <li>Access the shared message instantly.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>Uploading a File:</h4>
+                        <ol>
+                            <li>Visit the <a href="/files" style="color: white;">shart files</a> section.</li>
+                            <li>Select the file to upload and click "Upload".</li>
+                            <li>Get a unique folder name and PIN for the uploaded file.</li>
+                            <li>Share the folder name and PIN or the QR code with the recipient.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h4>Downloading a File:</h4>
+                        <ol>
+                            <li>Navigate to the <a href="/files" style="color: white;">shart files</a> section.</li>
+                            <li>Enter the provided folder name and PIN.</li>
+                            <li>Download the shared file securely.</li>
+                        </ol>
+                    </li>
+                </ul>
+
+                <h3>Security Measures</h3>
+                <ul>
+                    <li>Data Encryption: Currently, files and messages are not encrypted on the server. However, no one
+                        can access them. As a free service, I cannot afford intensive server-side encryption. As the
+                        project evolves, encryption will be added in the future. Additionally, if you are concerned, the
+                        transmission between the server and the client is fully encrypted.</li>
+                    <li>Session Management: Secure session handling to protect user data.</li>
+                    <li>Environment Configuration: Different settings for development and production to ensure security
+                        and performance.</li>
+                </ul>
+
+                <h3>Get Started</h3>
+                <p>To get started with JustShare, simply visit the homepage and choose whether you want to share or
+                    receive a message or file. The intuitive interface and step-by-step instructions make the process
+                    seamless and user-friendly.</p>
+
+                <h3>Contact Us</h3>
+                <p>For any inquiries or support, please contact us at <a href="mailto:dhanush@dhanush.online"
+                        style="color: white;">support</a>.</p>
+        </div>
+        <div class="strap" onclick="window.location.href='https://dhanush.online/justShare'">
+            <div class="strap-object">
+                <img src="/static/assets/Docum.svg" alt="GitHub Mark">
+                <a href="#">Docum</a>
+            </div>
+        </div>
     </div>
-</div>
-<div class="about-page-3">
-  <div class="container-Founder-doc">
-    <h1>JustShare: Secure and Simple File and Message Sharing</h2>
-    <p>JustShare is a web application designed to facilitate secure and simple sharing of messages and files. Whether you need to send a confidential message or share large files, JustShare ensures that your data remains safe and accessible only to intended recipients.</p>
-
-    <h3>Features</h3>
-    <ul>
-        <li>
-            <h4>Secure Message Sharing:</h4>
-            <ul>
-                <li>Easy to Use: Share messages effortlessly by generating a unique username and PIN.</li>
-                <li>Confidential: Only users with the correct username and PIN can access the message.</li>
-                <li>QR Code Generation: Quickly generate QR codes for easy sharing of access links.</li>
-            </ul>
-        </li>
-        <li>
-            <h4>File Upload and Download:</h4>
-            <ul>
-                <li>Large File Support: Upload files up to 11 MB in size.</li>
-                <li>Unique Access: Each file upload is protected with a unique folder name and PIN.</li>
-                <li>QR Code Access: Generate QR codes for easy download links.</li>
-            </ul>
-        </li>
-        <li>
-            <h4>User Privacy:</h4>
-            <ul>
-                <li>Secure Sessions: User sessions are managed securely to protect data.</li>
-                <li>No Registration Required: Use the service without creating an account.</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h3>How It Works</h3>
-    <ul>
-        <li>
-            <h4>Sharing a Message:</h4>
-            <ol>
-                <li>Navigate to the <a href="/text" style="color: white;">shart text</a> section.</li>
-                <li>Enter your message and click "Send".</li>
-                <li>Receive a unique username and PIN.</li>
-                <li>Share the username and PIN or the generated QR code with your recipient.</li>
-            </ol>
-        </li>
-        <li>
-            <h4>Receiving a Message:</h4>
-            <ol>
-                <li>Go to the <a href="/text" style="color: white;">shart text</a> section.</li>
-                <li>Enter the provided username and PIN.</li>
-                <li>Access the shared message instantly.</li>
-            </ol>
-        </li>
-        <li>
-            <h4>Uploading a File:</h4>
-            <ol>
-                <li>Visit the <a href="/files" style="color: white;">shart files</a> section.</li>
-                <li>Select the file to upload and click "Upload".</li>
-                <li>Get a unique folder name and PIN for the uploaded file.</li>
-                <li>Share the folder name and PIN or the QR code with the recipient.</li>
-            </ol>
-        </li>
-        <li>
-            <h4>Downloading a File:</h4>
-            <ol>
-                <li>Navigate to the <a href="/files" style="color: white;">shart files</a> section.</li>
-                <li>Enter the provided folder name and PIN.</li>
-                <li>Download the shared file securely.</li>
-            </ol>
-        </li>
-    </ul>
-
-    <h3>Security Measures</h3>
-    <ul>
-        <li>Data Encryption: Currently, files and messages are not encrypted on the server. However, no one can access them. As a free service, I cannot afford intensive server-side encryption. As the project evolves, encryption will be added in the future. Additionally, if you are concerned, the transmission between the server and the client is fully encrypted.</li>
-        <li>Session Management: Secure session handling to protect user data.</li>
-        <li>Environment Configuration: Different settings for development and production to ensure security and performance.</li>
-    </ul>
-
-    <h3>Get Started</h3>
-    <p>To get started with JustShare, simply visit the homepage and choose whether you want to share or receive a message or file. The intuitive interface and step-by-step instructions make the process seamless and user-friendly.</p>
-
-    <h3>Contact Us</h3>
-    <p>For any inquiries or support, please contact us at <a href="mailto:dhanush@dhanush.online" style="color: white;">support</a>.</p>
-</div>
-<div class="strap" onclick="window.location.href='https://dhanush.online/justShare'">
-    <div class="strap-object">
-        <img src="/static/assets/Docum.svg" alt="GitHub Mark">
-        <a href="#">Docum</a>
-      </div>
-    </div>
-</div>
-</script>
+    </script>
     <script src="{{ url_for('static', filename='js/script-about.js') }}"></script>
-  </body>
+</body>
+
 </html>

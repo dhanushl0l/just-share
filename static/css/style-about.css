@@ -1,12 +1,13 @@
-html, body {
+html,
+body {
     overscroll-behavior: none;
 }
 
-html{
-    touch-action: manipulation; 
-  } 
-  
-  body {
+html {
+    touch-action: manipulation;
+}
+
+body {
     background-color: black;
     padding: 0;
     min-height: 100vh;
@@ -16,11 +17,11 @@ html{
     overflow-x: hidden;
     position: absolute;
     font-family: Roboto, Arial, sans-serif;
-  }
-  
-  body::-webkit-scrollbar {
+}
+
+body::-webkit-scrollbar {
     display: none;
-  }
+}
 
 div[class^="about-page"] {
     position: fixed;
@@ -34,7 +35,8 @@ div[class^="about-page"] {
     overflow: hidden;
 }
 
-.container-Founder, .container-Founder-t {
+.container-Founder,
+.container-Founder-t {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,10 +88,10 @@ div[class^="about-page"] {
 
 .container {
     display: flex;
-    align-items: center; 
-  }
+    align-items: center;
+}
 
-.label-1{
+.label-1 {
     color: rgb(255, 255, 255);
     position: absolute;
     left: 0;
@@ -97,7 +99,10 @@ div[class^="about-page"] {
 }
 
 
-.container-1, .container-2, .container-3, .container-4 {
+.container-1,
+.container-2,
+.container-3,
+.container-4 {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -114,12 +119,15 @@ div[class^="about-page"] {
     margin-left: 20px;
 }
 
-.container-1 img, .container-2 img, .container-3 img, .container-4 img {
+.container-1 img,
+.container-2 img,
+.container-3 img,
+.container-4 img {
     position: relative;
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 50%; 
+    border-radius: 50%;
     top: 5px;
 
 }
@@ -134,7 +142,7 @@ div[class^="about-page"] {
     position: relative;
 }
 
-.nav{
+.nav {
     display: none;
 }
 
@@ -145,21 +153,21 @@ div[class^="about-page"] {
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 0;
-    position: absolute; 
-    z-index: 9;       
-  }
-
-.title h1 {
-  z-index: 999;
-  position: fixed;
-  font-size: 2.5em;
-  font-weight: 500;
-  margin-left: 50px;
-  color: rgb(255, 255, 255);
-  font-family: Roboto, Arial, sans-serif;
+    position: absolute;
+    z-index: 9;
 }
 
-  .strap {
+.title h1 {
+    z-index: 999;
+    position: fixed;
+    font-size: 2.5em;
+    font-weight: 500;
+    margin-left: 50px;
+    color: rgb(255, 255, 255);
+    font-family: Roboto, Arial, sans-serif;
+}
+
+.strap {
     position: absolute;
     z-index: 99;
     background-color: white;
@@ -178,7 +186,7 @@ div[class^="about-page"] {
     width: 100%;
     height: 400px;
     display: flex;
-    top:25%;
+    top: 25%;
 }
 
 .strap img {
@@ -229,7 +237,8 @@ div[class^="about-page"] {
 
 
 
-.container-Founder, .container-Founder-t {
+.container-Founder,
+.container-Founder-t {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -240,7 +249,7 @@ div[class^="about-page"] {
     top: 50px;
     box-sizing: border-box;
     position: absolute;
-    left:50px;
+    left: 50px;
 }
 
 .container-Founder {
@@ -255,7 +264,7 @@ div[class^="about-page"] {
 
 #justShare {
     cursor: pointer;
-  }
+}
 
 
 @media only screen and (max-width: 800px) {
@@ -263,12 +272,12 @@ div[class^="about-page"] {
     .title h1 {
         font-size: 2.0em;
         font-weight: 500;
-        margin-left:30px;
-        color: rgb(255, 255, 255); 
+        margin-left: 30px;
+        color: rgb(255, 255, 255);
         margin-top: 30px;
-      }
+    }
 
-      .strap {
+    .strap {
         position: fixed;
         bottom: 20px;
         left: 88%;
@@ -278,12 +287,12 @@ div[class^="about-page"] {
         padding: 10px;
         background-color: white;
         border-radius: 50%;
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .strap-object {
         position: static;
         width: auto;
@@ -292,21 +301,21 @@ div[class^="about-page"] {
         align-items: center;
         justify-content: center;
     }
-    
+
     .strap img {
         width: 30px;
         height: 30px;
         transform: rotate(0deg) scale(1);
         margin: 0;
     }
-    
+
     .strap a {
         display: none;
     }
-    
+
 
     .label-page-1 {
-        font-size: 40px; 
+        font-size: 40px;
         left: 40px;
         width: 90%;
         top: 20%;
@@ -317,22 +326,27 @@ div[class^="about-page"] {
         width: 92%;
     }
 
-      .container-Founder {
+    .container-Founder {
         top: 140px;
     }
-    
+
     .container-Founder-t {
         top: 382px;
     }
 
-    .container-Founder, .container-Founder-t{
+    .container-Founder,
+    .container-Founder-t {
         left: 20px;
     }
-    .label-1{
-        left:20px;
+
+    .label-1 {
+        left: 20px;
     }
 
-    .container-1, .container-2, .container-3, .container-4{
+    .container-1,
+    .container-2,
+    .container-3,
+    .container-4 {
         height: 170px;
     }
 }
